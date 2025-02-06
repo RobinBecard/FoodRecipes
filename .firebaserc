@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "foodrecipes-2aa22": {
+      "hosting": {
+        "foodrecipes": [
+          "foodrecipes-2aa22"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "foodrecipes-2aa22"
+  }
+}
