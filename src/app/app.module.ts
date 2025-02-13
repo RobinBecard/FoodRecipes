@@ -15,7 +15,9 @@ import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.com
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListSidenavComponent,
     LoginComponent,
     SignInComponent,
-    TestInfoLogComponent
+    TestInfoLogComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     provideAnimationsAsync()
