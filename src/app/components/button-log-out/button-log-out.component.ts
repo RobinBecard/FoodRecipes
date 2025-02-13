@@ -19,7 +19,7 @@ export class ButtonLogOutComponent {
       .then(() => {
         console.log('Déconnexion réussie');
         this.logoutEvent.emit(); // Émet un événement après déconnexion
-        this.router.navigate(['login']);
+        this.router.navigate(['']);
       })
       .catch(error => {
         console.error('Erreur de déconnexion :', error);
