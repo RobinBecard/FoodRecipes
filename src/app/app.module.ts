@@ -12,13 +12,19 @@ import { MaterialModule } from './material/material.module';
 import { BodyComponent } from './components/body/body.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
+import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { TestInfoLogComponent } from './test-info-log/test-info-log.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BodyComponent,
     SidenavComponent,
-    ListSidenavComponent
+    ListSidenavComponent,
+    LoginComponent,
+    SignInComponent,
+    TestInfoLogComponent
   ],
   imports: [
     BrowserModule,
