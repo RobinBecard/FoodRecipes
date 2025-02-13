@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,6 @@ import { ButtonLogOutComponent } from './components/button-log-out/button-log-ou
     SignInComponent,
     TestInfoLogComponent,
     ButtonLogOutComponent
-
   ],
   imports: [
     BrowserModule,
