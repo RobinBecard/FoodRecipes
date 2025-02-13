@@ -7,6 +7,7 @@ import { ApiService } from '../../service/api.meal.service';
   templateUrl: './body.component.html',
   styleUrl: './body.component.css'
 })
+
 export class BodyComponent {
   constructor(private api:ApiService) {}
   public myMeal?: Meal;
@@ -15,5 +16,8 @@ export class BodyComponent {
         console.log("ça marche")
         this.myMeal = meal
       });
+    }
+    public onLogOut(){
+      console.log('L’utilisateur est déconnecté.');
     }
 }
