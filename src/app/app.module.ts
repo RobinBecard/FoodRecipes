@@ -15,6 +15,7 @@ import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.com
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { TestInfoLogComponent } from './test-info-log/test-info-log.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TestInfoLogComponent } from './test-info-log/test-info-log.component';
     provideFirebaseApp(() => initializeApp({"projectId":"foodrecipes-2aa22","appId":"1:884813621746:web:33a2d8b48d913f4dc3636b","storageBucket":"foodrecipes-2aa22.firebasestorage.app","apiKey":"AIzaSyCX8mcEGxhnFox8kfUBQsE3tTzJKdExp6c","authDomain":"foodrecipes-2aa22.firebaseapp.com","messagingSenderId":"884813621746"})),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()
