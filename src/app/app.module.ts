@@ -15,9 +15,10 @@ import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.com
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
-
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
+
+
 
 @NgModule({
   declarations: [
