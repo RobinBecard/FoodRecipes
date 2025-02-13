@@ -34,7 +34,7 @@ export class ProtectedComponent {
       this.message = 'Donnée ajoutée avec succès !';
       this.fetchTestData();
     } catch (error: any) {
-      this.message = 'Erreur lors de l'ajout de la donnée : ' + error.message;
+      this.message = 'Erreur lors de l ajout de la donnée : ' + error.message;
     }
   }
 
