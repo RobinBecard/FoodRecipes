@@ -8,7 +8,22 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 @Component({
   selector: 'app-protected',
-  templateUrl: './protected.component.html',
+  template: `
+    <div class="container">
+      <h2>Page Protégée</h2>
+      <button (click)="logout()">Déconnexion</button>
+      
+      <h3>Ajouter une donnée</h3>
+      <button (click)="addTestData()">Ajouter</button>
+      
+      <h3>Données récupérées</h3>
+      <ul>
+        <li *ngFor="let data of testData">{{ data.value }} - {{ data.timestamp?.toDate() | date:'short' }}</li>
+      </ul>
+      
+      <p *ngIf="message">{{ message }}</p>
+    </div>
+  `,
   styleUrls: ['./protected.component.css']
 })
 export class ProtectedComponent {
@@ -34,7 +49,7 @@ export class ProtectedComponent {
       this.message = 'Donnée ajoutée avec succès !';
       this.fetchTestData();
     } catch (error: any) {
-      this.message = 'Erreur lors de l ajout de la donnée : ' + error.message;
+      this.message = 'Erreur lors de l\'ajout de la donnée : ' + error.message;
     }
   }
 
