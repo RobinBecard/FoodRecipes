@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
-import { SignInComponent } from '../components/sign-in/sign-in.component';
+import { SignUpComponent } from '../components/signUp/signUp.component';
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { SidenavComponent } from '../components/sidenav/sidenav.component';
 
@@ -12,11 +12,12 @@ const routes: Routes = [
   {path:"",component:LoginComponent},
   {path:'login',component:LoginComponent,...canActivate(redirectLoggedInToSidenav)},
   {path:'sidenav', component:SidenavComponent,...canActivate(redirectUnauthorizedToLogin)},
-  {path:"Register",component:SignInComponent}
+  {path:"Register",component:SignUpComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {}

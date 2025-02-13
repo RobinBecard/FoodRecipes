@@ -13,10 +13,11 @@ import { BodyComponent } from './components/body/body.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/signUp/signUp.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -27,7 +28,7 @@ import { ButtonLogOutComponent } from './components/button-log-out/button-log-ou
     SidenavComponent,
     ListSidenavComponent,
     LoginComponent,
-    SignInComponent,
+    SignUpComponent,
     TestInfoLogComponent,
     ButtonLogOutComponent
   ],
@@ -41,6 +42,7 @@ import { ButtonLogOutComponent } from './components/button-log-out/button-log-ou
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    RouterLink,
   ],
   providers: [
     provideAnimationsAsync()
