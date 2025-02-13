@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Meal } from './models';
+import { Meal } from '../models/meal.model';
 
 
 
@@ -13,7 +13,7 @@ export class ApiService {
 
   private baseUrl = "https://www.themealdb.com/api/json/v1"
 
-  public getMeal(idMeal:string):Observable<Meal> 
+  public getMealById(idMeal:string):Observable<Meal> 
   {
     return this.http.get<{meals:Meal[]}>(this.baseUrl+"/1/lookup.php?i="+idMeal)
     .pipe(
