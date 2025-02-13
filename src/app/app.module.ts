@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { TestInfoLogComponent } from './test-info-log/test-info-log.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ListSidenavComponent,
     LoginComponent,
     SignInComponent,
-    TestInfoLogComponent
+    TestInfoLogComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
