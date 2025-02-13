@@ -1,0 +1,26 @@
+.myList{
+    width: 100px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    border:solid 2px;
+    border-color: aqua;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+.myListTitle{
+    border-bottom: solid 1px red;
+    height: fit-content;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+h5{
+padding: 0;
+margin: 0;
+font-weight: bold;
+}
