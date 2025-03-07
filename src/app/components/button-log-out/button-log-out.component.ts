@@ -3,9 +3,10 @@ import { Auth, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'button-log-out',
-  templateUrl: './button-log-out.component.html',
-  styleUrls: ['./button-log-out.component.css']
+    selector: 'button-log-out',
+    templateUrl: './button-log-out.component.html',
+    styleUrls: ['./button-log-out.component.css'],
+    standalone: false
 })
 export class ButtonLogOutComponent {
 

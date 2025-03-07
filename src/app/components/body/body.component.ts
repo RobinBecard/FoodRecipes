@@ -4,9 +4,11 @@ import { ApiService } from '../../service/api.meal.service';
 import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({
-  selector: 'app-body',
-  templateUrl: './body.component.html',
-  styleUrls: ['./body.component.css'] // Correction : styleUrl → styleUrls
+    selector: 'app-body',
+    templateUrl: './body.component.html',
+    styleUrls: ['./body.component.css'] // Correction : styleUrl → styleUrls
+    ,
+    standalone: false
 })
 export class BodyComponent implements OnInit {
   private auth = inject(Auth);
