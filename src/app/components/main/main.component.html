@@ -41,11 +41,9 @@
           </select>
         </div>
       </div>
-      <cdk-virtual-scroll-viewport class="list-meal-viewport" >
         <div
         cdkDropList
         #mainList="cdkDropList"
-        cdkDropListOrientation="mixed"
         [cdkDropListData]="mainRecipes"
         [cdkDropListConnectedTo]="[sidebarList]"
         class="recipe-grid"
@@ -61,7 +59,6 @@
           <div class="recipe-calories">{{ recipe.calories }} calories</div>
         </div>
       </div>
-      </cdk-virtual-scroll-viewport>
       
       
     </div>
