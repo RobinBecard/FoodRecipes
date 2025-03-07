@@ -7,7 +7,6 @@
   
   /* Sidebar Styles */
   .sidebar {
-    background-color: #f3f4f6;
     padding: 1rem;
     border-radius: 8px;
   }
@@ -23,13 +22,70 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+
+  .sidebar-list-1,.sidebar-list-2{
+    background-color: #f3f4f6;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-title {
+    font-weight: 600;
+  }
+  
+  .filter-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .filter-select {
+    margin: 0 30px;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  /* Menu des filtres (catégories & régions) */
+  .filter-menu {
+    position: absolute;
+    width: 200px;
+    background-color: lightgreen;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    /*max-height: 100px;*/
+  }
+  
+  .filter-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .filter-menu li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .filter-menu li:hover {
+    background-color: #a8d5ba;
+  }
   
   .recipe-card {
     background-color: white;
     padding: 0.75rem;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    cursor: move;
+    cursor: default;
   }
   
   .recipe-name {
@@ -94,6 +150,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
+    cursor: move;
   }
   
   .main-recipe-card {
