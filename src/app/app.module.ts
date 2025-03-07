@@ -18,6 +18,8 @@ import { TestInfoLogComponent } from './components/test-info-log/test-info-log.c
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
 import { RouterLink } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 
 
@@ -43,6 +45,7 @@ import { RouterLink } from '@angular/router';
     ReactiveFormsModule,
     FormsModule,
     RouterLink,
+    DragDropModule,
   ],
   providers: [
     provideAnimationsAsync()
