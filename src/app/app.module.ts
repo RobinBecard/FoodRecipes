@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
 import { RouterLink } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PageListIngredientComponent } from './components/page-list-ingredient/page-list-ingredient.component';
 
 
 
@@ -32,7 +33,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     LoginComponent,
     SignUpComponent,
     TestInfoLogComponent,
-    ButtonLogOutComponent
+    ButtonLogOutComponent,
+    PageListIngredientComponent
   ],
   imports: [
     BrowserModule,
