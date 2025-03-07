@@ -6,11 +6,10 @@ import {
 } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
-import { SidenavComponent } from '../components/sidenav/sidenav.component';
+import { MainComponent } from '../components/main/main.component';
 import { SignUpComponent } from '../components/signUp/signUp.component';
-import { ApiTestComponent } from '../components/test/api-test.component';
 
-const redirectLoggedInToSidenav = () => redirectLoggedInTo(['sidenav']);
+const redirectLoggedInToMain = () => redirectLoggedInTo(['main']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
@@ -18,11 +17,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    ...canActivate(redirectLoggedInToSidenav),
+    ...canActivate(redirectLoggedInToMain),
   },
   {
-    path: 'sidenav',
-    component: SidenavComponent,
+    path: 'main',
+    component: MainComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
   { path: 'Register', component: SignUpComponent },

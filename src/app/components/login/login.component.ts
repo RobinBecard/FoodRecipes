@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 @Component({
-  selector: 'login-form',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+    selector: 'login-form',
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    standalone: false
 })
 export class LoginComponent {
 
@@ -35,7 +36,7 @@ export class LoginComponent {
       signInWithEmailAndPassword(this.auth, email, password)
         .then((userCredential) => {
           console.log('Connexion réussie :', userCredential.user);
-          this.router.navigate(['sidenav']);
+          this.router.navigate(['main']);
         })
         .catch((error) => {
           console.error('Erreur de connexion :', error.code, error.message);

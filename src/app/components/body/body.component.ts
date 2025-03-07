@@ -6,7 +6,8 @@ import { ApiService } from '../../service/api.service';
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
-  styleUrls: ['./body.component.css'],
+  styleUrls: ['./body.component.css'], // Correction : styleUrl → styleUrls
+  standalone: false,
 })
 export class BodyComponent implements OnInit {
   private auth = inject(Auth);
