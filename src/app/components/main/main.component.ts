@@ -59,6 +59,7 @@ export class MainComponent {
       );
     }
   }
+  
   updateFilterPosition(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.selectedFilter = selectedValue;
