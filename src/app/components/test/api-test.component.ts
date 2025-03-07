@@ -7,6 +7,7 @@ import { ApiService } from '../../service/api.service';
   selector: 'app-api-test',
   templateUrl: './api-test.component.html',
   styleUrls: ['./api-test.component.scss'],
+  standalone: false,
 })
 export class ApiTestComponent implements OnInit {
   searchForm!: FormGroup;
