@@ -56,24 +56,26 @@
               <li *ngFor="let category of categories" (click)="filterByCategory(category)">{{ category }}</li>
           </ul>
       </div>
-        <div
-        cdkDropList
-        #mainList="cdkDropList"
-        cdkDropListOrientation="mixed"
-        [cdkDropListData]="mainRecipes"
-        class="recipe-grid"
-        (cdkDropListDropped)="drop($event)"
+      <div 
+      cdkDropList
+      #mainList="cdkDropList"
+      cdkDropListOrientation="mixed"
+      [cdkDropListData]="mainRecipes"
+      class="recipe-grid"
+      (cdkDropListDropped)="drop($event)"
+      cdkDropListAutoScroll
+    >
+      <div 
+        *ngFor="let recipe of mainRecipes" 
+        cdkDrag 
+        class="main-recipe-card"
       >
-        <div 
-          *ngFor="let recipe of mainRecipes" 
-          cdkDrag 
-          class="main-recipe-card"
-        >
-          <div class="recipe-image-placeholder"></div>
-          <div class="recipe-name">{{ recipe.name }}</div>
-          <div class="recipe-calories">{{ recipe.calories }} calories</div>
-        </div>
+        <div class="recipe-image-placeholder"></div>
+        <div class="recipe-name">{{ recipe.name }}</div>
+        <div class="recipe-calories">{{ recipe.calories }} calories</div>
       </div>
+    </div>
+    
     </div>
     <button-log-out></button-log-out>
   </div>
