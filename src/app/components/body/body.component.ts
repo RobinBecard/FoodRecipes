@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Meal } from '../../models/meal.model';
-import { ApiService } from '../../service/api.meal.service';
 import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
+import { Meal } from '../../models/meal.model';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
-  styleUrls: ['./body.component.css'] // Correction : styleUrl → styleUrls
+  styleUrls: ['./body.component.css'],
 })
 export class BodyComponent implements OnInit {
   private auth = inject(Auth);
@@ -19,16 +19,16 @@ export class BodyComponent implements OnInit {
     // Récupérer l'email de l'utilisateur connecté
     onAuthStateChanged(this.auth, (user: User | null) => {
       if (user) {
-        this.userEmail = user.email ?? "Email non disponible";
-        console.log("Utilisateur connecté :", this.userEmail);
+        this.userEmail = user.email ?? 'Email non disponible';
+        console.log('Utilisateur connecté :', this.userEmail);
       } else {
-        console.log("Aucun utilisateur connecté.");
+        console.log('Aucun utilisateur connecté.');
       }
     });
 
     // Charger le repas
-    this.api.getMealById("52772").subscribe((meal: Meal) => {
-      console.log("ça marche");
+    this.api.getMealById('52772').subscribe((meal: Meal) => {
+      console.log('ça marche');
       this.myMeal = meal;
     });
   }
@@ -37,4 +37,3 @@ export class BodyComponent implements OnInit {
     console.log('L’utilisateur est déconnecté.');
   }
 }
-

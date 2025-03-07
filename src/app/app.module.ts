@@ -1,27 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './routes/app-routing.module';
-import { AppComponent } from './app.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MaterialModule } from './material.module';
+import { RouterLink } from '@angular/router';
+import { AppComponent } from './app.component';
 import { BodyComponent } from './components/body/body.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SignUpComponent } from './components/signUp/signUp.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
-import { RouterLink } from '@angular/router';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-
-
-
+import { ApiTestComponent } from './components/test/api-test.component';
+import { MaterialModule } from './material.module';
+import { AppRoutingModule } from './routes/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +30,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     LoginComponent,
     SignUpComponent,
     TestInfoLogComponent,
-    ButtonLogOutComponent
+    ButtonLogOutComponent,
+    ApiTestComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +46,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     RouterLink,
     DragDropModule,
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+  providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
