@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray,  CdkDrag, CdkDropList,transferArrayItem } from '@angular/cdk/drag-drop';
 
 interface Recipe {
   id: string;
@@ -13,6 +13,7 @@ interface Recipe {
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
+
 export class MainComponent {
   sidebarRecipes: Recipe[] = [
     { id: '1', name: 'Patates, tomate', calories: 544 },
