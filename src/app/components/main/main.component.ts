@@ -23,7 +23,7 @@ export class MainComponent {
     { id: '2', name: 'Plat #1', calories: 450 },
   ];
 
-  mainRecipes: Recipe[] = Array(10).fill(null).map((_, i) => ({
+  mainRecipes: Recipe[] = Array(20).fill(null).map((_, i) => ({
     id: `main-${i}`,
     name: 'Patates, tomate',
     calories: 544
@@ -59,7 +59,7 @@ export class MainComponent {
       );
     }
   }
-  
+
   updateFilterPosition(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.selectedFilter = selectedValue;
