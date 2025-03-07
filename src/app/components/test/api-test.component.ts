@@ -6,7 +6,7 @@ import { ApiService } from '../../service/api.service';
 @Component({
   selector: 'app-api-test',
   templateUrl: './api-test.component.html',
-  styleUrls: ['./api-test.component.scss'],
+  styleUrls: ['./api-test.component.css'],
   standalone: false,
 })
 export class ApiTestComponent implements OnInit {
