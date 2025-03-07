@@ -35,7 +35,7 @@ export class LoginComponent {
       signInWithEmailAndPassword(this.auth, email, password)
         .then((userCredential) => {
           console.log('Connexion réussie :', userCredential.user);
-          this.router.navigate(['sidenav']);
+          this.router.navigate(['main']);
         })
         .catch((error) => {
           console.error('Erreur de connexion :', error.code, error.message);

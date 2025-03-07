@@ -10,7 +10,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './material.module';
 import { BodyComponent } from './components/body/body.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { MainComponent } from './components/main/main.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/signUp/signUp.component';
@@ -27,7 +27,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   declarations: [
     AppComponent,
     BodyComponent,
-    SidenavComponent,
+    MainComponent,
     ListSidenavComponent,
     LoginComponent,
     SignUpComponent,

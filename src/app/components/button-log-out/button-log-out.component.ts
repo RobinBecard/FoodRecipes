@@ -3,7 +3,7 @@ import { Auth, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-button-log-out',
+  selector: 'button-log-out',
   templateUrl: './button-log-out.component.html',
   styleUrls: ['./button-log-out.component.css']
 })
