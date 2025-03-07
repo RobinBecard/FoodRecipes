@@ -23,9 +23,6 @@ import { ButtonLogOutComponent } from './components/button-log-out/button-log-ou
 import { RouterLink, RouterModule } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PageListIngredientComponent } from './components/page-list-ingredient/page-list-ingredient.component';
-
-
-
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({

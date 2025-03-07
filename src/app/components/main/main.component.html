@@ -24,9 +24,8 @@
     <!-- Main Content -->
     <div class="main-content">
       <div class="header">
-        <h1 class="page-title">Trouver une nouvelle Recette</h1>
-        <button class="random-button">Aléatoire</button>
-        <button [routerLink]="['/CreateList']">vers la page test</button>
+        <h1 class="page-title">Find a new recipe</h1>
+        <button class="random-button">Random</button>
       </div>
   
       <div class="filters">
@@ -35,10 +34,11 @@
         </div>
         <div class="filter-controls">
           <select class="filter-select">
-            <option>Filtre</option>
+            <option>Filter by</option>
           </select>
           <select class="filter-select">
-            <option>Sélectionner une liste d'ingrédients</option>
+            <option>Select an ingredient list</option>
+            <option [routerLink]="['/CreateList']">Create a new list</option>
           </select>
         </div>
       </div>

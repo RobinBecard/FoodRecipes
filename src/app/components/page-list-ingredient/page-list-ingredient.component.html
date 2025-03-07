@@ -3,7 +3,6 @@
     <div class="main-content">
         <div class="header">
             <h1 class="page-title">Création d'une liste</h1>
-            <button class="random-button" [routerLink]="['/main']">Retour à la page principale</button>
         </div>
         
         <!-- Wrapper pour les colonnes -->
@@ -23,19 +22,18 @@
                 <div
                 cdkDropList
                 #rightList="cdkDropList"
-                [cdkDropListData]="mainRecipes"
-                [cdkDropListConnectedTo]="[sidebarList]"
-                class="recipe-grid"
+                [cdkDropListData]="leftIngredient"
+                [cdkDropListConnectedTo]="[leftList]"
+                class="ingredient-grid"
                 (cdkDropListDropped)="drop($event)"
               >
                 <div 
-                  *ngFor="let recipe of mainRecipes" 
+                  *ngFor="let ingredient of leftIngredient" 
                   cdkDrag 
                   class="main-recipe-card"
                 >
-                  <div class="recipe-image-placeholder"></div>
-                  <div class="recipe-name">{{ recipe.name }}</div>
-                  <div class="recipe-calories">{{ recipe.calories }} calories</div>
+                    <div class="recipe-image-placeholder"></div>
+                    <div class="recipe-name">{{ ingredient.name }}</div>
                 </div>
               </div>
 
@@ -47,24 +45,29 @@
             </div>
             <!-- Right Content -->
             <div class="right-content">
-                <p>test à droite</p>
+                <h2>Création de votre nouvelle liste</h2>
 
                 <div
                 cdkDropList
-                #sidebarList="cdkDropList"
+                #leftList="cdkDropList"
                 [cdkDropListData]="rigthIngredient"
                 [cdkDropListConnectedTo]="[rightList]"
-                class="sidebar-list"
+                class="ingredient-grid"
                 (cdkDropListDropped)="drop($event)"
               >
                 <div 
-                  *ngFor="let recipe of rigthIngredient" 
+                  *ngFor="let ingredient of rigthIngredient" 
                   cdkDrag 
-                  class="recipe-card"
+                  class="main-recipe-card"
                 >
-                  <div class="recipe-name">{{ recipe.name }}</div>
-                  <div class="recipe-calories">{{ recipe.calories }} calories</div>
+                  <div class="recipe-image-placeholder"></div>
+                  <div class="recipe-name">{{ ingredient.name }}</div>
                 </div>
+              </div>
+              
+              <div class="button">
+                <button class="cancel-button" [routerLink]="['/main']">Cancel</button>
+                <button class="save-button">Save</button>
               </div>
             </div>
         </div>
