@@ -1,27 +1,50 @@
-<mat-card>
-    <mat-card-title>Login</mat-card-title>
-    <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="submit()">
-    <p>
-        <mat-form-field>
-        <input type="text" matInput placeholder="Email" formControlName="email">
-        </mat-form-field>
-    </p>
-
-    <p>
-        <mat-form-field>
-        <input type="password" matInput placeholder="Password" formControlName="password">
-        </mat-form-field>
-    </p>
-
-    <p *ngIf="error" class="error">
-        {{ error }}
-    </p>
-
-    <div class="button">
-        <button type="submit" mat-button>Login</button>
+<div class="container">
+    <!-- Left Panel -->
+    <div class="left-panel">
+    <div class="background-pattern"></div>
+      <div class="logo-section">
+        <div class="title">
+          <h1>Easy</h1>
+          <h1>Meal</h1>
+        </div>
+        <p>Log in to explore delicious recipes!</p>
+      </div>
+      <div class="bottom-section">
+        <p id="logInCase">Don't already have an account ? Register now</p>
+        <button mat-flat-button class="sign-in-btn" [routerLink]="['Register']">SIGN UP</button>
+      </div>
     </div>
 
-    </form>
-    </mat-card-content>
-</mat-card>
+    <!-- Right Panel -->
+    <mat-card class="signup-card">
+      <mat-card-title>Log In</mat-card-title>
+      
+      <div class="social-links">
+        <a class="social-btn"><mat-icon>facebook</mat-icon></a>
+        <a class="social-btn"><mat-icon>mail</mat-icon></a>
+        <a class="social-btn"><mat-icon>linked_in</mat-icon></a>
+      </div>
+
+      <p class="divider">or use your email for authentification:</p>
+
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Email">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Password">
+          </mat-form-field>
+
+          <p *ngIf="error" class="error">{{ error }}</p>
+
+          <button mat-flat-button color="primary" type="submit" class="signup-btn">
+            LOG IN
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

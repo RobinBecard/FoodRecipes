@@ -10,22 +10,29 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './material.module';
 import { BodyComponent } from './components/body/body.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { MainComponent } from './components/main/main.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/signUp/signUp.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
+import { RouterLink } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     BodyComponent,
-    SidenavComponent,
+    MainComponent,
     ListSidenavComponent,
     LoginComponent,
-    SignInComponent,
-    TestInfoLogComponent
+    SignUpComponent,
+    TestInfoLogComponent,
+    ButtonLogOutComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    RouterLink,
+    DragDropModule,
   ],
   providers: [
     provideAnimationsAsync()

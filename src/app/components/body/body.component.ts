@@ -1,19 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.meal.service';
+import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
-  styleUrl: './body.component.css'
+  styleUrls: ['./body.component.css'] // Correction : styleUrl → styleUrls
 })
-export class BodyComponent {
-  constructor(private api:ApiService) {}
+export class BodyComponent implements OnInit {
+  private auth = inject(Auth);
   public myMeal?: Meal;
-    public ngOnInit(){
-      this.api.getMealById("52772").subscribe((meal:Meal)=>{
-        console.log("ça marche")
-        this.myMeal = meal
-      });
-    }
+  public userEmail?: string; // Stocke l'email de l'utilisateur
+
+  constructor(private api: ApiService) {}
+
+  ngOnInit() {
+    // Récupérer l'email de l'utilisateur connecté
+    onAuthStateChanged(this.auth, (user: User | null) => {
+      if (user) {
+        this.userEmail = user.email ?? "Email non disponible";
+        console.log("Utilisateur connecté :", this.userEmail);
+      } else {
+        console.log("Aucun utilisateur connecté.");
+      }
+    });
+
+    // Charger le repas
+    this.api.getMealById("52772").subscribe((meal: Meal) => {
+      console.log("ça marche");
+      this.myMeal = meal;
+    });
+  }
+
+  onLogOut() {
+    console.log('L’utilisateur est déconnecté.');
+  }
 }
+
