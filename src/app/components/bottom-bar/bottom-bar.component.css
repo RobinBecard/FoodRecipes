@@ -10,14 +10,13 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-  }
-  
-  .spacer {
-    flex: 1;
-  }
-  
-  
-  .spacer {
-    flex: 1;
-  }
-  
+}
+
+.spacer {
+flex: 1;
+}
+
+
+.spacer {
+flex: 1;
+}
