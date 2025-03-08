@@ -23,6 +23,9 @@ import { ButtonLogOutComponent } from './components/button-log-out/button-log-ou
 import { RouterLink, RouterModule } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     SignUpComponent,
     TestInfoLogComponent,
     ButtonLogOutComponent,
+    BottomBarComponent
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -46,6 +50,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     RouterLink,
     DragDropModule,
     ScrollingModule,
+    MatToolbarModule,
+    MatIconModule 
   ],
   providers: [
     provideAnimationsAsync(),

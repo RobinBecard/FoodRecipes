@@ -4,6 +4,10 @@
     gap: 1rem;
     padding: 1rem;
   }
+  .global-container{
+    display: flex;
+    flex-direction: column;
+  }
   
   /* Sidebar Styles */
   .sidebar {
