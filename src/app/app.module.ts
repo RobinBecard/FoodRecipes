@@ -24,6 +24,7 @@ import { TestInfoLogComponent } from './components/test-info-log/test-info-log.c
 import { ApiTestComponent } from './components/test/api-test.component';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './routes/app-routing.module';
+import { MealCardComponent } from './components/meal-card/meal-card.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     TestInfoLogComponent,
     ButtonLogOutComponent,
     ApiTestComponent,
+    MealCardComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
