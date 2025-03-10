@@ -1,65 +1,60 @@
 <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <h2 class="sidebar-title">Mes Listes</h2>
-      <div
-        cdkDropList
-        #sidebarList="cdkDropList"
-        [cdkDropListData]="sidebarRecipes"
-        [cdkDropListConnectedTo]="[mainList]"
-        class="sidebar-list"
-        (cdkDropListDropped)="drop($event)"
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2 class="sidebar-title">Mes Listes</h2>
+    <div
+      cdkDropList
+      #sidebarList="cdkDropList"
+      [cdkDropListData]="sidebarRecipes"
+      [cdkDropListConnectedTo]="[mainList]"
+      class="sidebar-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <app-simplified-card
+        *ngFor="let recipe of sidebarRecipes"
+        [recipe]="recipe"
+        displayType="sidebar"
       >
-        <div 
-          *ngFor="let recipe of sidebarRecipes" 
-          cdkDrag 
-          class="recipe-card"
-        >
-          <div class="recipe-name">{{ recipe.name }}</div>
-          <div class="recipe-calories">{{ recipe.calories }} calories</div>
-        </div>
-      </div>
+      </app-simplified-card>
     </div>
-  
-    <!-- Main Content -->
-    <div class="main-content">
-      <div class="header">
-        <h1 class="page-title">Trouver une nouvelle Recette</h1>
-        <button class="random-button">Aléatoire</button>
-      </div>
-  
-      <div class="filters">
-        <div>
-          <h3 class="filter-title">Recommandation</h3>
-        </div>
-        <div class="filter-controls">
-          <select class="filter-select">
-            <option>Filtre</option>
-          </select>
-          <select class="filter-select">
-            <option>Sélectionner une ingrédients</option>
-          </select>
-        </div>
-      </div>
-        <div
-        cdkDropList
-        #mainList="cdkDropList"
-        cdkDropListOrientation="mixed"
-        [cdkDropListData]="mainRecipes"
-        [cdkDropListConnectedTo]="[sidebarList]"
-        class="recipe-grid"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div 
-          *ngFor="let recipe of mainRecipes" 
-          cdkDrag 
-          class="main-recipe-card"
-        >
-          <div class="recipe-image-placeholder"></div>
-          <div class="recipe-name">{{ recipe.name }}</div>
-          <div class="recipe-calories">{{ recipe.calories }} calories</div>
-        </div>
-      </div>
-    </div>
-    <button-log-out></button-log-out>
   </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <h1 class="page-title">Trouver une nouvelle Recette</h1>
+      <button class="random-button">Aléatoire</button>
+    </div>
+
+    <div class="filters">
+      <div>
+        <h3 class="filter-title">Recommandation</h3>
+      </div>
+      <div class="filter-controls">
+        <select class="filter-select">
+          <option>Filtre</option>
+        </select>
+        <select class="filter-select">
+          <option>Sélectionner une ingrédients</option>
+        </select>
+      </div>
+    </div>
+    <div
+      cdkDropList
+      #mainList="cdkDropList"
+      cdkDropListOrientation="mixed"
+      [cdkDropListData]="mainRecipes"
+      [cdkDropListConnectedTo]="[sidebarList]"
+      class="recipe-grid"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <app-simplified-card
+        *ngFor="let recipe of mainRecipes"
+        [recipe]="recipe"
+        displayType="main"
+      >
+      </app-simplified-card>
+    </div>
+  </div>
+  <button-log-out></button-log-out>
+</div>

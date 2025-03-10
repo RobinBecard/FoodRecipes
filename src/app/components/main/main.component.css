@@ -1,139 +1,107 @@
 .container {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  /* Sidebar Styles */
-  .sidebar {
-    background-color: #f3f4f6;
-    padding: 1rem;
-    border-radius: 8px;
-  }
-  
-  .sidebar-title {
-    font-size: 1.125rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .sidebar-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .recipe-card {
-    background-color: white;
-    padding: 0.75rem;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    cursor: move;
-  }
-  
-  .recipe-name {
-    font-size: 0.875rem;
-  }
-  
-  .recipe-calories {
-    font-size: 0.75rem;
-    color: #666;
-  }
-  
-  /* Main Content Styles */
-  .main-content {
-    flex: 1;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  
-  .page-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .random-button {
-    background-color: #fce7f3;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Filters Section */
-  .filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  
-  .filter-title {
-    font-weight: 600;
-  }
-  
-  .filter-controls {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .filter-select {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
 
-  /* Recipe Grid */
-  .recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-  }
-  
-  .main-recipe-card {
-    background-color: #fafafa;
-    padding: 1rem;
-    border-radius: 8px;
-  }
-  
-  .recipe-image-placeholder {
-    background-color: #e5e7eb;
-    height: 8rem;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-  }
-  
-  /* Drag and Drop Styles */
-  .cdk-drag-preview {
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  }
-  
-  .cdk-drag-placeholder {
-    opacity: 0;
-  }
-  
-  .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+/* Sidebar Styles */
+.sidebar {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 8px;
+}
 
-  .list-meal-viewport{
-    width: 100%;
-    height: 100%;
-  }
+.sidebar-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-  .list-meal-viewport {
-    height: 200px;
-    width: 200px;
-    border: 1px solid black;
-  }
-  
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.random-button {
+  background-color: #fce7f3;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Filters Section */
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.filter-title {
+  font-weight: 600;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Recipe Grid */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+/* Drag and Drop Styles */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.list-meal-viewport {
+  width: 100%;
+  height: 100%;
+}
+
+.list-meal-viewport {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+}

@@ -4,13 +4,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-
-interface Recipe {
-  id: string;
-  name: string;
-  calories: number;
-  image?: string;
-}
+import { Recipe } from '../../models/meal.model';
 
 @Component({
   selector: 'app-main',
@@ -20,16 +14,16 @@ interface Recipe {
 })
 export class MainComponent {
   sidebarRecipes: Recipe[] = [
-    { id: '1', name: 'Patates, tomate', calories: 544 },
-    { id: '2', name: 'Plat #1', calories: 450 },
+    { idMeal: '1', strMeal: 'Patates, tomate', strCategory: 'Asian' },
+    { idMeal: '2', strMeal: 'Plat #1', strCategory: 'French' },
   ];
 
   mainRecipes: Recipe[] = Array(10)
     .fill(null)
     .map((_, i) => ({
-      id: `main-${i}`,
-      name: 'Patates, tomate',
-      calories: 544,
+      idMeal: `main-${i}`,
+      strMeal: 'Patates, tomate',
+      strCategory: 'Asian',
     }));
 
   drop(event: CdkDragDrop<Recipe[]>) {
