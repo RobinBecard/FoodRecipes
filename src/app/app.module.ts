@@ -20,6 +20,7 @@ import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.com
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { SignUpComponent } from './components/signUp/signUp.component';
+import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { ApiTestComponent } from './components/test/api-test.component';
 import { MaterialModule } from './material.module';
@@ -36,6 +37,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     TestInfoLogComponent,
     ButtonLogOutComponent,
     ApiTestComponent,
+    SimplifiedCardComponent,
   ],
   bootstrap: [AppComponent],
   imports: [

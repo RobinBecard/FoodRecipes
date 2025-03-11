@@ -16,3 +16,10 @@ export interface MealSimplify {
   strMealThumb: string; // URL
   idMeal: string;
 }
+
+export interface Recipe {
+  idMeal: string;
+  strMeal: string;
+  strCategory: string;
+  strMealThumb?: string;
+}
