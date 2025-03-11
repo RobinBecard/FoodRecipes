@@ -4,6 +4,7 @@
     gap: 1rem;
     padding: 1rem;
   }
+  
   .global-container{
     display: flex;
     flex-direction: column;
@@ -125,7 +126,6 @@
   padding: 0.5rem 1rem;
   border-radius: 4px;
   border: none;
-  cursor: pointer;
 }
 
 /* Filters Section */
@@ -226,7 +226,7 @@
     grid-template-columns: repeat(
       auto-fit,
       minmax(100px, 1fr)
-    ); /* Even smaller items */
+    );
     gap: 0.5rem;
   }
 }
