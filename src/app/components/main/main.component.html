@@ -1,63 +1,87 @@
 <div class="global-container">
 <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="sidebar-list-1">
-        <h2 class="sidebar-title">My List</h2>
-        <div class="sidebar-list">
-          <div *ngFor="let recipe of sidebarRecipes" class="recipe-card">
-            <div class="recipe-name">{{ recipe.name }}</div>
-            <div class="recipe-calories">{{ recipe.calories }} calories</div>
-          </div>
-        </div>
-      </div>
-      <div class="sidebar-list-2">
-        <h2 class="sidebar-title">My Favories</h2>
-        <div class="sidebar-list">
-          <div *ngFor="let recipe of sidebarRecipes" class="recipe-card">
-            <div class="recipe-name">{{ recipe.name }}</div>
-            <div class="recipe-calories">{{ recipe.calories }} calories</div>
-          </div>
-        </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-list-1">
+      <h2 class="sidebar-title">My List</h2>
+      <div class="sidebar-list">
+        <app-simplified-card
+          *ngFor="let recipe of sidebarRecipes"
+          [recipe]="recipe"
+          displayType="sidebar"
+        >
+        </app-simplified-card>
       </div>
     </div>
-    <!-- Main Content -->
-    <div class="main-content">
-      <div class="header">
-        <h1 class="page-title">Find a new recipe</h1>
-        <button class="random-button">Random</button>
+    <div class="sidebar-list-2">
+      <h2 class="sidebar-title">My Favories</h2>
+      <div class="sidebar-list">
+        <app-simplified-card
+          *ngFor="let recipe of sidebarRecipes"
+          [recipe]="recipe"
+          displayType="sidebar"
+        >
+        </app-simplified-card>
       </div>
-      <div class="filters">
-          <div>
-              <h3 class="filter-title">Recommandation</h3>
-          </div>
-          <div class="filter-controls">
-              <select id="filterType" class="filter-select" (change)="updateFilterPosition($event)">
-                  <option value="">Filtre</option>
-                  <option value="region">Région</option>
-                  <option value="categorie">Catégorie</option>
-              </select>
+    </div>
+  </div>
 
-              <select class="filter-select">
-                  <option>Sélectionner un ingrédient</option>
-              </select>
-          </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <h1 class="page-title">Find a new recipe</h1>
+      <button class="random-button">Random</button>
+    </div>
+    <div class="filters">
+      <div>
+        <h3 class="filter-title">Recommandation</h3>
       </div>
+      <div class="filter-controls">
+        <select
+          id="filterType"
+          class="filter-select"
+          (change)="updateFilterPosition($event)"
+        >
+          <option value="">Filtre</option>
+          <option value="region">Région</option>
+          <option value="categorie">Catégorie</option>
+        </select>
 
-      <!-- Menu des régions -->
-      <div *ngIf="selectedFilter === 'region'" class="filter-menu" [ngStyle]="menuStyle">
-          <ul>
-              <li *ngFor="let region of regions" (click)="filterByRegion(region)">{{ region }}</li>
-          </ul>
+        <select class="filter-select">
+          <option>Sélectionner un ingrédient</option>
+        </select>
       </div>
+    </div>
 
-      <!-- Menu des catégories -->
-      <div *ngIf="selectedFilter === 'categorie'" class="filter-menu" [ngStyle]="menuStyle">
-          <ul>
-              <li *ngFor="let category of categories" (click)="filterByCategory(category)">{{ category }}</li>
-          </ul>
-      </div>
-      <div 
+    <!-- Menu des régions -->
+    <div
+      *ngIf="selectedFilter === 'region'"
+      class="filter-menu"
+      [ngStyle]="menuStyle"
+    >
+      <ul>
+        <li *ngFor="let region of regions" (click)="filterByRegion(region)">
+          {{ region }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Menu des catégories -->
+    <div
+      *ngIf="selectedFilter === 'categorie'"
+      class="filter-menu"
+      [ngStyle]="menuStyle"
+    >
+      <ul>
+        <li
+          *ngFor="let category of categories"
+          (click)="filterByCategory(category)"
+        >
+          {{ category }}
+        </li>
+      </ul>
+    </div>
+    <div
       cdkDropList
       #mainList="cdkDropList"
       cdkDropListOrientation="mixed"
@@ -66,20 +90,15 @@
       (cdkDropListDropped)="drop($event)"
       cdkDropListAutoScroll
     >
-      <div 
-        *ngFor="let recipe of mainRecipes" 
-        cdkDrag 
-        class="main-recipe-card"
+      <app-simplified-card
+        *ngFor="let recipe of mainRecipes"
+        [recipe]="recipe"
+        displayType="main"
       >
-        <div class="recipe-image-placeholder"></div>
-        <div class="recipe-name">{{ recipe.name }}</div>
-        <div class="recipe-calories">{{ recipe.calories }} calories</div>
-      </div>
+      </app-simplified-card>
     </div>
-    
-    </div>
-    <button-log-out></button-log-out>
   </div>
 
   <app-bottom-bar></app-bottom-bar>
+</div>
 </div>

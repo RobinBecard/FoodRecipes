@@ -1,0 +1,125 @@
+<div class="api-test-container">
+  <h2>Testeur d'API TheMealDB</h2>
+
+  <div class="search-type-selector">
+    <h3>Sélectionner le type de requête :</h3>
+    <div class="button-group">
+      <button
+        (click)="setSearchType('mealByName')"
+        [class.active]="searchType === 'mealByName'"
+      >
+        Recherche par nom
+      </button>
+      <button
+        (click)="setSearchType('mealsByFirstLetter')"
+        [class.active]="searchType === 'mealsByFirstLetter'"
+      >
+        Liste par première lettre
+      </button>
+      <button
+        (click)="setSearchType('mealById')"
+        [class.active]="searchType === 'mealById'"
+      >
+        Détails par ID
+      </button>
+      <button
+        (click)="setSearchType('randomMeal')"
+        [class.active]="searchType === 'randomMeal'"
+      >
+        Repas aléatoire
+      </button>
+      <button
+        (click)="setSearchType('allCategories')"
+        [class.active]="searchType === 'allCategories'"
+      >
+        Toutes les catégories
+      </button>
+      <button
+        (click)="setSearchType('allAreas')"
+        [class.active]="searchType === 'allAreas'"
+      >
+        Toutes les régions
+      </button>
+      <button
+        (click)="setSearchType('allIngredients')"
+        [class.active]="searchType === 'allIngredients'"
+      >
+        Tous les ingrédients
+      </button>
+      <button
+        (click)="setSearchType('filterByIngredient')"
+        [class.active]="searchType === 'filterByIngredient'"
+      >
+        Filtrer par ingrédient
+      </button>
+      <button
+        (click)="setSearchType('filterByCategory')"
+        [class.active]="searchType === 'filterByCategory'"
+      >
+        Filtrer par catégorie
+      </button>
+      <button
+        (click)="setSearchType('filterByArea')"
+        [class.active]="searchType === 'filterByArea'"
+      >
+        Filtrer par région
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="searchForm" (ngSubmit)="executeSearch()">
+    <div
+      class="form-group"
+      *ngIf="
+        !['randomMeal', 'allCategories', 'allAreas', 'allIngredients'].includes(
+          searchType
+        )
+      "
+    >
+      <label [for]="'search-' + searchType">
+        {{
+          searchType === "mealByName"
+            ? "Nom du repas"
+            : searchType === "mealsByFirstLetter"
+            ? "Première lettre"
+            : searchType === "mealById"
+            ? "ID du repas"
+            : searchType === "filterByIngredient"
+            ? "Ingrédient"
+            : searchType === "filterByCategory"
+            ? "Catégorie"
+            : "Région"
+        }}:
+      </label>
+      <input
+        [id]="'search-' + searchType"
+        type="text"
+        formControlName="searchValue"
+        [placeholder]="
+          searchType === 'mealByName'
+            ? 'Ex: Arrabiata'
+            : searchType === 'mealsByFirstLetter'
+            ? 'Ex: a'
+            : searchType === 'mealById'
+            ? 'Ex: 52772'
+            : searchType === 'filterByIngredient'
+            ? 'Ex: chicken_breast'
+            : searchType === 'filterByCategory'
+            ? 'Ex: Seafood'
+            : 'Ex: Canadian'
+        "
+      />
+    </div>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? "Chargement..." : "Exécuter la requête" }}
+    </button>
+  </form>
+
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div class="results-container" *ngIf="results">
+    <h3>Résultats :</h3>
+    <pre>{{ results | json }}</pre>
+  </div>
+</div>
