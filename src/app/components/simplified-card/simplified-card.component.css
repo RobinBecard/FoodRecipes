@@ -1,0 +1,30 @@
+.recipe-card {
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: move;
+}
+
+.main-recipe-card {
+  background-color: #fafafa;
+  padding: 1rem;
+  border-radius: 8px;
+  cursor: move;
+}
+
+.recipe-name {
+  font-size: 0.875rem;
+}
+
+.recipe-calories {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.recipe-image-placeholder {
+  background-color: #e5e7eb;
+  height: 8rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}

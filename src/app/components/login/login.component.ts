@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 @Component({
-  selector: 'login-form',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+    selector: 'login-form',
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    standalone: false
 })
 export class LoginComponent {
 

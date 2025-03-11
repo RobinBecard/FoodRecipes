@@ -4,9 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-signUp',
-  templateUrl: './signUp.component.html',
-  styleUrl: './signUp.component.css'
+    selector: 'app-signUp',
+    templateUrl: './signUp.component.html',
+    styleUrl: './signUp.component.css',
+    standalone: false
 })
 export class SignUpComponent {
 
