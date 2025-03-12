@@ -1,9 +1,32 @@
 .container {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 1rem;
-  padding: 1rem;
-}
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .global-container{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .sidebar-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
 /* Sidebar Styles */
 .sidebar {
@@ -103,7 +126,6 @@
   padding: 0.5rem 1rem;
   border-radius: 4px;
   border: none;
-  cursor: pointer;
 }
 
 /* Filters Section */
@@ -204,7 +226,7 @@
     grid-template-columns: repeat(
       auto-fit,
       minmax(100px, 1fr)
-    ); /* Even smaller items */
+    );
     gap: 0.5rem;
   }
 }

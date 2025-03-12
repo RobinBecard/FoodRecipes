@@ -1,12 +1,9 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -22,6 +19,11 @@ import { MainComponent } from './components/main/main.component';
 import { SignUpComponent } from './components/signUp/signUp.component';
 import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { ApiTestComponent } from './components/test/api-test.component';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './routes/app-routing.module';
@@ -36,6 +38,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     SignUpComponent,
     TestInfoLogComponent,
     ButtonLogOutComponent,
+    BottomBarComponent,
     ApiTestComponent,
     SimplifiedCardComponent,
   ],
@@ -50,6 +53,8 @@ import { AppRoutingModule } from './routes/app-routing.module';
     RouterLink,
     DragDropModule,
     ScrollingModule,
+    MatToolbarModule,
+    MatIconModule 
   ],
   providers: [
     provideAnimationsAsync(),
