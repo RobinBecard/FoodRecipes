@@ -117,7 +117,7 @@
 
 /* Main Content Styles */
 .main-content {
-  height: 100%; /* Prend toute la hauteur disponible */
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -177,7 +177,7 @@
 
 @media (max-width: 768px) {
   .container {
-    grid-template-columns: 1fr; /* Un seul colonne sur mobile */
+    grid-template-columns: 1fr;
   }
 
   .recipe-grid {

@@ -235,4 +235,6 @@ export class MainComponent implements OnInit {
       (r) => r.idMeal !== recipe.idMeal
     );
   }
+
+  // implementer le drag and drop pour les recettes favorites
 }
