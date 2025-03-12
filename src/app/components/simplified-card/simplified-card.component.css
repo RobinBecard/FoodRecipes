@@ -7,7 +7,7 @@
 }
 
 .main-recipe-card {
-  background-color: #fafafa;
+  background-color: #f7f7f7;
   padding: 1rem;
   border-radius: 8px;
   cursor: move;
@@ -17,14 +17,22 @@
   font-size: 0.875rem;
 }
 
-.recipe-calories {
+.recipe-attributs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  gap: 0.5rem;
+  overflow-wrap: wrap;
+}
+
+.recipe-attributs > * {
   font-size: 0.75rem;
   color: #666;
 }
 
-.recipe-image-placeholder {
-  background-color: #e5e7eb;
-  height: 8rem;
-  margin-bottom: 0.5rem;
+.recipe-image {
+  width: 100%;
+  height: auto;
   border-radius: 4px;
+  margin-bottom: 0.5rem;
 }

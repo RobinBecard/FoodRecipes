@@ -21,11 +21,15 @@ const routes: Routes = [
     ...canActivate(redirectLoggedInToMain),
   },
   {
+    path: 'Register',
+    component: SignUpComponent,
+    ...canActivate(redirectLoggedInToMain),
+  },
+  {
     path: 'main',
     component: MainComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
-  { path: 'Register', component: SignUpComponent },
   { path: 'api-test', component: ApiTestComponent },
 ];
 

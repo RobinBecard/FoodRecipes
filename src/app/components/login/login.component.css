@@ -85,6 +85,14 @@
     text-align: center;
 }
 
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: center;
+}
+  
+
 @media (max-width: 1024px) {
     .bottom-section {
         display: flex;

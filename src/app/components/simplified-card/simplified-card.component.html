@@ -5,7 +5,15 @@
     'main-recipe-card': displayType === 'main'
   }"
 >
-  <div *ngIf="displayType === 'main'" class="recipe-image-placeholder"></div>
+  <img
+    *ngIf="displayType === 'main' && recipe.strMealThumb"
+    [src]="recipe.strMealThumb + '/medium'"
+    alt="{{ recipe.strMeal }}"
+    class="recipe-image"
+  />
   <div class="recipe-name">{{ recipe.strMeal }}</div>
-  <div class="recipe-calories">{{ recipe.strCategory }}</div>
+  <div class="recipe-attributs">
+    <div>{{ recipe.strCategory }}</div>
+    <div>{{ recipe.strArea }}</div>
+  </div>
 </div>

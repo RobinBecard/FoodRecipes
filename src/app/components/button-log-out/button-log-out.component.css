@@ -1,5 +1,12 @@
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.rounded-button {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-icon {
+  color: white;
+  padding: none;
+  margin: none;
+}

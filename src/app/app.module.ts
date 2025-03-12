@@ -1,20 +1,28 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BodyComponent } from './components/body/body.component';
+import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
@@ -36,6 +44,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     SignUpComponent,
     TestInfoLogComponent,
     ButtonLogOutComponent,
+    BottomBarComponent,
     ApiTestComponent,
     SimplifiedCardComponent,
   ],
@@ -50,6 +59,16 @@ import { AppRoutingModule } from './routes/app-routing.module';
     RouterLink,
     DragDropModule,
     ScrollingModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   providers: [
     provideAnimationsAsync(),
