@@ -24,27 +24,29 @@
         <a class="social-btn"><mat-icon>mail</mat-icon></a>
         <a class="social-btn"><mat-icon>linked_in</mat-icon></a>
       </div>
-
+    
       <p class="divider">or use your email for authentification:</p>
-
+    
       <mat-card-content>
         <form [formGroup]="form" (ngSubmit)="submit()">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput formControlName="email" placeholder="Email">
           </mat-form-field>
-
+    
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input type="password" matInput formControlName="password" placeholder="Password">
           </mat-form-field>
-
-          <p *ngIf="error" class="error">{{ error }}</p>
-
+    
+          <!-- Message d'erreur -->
+          <p *ngIf="loginError" class="error-message">{{ loginError }}</p>
+    
           <button mat-flat-button color="primary" type="submit" class="signup-btn">
             LOG IN
           </button>
         </form>
       </mat-card-content>
     </mat-card>
+    
   </div>
