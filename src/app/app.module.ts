@@ -10,6 +10,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -54,6 +55,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     DragDropModule,
     FormsModule,
     MatButtonModule,
+    MatCardModule,
     MatChipsModule,
     MatIconModule,
     MatInputModule,

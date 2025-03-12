@@ -8,10 +8,9 @@ describe('ButtonLogOutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ButtonLogOutComponent]
-    })
-    .compileComponents();
-    
+      declarations: [ButtonLogOutComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ButtonLogOutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
