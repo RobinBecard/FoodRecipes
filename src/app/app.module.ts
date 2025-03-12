@@ -31,7 +31,6 @@ import { SignUpComponent } from './components/signUp/signUp.component';
 import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { ApiTestComponent } from './components/test/api-test.component';
-import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './routes/app-routing.module';
 
 @NgModule({
@@ -50,25 +49,22 @@ import { AppRoutingModule } from './routes/app-routing.module';
   ],
   bootstrap: [AppComponent],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    MaterialModule,
-    RouterModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterLink,
+    BrowserModule,
     DragDropModule,
-    ScrollingModule,
-    MatIconModule,
+    FormsModule,
     MatButtonModule,
-    MatInputModule,
-    MatSelectModule,
     MatChipsModule,
+    MatIconModule,
+    MatInputModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    MatToolbarModule,
-    MatIconModule,
+    RouterLink,
+    RouterModule,
+    ScrollingModule,
   ],
   providers: [
     provideAnimationsAsync(),

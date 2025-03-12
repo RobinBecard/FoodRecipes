@@ -97,6 +97,10 @@
   min-width: fit-content;
 }
 
+.random-button {
+  background-color: #fce7f3;
+}
+
 .alphabet-filter {
   flex: 1 1 100%;
   margin-top: 0.5rem;
