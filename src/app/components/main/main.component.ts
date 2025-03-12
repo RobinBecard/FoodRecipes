@@ -4,8 +4,8 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Recipe } from '../../models/meal.model';
-
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -13,6 +13,8 @@ import { Recipe } from '../../models/meal.model';
   standalone: false,
 })
 export class MainComponent {
+  constructor(private router: Router) {}
+
   @ViewChild('filterType', { static: false }) filterButton!: ElementRef;
 
   sidebarRecipes: Recipe[] = [
@@ -110,5 +112,12 @@ export class MainComponent {
     this.filteredRecipes = this.mainRecipes.filter((recipe) =>
       recipe.strMeal.includes(region)
     );
+  }
+
+  onIngredientListChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    if (value === 'create') {
+      this.router.navigate(['/CreateList']);
+    }
   }
 }
