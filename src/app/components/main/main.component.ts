@@ -5,6 +5,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { IngredientsList, Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
@@ -34,7 +35,7 @@ export class MainComponent implements OnInit {
   isLoading = false;
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
-  constructor(private mealService: ApiService) {} // pour les appels API
+  constructor(private mealService: ApiService, private router: Router) {} // pour les appels API et navigation
 
   ngOnInit(): void {
     this.loadInitialData(); // Charger les données initiales : catégories, régions, Liste d'ingrédients, recettes aléatoires, recettes favorites
@@ -221,5 +222,9 @@ export class MainComponent implements OnInit {
         filterFunction(value);
       }
     });
+  }
+
+  addRecipe(): void {
+    this.router.navigate(['/CreateList']);
   }
 }

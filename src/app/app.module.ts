@@ -28,6 +28,7 @@ import { ButtonLogOutComponent } from './components/button-log-out/button-log-ou
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { PageListIngredientComponent } from './components/page-list-ingredient/page-list-ingredient.component';
 import { SignUpComponent } from './components/signUp/signUp.component';
 import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
@@ -44,6 +45,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     SignUpComponent,
     TestInfoLogComponent,
     ButtonLogOutComponent,
+    PageListIngredientComponent,
     BottomBarComponent,
     ApiTestComponent,
     SimplifiedCardComponent,
@@ -62,6 +64,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatToolbarModule,
+    MatIconModule,
     MatTooltipModule,
     ReactiveFormsModule,
     RouterLink,
