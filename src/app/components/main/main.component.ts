@@ -3,12 +3,14 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { IngredientsList, Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -34,8 +36,10 @@ export class MainComponent implements OnInit {
 
   isLoading = false;
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  isSidebarOpen = false;
+  private breakpointSubscription: Subscription = new Subscription();
 
-  constructor(private mealService: ApiService, private router: Router) {} // pour les appels API et navigation
+  constructor(private mealService: ApiService, private router: Router,private breakpointObserver: BreakpointObserver) {} // pour les appels API et navigation
 
   ngOnInit(): void {
     this.loadInitialData(); // Charger les données initiales : catégories, régions, Liste d'ingrédients, recettes aléatoires, recettes favorites
@@ -61,6 +65,23 @@ export class MainComponent implements OnInit {
       this.selectedLetter,
       this.filterByFirstLetter.bind(this)
     );
+
+    this.breakpointSubscription = this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+      .subscribe(result => {
+        // Si l'écran correspond à Small ou HandsetPortrait, fermez la sidebar
+        if (result.matches) {
+          this.isSidebarOpen = false;
+        }
+      });
+    
+    // Vérifiez la taille de l'écran au démarrage
+    if (window.innerWidth <= 768) {
+      this.isSidebarOpen = false;
+    } else {
+      // Si l'écran est grand au démarrage, la sidebar peut être ouverte par défaut
+      this.isSidebarOpen = true;
+    }
   }
 
   loadInitialData(): void {
@@ -226,5 +247,16 @@ export class MainComponent implements OnInit {
 
   addRecipe(): void {
     this.router.navigate(['/CreateList']);
+  }
+
+  ngOnDestroy() {
+    // Nettoyez l'abonnement pour éviter les fuites de mémoire
+    if (this.breakpointSubscription) {
+      this.breakpointSubscription.unsubscribe();
+    }
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 }
