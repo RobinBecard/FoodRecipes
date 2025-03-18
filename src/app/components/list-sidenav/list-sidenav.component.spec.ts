@@ -8,10 +8,9 @@ describe('ListSidenavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListSidenavComponent]
-    })
-    .compileComponents();
-    
+      declarations: [ListSidenavComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ListSidenavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

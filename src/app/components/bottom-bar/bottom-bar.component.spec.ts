@@ -8,9 +8,8 @@ describe('BottomBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BottomBarComponent]
-    })
-    .compileComponents();
+      declarations: [BottomBarComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BottomBarComponent);
     component = fixture.componentInstance;
