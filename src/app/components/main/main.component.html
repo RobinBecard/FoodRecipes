@@ -11,7 +11,7 @@
         <h2 class="sidebar-title">
           <mat-icon>favorite</mat-icon> My Favorites
         </h2>
-        <div class="sidebar-card" *ngFor="let recipe of favoriteRecipes">
+        <div class="sidebar-card" *ngFor="let recipe of favoriteRecipesList">
           <div class="sidebar-recipe-name">{{ recipe.strMeal }}</div>
           <div class="sidebar-recipe-attributs">
             <div>{{ recipe.strCategory }}</div>
@@ -106,10 +106,7 @@
       </div>
 
       <!-- No results message -->
-      <div
-        class="no-results"
-        *ngIf="!isLoading && filteredRecipes.length === 0"
-      >
+      <div class="no-results" *ngIf="!isLoading && RecipesList.length === 0">
         <mat-icon>search_off</mat-icon>
         <p>
           No recipes found matching your criteria. Try changing your filters.
@@ -121,13 +118,13 @@
         cdkDropList
         #mainList="cdkDropList"
         cdkDropListOrientation="mixed"
-        [cdkDropListData]="filteredRecipes"
+        [cdkDropListData]="RecipesList"
         class="recipe-grid"
         (cdkDropListDropped)="drop($event)"
         cdkDropListAutoScroll
       >
         <app-simplified-card
-          *ngFor="let recipe of filteredRecipes"
+          *ngFor="let recipe of RecipesList"
           [recipe]="recipe"
           displayType="main"
         >
