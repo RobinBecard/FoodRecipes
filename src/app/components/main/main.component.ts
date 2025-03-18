@@ -205,7 +205,7 @@ export class MainComponent implements OnInit {
     this.loadRandomMeals(15);
   }
 
-  drop(event: CdkDragDrop<Meal[]>) {
+  drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -220,6 +220,7 @@ export class MainComponent implements OnInit {
         event.currentIndex
       );
     }
+    this.RecipesList = [...this.RecipesList];
   }
 
   addToFavorites(recipe: Meal): void {

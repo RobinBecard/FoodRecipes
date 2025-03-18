@@ -132,13 +132,15 @@
         (cdkDropListDropped)="drop($event)"
         cdkDropListAutoScroll
       >
+      @for (recipe of RecipesList; track recipe.idMeal) {
         <app-simplified-card
-          *ngFor="let recipe of RecipesList"
           [recipe]="recipe"
           displayType="main"
+          cdkDrag
         >
         </app-simplified-card>
-      </div>
+      }
+    </div>
     </div>
   </div>
 </div>
