@@ -17,32 +17,25 @@ import { ApiService } from '../../service/api.service';
 })
 export class MainComponent implements OnInit {
   // Listes
-  mainRecipes: Meal[] = []; // Liste de recettes principales
-  filteredRecipes: Meal[] = []; // Liste de recettes filtrées
-  favoriteRecipes: Meal[] = []; // Liste des recettes favorites : à récupérer et sauvegarder avec firebase
+  RecipesList: Meal[] = []; // Liste de recettes filtrées
+  favoriteRecipesList: Meal[] = []; // Liste des recettes favorites : à récupérer et sauvegarder avec firebase
 
-  // Options de filtrage
   categories: string[] = [];
   regions: string[] = [];
   ingredientsList: IngredientsList[] = [];
 
-  // Contrôles pour la recherche et le filtrage
-  searchControl = new FormControl('');
-  selectedCategory = new FormControl('');
-  selectedRegion = new FormControl('');
-  selectedIngredientsList = new FormControl<IngredientsList>({
-    listName: '',
-    ingredients: [''],
-  });
-  selectedLetter = new FormControl('');
+  // Options de filtrage
+  searchControl = new FormControl(''); // pour la recherche
+  selectedCategory = new FormControl(''); // pour les catégories
+  selectedRegion = new FormControl(''); // pour les régions
+  selectedIngredientsList = new FormControl(''); // pour les listes d'ingrédients
+  selectedLetter = new FormControl(''); // pour les lettres
 
-  // État des filtres
   isLoading = false;
-  alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''); // afficher toutes les lettres de l'alphabet | peut-être emplacé par un simple input
+  alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
   constructor(private mealService: ApiService) {} // pour les appels API
 
-  // à l'initialisation
   ngOnInit(): void {
     this.loadInitialData(); // Charger les données initiales : catégories, régions, Liste d'ingrédients, recettes aléatoires, recettes favorites
 
@@ -50,33 +43,23 @@ export class MainComponent implements OnInit {
     this.searchControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((term) => {
-        if (term && term.length > 2) {
+        if (term && term.length > 1) {
           this.searchMeals(term);
         } else if (!term) {
           this.resetFilters();
         }
       });
 
-    // Observer les changements de catégories
-    this.selectedCategory.valueChanges.subscribe((category) => {
-      if (category) {
-        this.filterByCategory(category);
-      }
-    });
-
-    // Observer les changements de régions
-    this.selectedRegion.valueChanges.subscribe((region) => {
-      if (region) {
-        this.filterByRegion(region);
-      }
-    });
-
-    // Observer les changements de lettre
-    this.selectedLetter.valueChanges.subscribe((letter) => {
-      if (letter) {
-        this.filterByFirstLetter(letter);
-      }
-    });
+    // Observer les changements de catégories, de régions, de lettres
+    this.observeChanges(
+      this.selectedCategory,
+      this.filterByCategory.bind(this)
+    );
+    this.observeChanges(this.selectedRegion, this.filterByRegion.bind(this));
+    this.observeChanges(
+      this.selectedLetter,
+      this.filterByFirstLetter.bind(this)
+    );
   }
 
   loadInitialData(): void {
@@ -131,13 +114,11 @@ export class MainComponent implements OnInit {
   loadRandomMeals(count: number): void {
     this.isLoading = true;
     // s'assurer que les listes sont vides
-    this.mainRecipes = [];
-    this.filteredRecipes = [];
+    this.RecipesList = [];
 
     for (let i = 0; i < count; i++) {
       this.mealService.getSingleRandomMeal().subscribe((meal) => {
-        this.mainRecipes.push(meal);
-        this.filteredRecipes = [...this.mainRecipes]; // ajouter les recettes à la liste filtrée | il faudrait prendre les recettes en communes, et non l'union des recettes filtrés
+        this.RecipesList.push(meal); // ajouter les recettes à la liste filtrée | il faudrait prendre les recettes en communes, et non l'union des recettes filtrés
         this.isLoading = false;
       });
     }
@@ -147,11 +128,11 @@ export class MainComponent implements OnInit {
     // Simuler le chargement des recettes sauvegardées
     // Faire une requête à Firebase pour récupérer les recettes favorites
     this.mealService.getMealById('52771').subscribe((meal) => {
-      this.favoriteRecipes = [meal];
+      this.favoriteRecipesList = [meal];
     });
 
     this.mealService.getMealById('52772').subscribe((meal) => {
-      this.favoriteRecipes.push(meal);
+      this.favoriteRecipesList.push(meal);
     });
   }
 
@@ -159,11 +140,9 @@ export class MainComponent implements OnInit {
     this.isLoading = true;
     this.mealService.getMealByName(term).subscribe((meals) => {
       if (meals) {
-        this.mainRecipes = meals;
-        this.filteredRecipes = [...this.mainRecipes];
+        this.RecipesList = meals; // remplace la liste par la rechercher
       } else {
-        this.mainRecipes = []; // pas de recettes trouvées
-        this.filteredRecipes = []; // pas de recettes trouvées
+        this.RecipesList = []; // pas de recettes trouvées
       }
       this.isLoading = false;
     });
@@ -174,8 +153,7 @@ export class MainComponent implements OnInit {
     this.mealService
       .getAllMealsFilterByCategory(category)
       .subscribe((meals) => {
-        this.mainRecipes = meals;
-        this.filteredRecipes = [...this.mainRecipes];
+        this.RecipesList = meals;
         this.isLoading = false;
       });
   }
@@ -183,8 +161,7 @@ export class MainComponent implements OnInit {
   filterByRegion(region: string): void {
     this.isLoading = true;
     this.mealService.getAllMealsFilterByArea(region).subscribe((meals) => {
-      this.mainRecipes = meals;
-      this.filteredRecipes = [...this.mainRecipes];
+      this.RecipesList = meals;
       this.isLoading = false;
     });
   }
@@ -192,8 +169,7 @@ export class MainComponent implements OnInit {
   filterByFirstLetter(letter: string): void {
     this.isLoading = true;
     this.mealService.getAllMealsByFirstLetter(letter).subscribe((meals) => {
-      this.mainRecipes = meals;
-      this.filteredRecipes = [...this.mainRecipes];
+      this.RecipesList = meals;
       this.isLoading = false;
     });
   }
@@ -201,10 +177,10 @@ export class MainComponent implements OnInit {
   resetFilters(): void {
     this.selectedCategory.setValue('');
     this.selectedRegion.setValue('');
-    this.selectedIngredientsList.setValue({ listName: '', ingredients: [''] });
+    this.selectedIngredientsList.setValue('');
     this.selectedLetter.setValue('');
     this.searchControl.setValue('');
-    this.loadRandomMeals(10);
+    this.loadRandomMeals(15);
   }
 
   drop(event: CdkDragDrop<Meal[]>) {
@@ -225,16 +201,25 @@ export class MainComponent implements OnInit {
   }
 
   addToFavorites(recipe: Meal): void {
-    if (!this.favoriteRecipes.some((r) => r.idMeal === recipe.idMeal)) {
-      this.favoriteRecipes.push(recipe);
+    if (!this.favoriteRecipesList.some((r) => r.idMeal === recipe.idMeal)) {
+      this.favoriteRecipesList.push(recipe);
     }
   }
 
   removeFromFavorites(recipe: Meal): void {
-    this.favoriteRecipes = this.favoriteRecipes.filter(
+    this.favoriteRecipesList = this.favoriteRecipesList.filter(
       (r) => r.idMeal !== recipe.idMeal
     );
   }
 
-  // implementer le drag and drop pour les recettes favorites
+  private observeChanges(
+    control: FormControl,
+    filterFunction: (value: string) => void
+  ): void {
+    control.valueChanges.subscribe((value) => {
+      if (value) {
+        filterFunction(value);
+      }
+    });
+  }
 }
