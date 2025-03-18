@@ -1,0 +1,85 @@
+/* Mise en forme de la recette */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .recipe-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recipe-header {
+    text-align: center;
+  }
+  
+  #mealName {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  #mealThumb {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .recipe-details {
+    margin-top: 20px;
+  }
+  
+  h2, h3 {
+    margin: 10px 0;
+  }
+  
+  #mealInstructions {
+    margin-top: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
+  }
+  
+  .ingredients {
+    margin-top: 30px;
+  }
+  
+  #ingredientsList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #ingredientsList li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  
+  .links {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .links a {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .links a:hover {
+    background-color: #0056b3;
+  }
+  

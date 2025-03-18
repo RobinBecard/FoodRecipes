@@ -9,6 +9,7 @@ import { LoginComponent } from '../components/login/login.component';
 import { MainComponent } from '../components/main/main.component';
 import { SignUpComponent } from '../components/signUp/signUp.component';
 import { ApiTestComponent } from '../components/test/api-test.component';
+import { DescriptionComponent } from '../components/description/description';
 
 const redirectLoggedInToMain = () => redirectLoggedInTo(['main']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -31,6 +32,7 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   { path: 'api-test', component: ApiTestComponent },
+  { path: 'description', component: DescriptionComponent },
 ];
 
 @NgModule({
