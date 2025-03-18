@@ -90,6 +90,7 @@
   gap: 0.5rem;
   justify-content: space-between;
   flex-direction: row;
+  align-items: center;
 }
 
 .buttons-container button {
@@ -99,6 +100,13 @@
 
 .random-button {
   background-color: #fce7f3;
+}
+
+.title-part{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .alphabet-filter {
@@ -136,12 +144,21 @@
   gap: 1rem;
 }
 
+.title-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .page-title {
   margin: 0;
   text-transform: capitalize;
   font-size: 1.75rem;
   font-weight: bold;
   color: #424242;
+  padding-left: 50px;
+  align-items: center;
 }
 
 /* Recipe Grid */
