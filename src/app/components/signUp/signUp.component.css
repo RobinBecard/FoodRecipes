@@ -141,6 +141,8 @@ mat-card-title {
   transition: all 0.3s ease;
 }
 
+
+
 .social-btn:hover {
   background-color: #1abc9c;
   color: white;
