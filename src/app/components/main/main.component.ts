@@ -60,6 +60,10 @@ export class MainComponent implements OnInit {
       this.selectedLetter,
       this.filterByFirstLetter.bind(this)
     );
+    this.observeChanges(
+      this.selectedIngredientsList,
+      this.filterByIngredientsList.bind(this)
+    );
   }
 
   loadInitialData(): void {
@@ -107,6 +111,7 @@ export class MainComponent implements OnInit {
         },
       ];
 
+      console.log(tempIngredientsList);
       this.ingredientsList = tempIngredientsList;
     });
   }
@@ -174,6 +179,51 @@ export class MainComponent implements OnInit {
     });
   }
 
+  filterByIngredientsList(listName: string): void {
+    this.isLoading = true;
+
+    const selectedList = this.ingredientsList.find(
+      (list) => list.listName === listName
+    );
+
+    // Si la liste n'est pas trouvée ou est vide, charger des recettes aléatoires
+    if (!selectedList || selectedList.ingredients.length === 0) {
+      this.loadRandomMeals(15);
+      return;
+    }
+
+    const ingredients = selectedList.ingredients;
+
+    // Initialiser un tableau pour stocker toutes les recettes récupérées
+    let allRecipes: Meal[] = [];
+
+    // Pour chaque ingrédient, recupérer les recettes associées
+    ingredients.forEach((ingredient) => {
+      this.mealService
+        .getAllMealsFilterByMainIngredient(ingredient)
+        .subscribe((meals) => {
+          if (meals) {
+            // Ajouter les recettes en évitant les doublons
+            meals.forEach((meal) => {
+              if (!allRecipes.some((r) => r.idMeal === meal.idMeal)) {
+                // Ajouter un score à chaque recette (nombre d'ingrédients correspondants)
+                meal.matchScore = this.calculateMatchScore(meal, ingredients);
+                allRecipes.push(meal);
+              }
+            });
+          }
+        });
+    });
+
+    // Trier par score décroissant
+    allRecipes.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
+    // Garder les 15 premières recettes
+    allRecipes = allRecipes.slice(0, 5);
+    this.RecipesList = allRecipes;
+    console.log(allRecipes);
+    this.isLoading = false;
+  }
+
   resetFilters(): void {
     this.selectedCategory.setValue('');
     this.selectedRegion.setValue('');
@@ -221,5 +271,31 @@ export class MainComponent implements OnInit {
         filterFunction(value);
       }
     });
+  }
+
+  // Fonction pour calculer le score de correspondance
+  calculateMatchScore(meal: Meal, ingredientsList: string[]): number {
+    let score = 0;
+
+    // Récupérer tous les ingrédients du plat (non vides)
+    const mealIngredients: string[] = meal.strIngredients;
+
+    // Compter combien d'ingrédients de la liste sont présents dans la recette
+    ingredientsList.forEach((ingredient) => {
+      if (
+        mealIngredients.some(
+          (mealIng) =>
+            mealIng.toLowerCase().includes(ingredient.toLowerCase()) ||
+            ingredient.toLowerCase().includes(mealIng)
+        )
+      ) {
+        score++;
+      }
+    });
+
+    // len --> 1
+    // score -->
+
+    return (score / ingredientsList.length) * 100;
   }
 }
