@@ -5,23 +5,17 @@
       <div class="sidebar-list">
         <h2 class="sidebar-title"><mat-icon>list</mat-icon> My List</h2>
         <div class="sidebar-list-container">
-          <!-- À FAIRE : lister les listes d'ingrédients -->
         </div>
       </div>
       <div class="sidebar-list">
         <h2 class="sidebar-title">
           <mat-icon>favorite</mat-icon> My Favorites
         </h2>
-        <div class="sidebar-list-container">
-          <app-simplified-card
-            *ngFor="let recipe of favoriteRecipes"
-            [recipe]="recipe"
-            displayType="sidebar"
-          >
-          </app-simplified-card>
-          <div class="empty-list-message" *ngIf="favoriteRecipes.length === 0">
-            <mat-icon>info</mat-icon>
-            <p>Drag and drop recipes here to save them to your favorites</p>
+        <div class="sidebar-card" *ngFor="let recipe of favoriteRecipes">
+          <div class="sidebar-recipe-name">{{ recipe.strMeal }}</div>
+          <div class="sidebar-recipe-attributs">
+            <div>{{ recipe.strCategory }}</div>
+            <div>{{ recipe.strArea }}</div>
           </div>
         </div>
       </div>

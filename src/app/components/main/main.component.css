@@ -6,16 +6,16 @@
   height: 100vh;
   gap: 1rem;
   padding: 1rem;
+  background: rgba(0, 0, 0, 0.5) url("../../../assets/Images/main-bg.jpeg") no-repeat center center;
+  backdrop-filter: blur(150px);
+  background-size: cover;
 }
+
 
 /* Sidebar Styles */
 .sidebar {
   box-sizing: border-box;
   height: 100%;
-  background-color: #1773cf;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   position: relative;
   transition: transform 0.3s ease;
@@ -28,11 +28,18 @@
 .sidebar-list {
   box-sizing: border-box;
   height: calc((100% - 1rem) / 2);
-  background-color: #ffffff;
+  background-color: #ffffff9d;
   border-radius: 10px;
   padding: 16px;
   margin-bottom: 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-card{
+  margin-top: 10px;
+  padding: 5px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
 }
 
 .sidebar-title {
@@ -49,6 +56,20 @@
   display: flex;
   flex-direction: column;
 }
+
+.sidebar-recipe-attributs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  gap: 0.5rem;
+  overflow-wrap: wrap;
+}
+
+.sidebar-recipe-name {
+  font-size: 0.875rem;
+}
+
+
 
 .empty-list-message {
   display: flex;
