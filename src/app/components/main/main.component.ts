@@ -7,7 +7,12 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  forkJoin,
+  Subscription,
+} from 'rxjs';
 import { IngredientsList, Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
 
@@ -211,42 +216,40 @@ export class MainComponent implements OnInit {
       (list) => list.listName === listName
     );
 
-    // Si la liste n'est pas trouvée ou est vide, charger des recettes aléatoires
     if (!selectedList || selectedList.ingredients.length === 0) {
-      this.loadRandomMeals(15);
       return;
     }
 
     const ingredients = selectedList.ingredients;
+    console.log(ingredients.length);
 
-    // Initialiser un tableau pour stocker toutes les recettes récupérées
-    let allRecipes: Meal[] = [];
+    // Créer un tableau d'observables
+    const requests = ingredients.map((ingredient) =>
+      this.mealService.getAllMealsFilterByMainIngredient(ingredient)
+    );
 
-    // Pour chaque ingrédient, recupérer les recettes associées
-    ingredients.forEach((ingredient) => {
-      this.mealService
-        .getAllMealsFilterByMainIngredient(ingredient)
-        .subscribe((meals) => {
-          if (meals) {
-            // Ajouter les recettes en évitant les doublons
-            meals.forEach((meal) => {
-              if (!allRecipes.some((r) => r.idMeal === meal.idMeal)) {
-                // Ajouter un score à chaque recette (nombre d'ingrédients correspondants)
-                meal.matchScore = this.calculateMatchScore(meal, ingredients);
-                allRecipes.push(meal);
-              }
-            });
-          }
-        });
+    // Utiliser forkJoin pour attendre les requêtes
+    forkJoin(requests).subscribe((results) => {
+      let allRecipes: Meal[] = [];
+      results.forEach((meals) => {
+        if (meals) {
+          meals.forEach((meal) => {
+            // Éviter les doublons
+            if (!allRecipes.some((r) => r.idMeal === meal.idMeal)) {
+              meal.matchScore = this.calculateMatchScore(meal, ingredients);
+              allRecipes.push(meal);
+            }
+          });
+        }
+      });
+
+      allRecipes.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0)); // score decroissant
+
+      // Garder seulement les 5 premières recettes
+      this.RecipesList = allRecipes.slice(0, 50);
+
+      this.isLoading = false;
     });
-
-    // Trier par score décroissant
-    allRecipes.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
-    // Garder les 15 premières recettes
-    allRecipes = allRecipes.slice(0, 5);
-    this.RecipesList = allRecipes;
-    console.log(allRecipes);
-    this.isLoading = false;
   }
 
   resetFilters(): void {
