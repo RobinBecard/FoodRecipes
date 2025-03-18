@@ -30,7 +30,12 @@
     <!-- Main Content -->
     <div class="main-content">
       <div class="header">
-        <h1 class="page-title">Find a new recipe</h1>
+        <div class="title-part">
+          <div class="title-div">
+            <h1 class="page-title">Find a new recipe</h1>
+          </div>
+          <app-bottom-bar></app-bottom-bar>
+        </div>
         <div class="buttons-container">
           <button mat-raised-button color="primary" (click)="resetFilters()">
             <mat-icon>refresh</mat-icon> Reset Filters
@@ -135,7 +140,5 @@
         </app-simplified-card>
       </div>
     </div>
-    <app-bottom-bar></app-bottom-bar>
   </div>
 </div>
-<app-bottom-bar></app-bottom-bar>
