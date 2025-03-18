@@ -2,91 +2,149 @@
   <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-      <div class="sidebar-list-1">
-        <h2 class="sidebar-title">My List</h2>
-        <div class="sidebar-list">
+      <div class="sidebar-list">
+        <h2 class="sidebar-title"><mat-icon>list</mat-icon> My List</h2>
+        <div class="sidebar-list-container">
+          <!-- À FAIRE : lister les listes d'ingrédients -->
+        </div>
+      </div>
+      <div class="sidebar-list">
+        <h2 class="sidebar-title">
+          <mat-icon>favorite</mat-icon> My Favorites
+        </h2>
+        <div class="sidebar-list-container">
           <app-simplified-card
-            *ngFor="let recipe of sidebarRecipes"
+            *ngFor="let recipe of favoriteRecipesList"
             [recipe]="recipe"
             displayType="sidebar"
           >
           </app-simplified-card>
+          <div
+            class="empty-list-message"
+            *ngIf="favoriteRecipesList.length === 0"
+          >
+            <mat-icon>info</mat-icon>
+            <p>Drag and drop recipes here to save them to your favorites</p>
+          </div>
         </div>
       </div>
     </div>
+
     <!-- Main Content -->
     <div class="main-content">
       <div class="header">
-        <h1 class="page-title">Find a new recipe</h1>
-        <button class="random-button">Random</button>
-      </div>
-
-      <div class="filters">
-        <div>
-          <h3 class="filter-title">Recommandation</h3>
+        <div class="title-part">
+          <div class="title-div">
+            <h1 class="page-title">Find a new recipe</h1>
+          </div>
+          <app-bottom-bar></app-bottom-bar>
+          <button mat-raised-button color="primary" (click)="addRecipe()">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
-        <div class="filter-controls">
-          <select class="filter-select" (change)="updateFilterPosition($event)">
-            <option value="">Filter by</option>
-            <option value="region">Region</option>
-            <option value="categorie">Category</option>
-          </select>
-          <select
-            class="filter-select"
-            (change)="onIngredientListChange($event)"
+        <div class="buttons-container">
+          <button mat-raised-button color="primary" (click)="resetFilters()">
+            <mat-icon>refresh</mat-icon> Reset Filters
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="loadRandomMeals(15)"
+            class="random-button"
           >
-            <option value="">Select an ingredient list</option>
-          </select>
+            <mat-icon>shuffle</mat-icon> Random Recipe
+          </button>
         </div>
       </div>
 
-      <!-- Menu des régions -->
-      <div
-        *ngIf="selectedFilter === 'region'"
-        class="filter-menu"
-        [ngStyle]="menuStyle"
-      >
-        <ul>
-          <li *ngFor="let region of regions" (click)="filterByRegion(region)">
-            {{ region }}
-          </li>
-        </ul>
+      <!-- Filtres -->
+      <div class="filters-container">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Search by recipe name</mat-label>
+          <input
+            matInput
+            type="text"
+            [formControl]="searchControl"
+            placeholder="Enter recipe name..."
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select [formControl]="selectedCategory">
+            <mat-option [value]="">All Categories</mat-option>
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Region</mat-label>
+          <mat-select [formControl]="selectedRegion">
+            <mat-option [value]="">All Regions</mat-option>
+            <mat-option *ngFor="let region of regions" [value]="region">
+              {{ region }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ingredients</mat-label>
+          <mat-select [formControl]="selectedIngredientsList" multiple>
+            <mat-option
+              *ngFor="let ingredient of ingredientsList"
+              [value]="ingredient"
+            >
+              {{ ingredient }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="alphabet-filter">
+          <span>Filter by first letter:</span>
+          <div class="letter-container">
+            <mat-chip-option
+              *ngFor="let letter of alphabet"
+              [value]="letter"
+              (click)="selectedLetter.setValue(letter)"
+              [selected]="selectedLetter.value === letter"
+            >
+              {{ letter }}
+            </mat-chip-option>
+          </div>
+        </div>
       </div>
 
-      <!-- Menu des catégories -->
-      <div
-        *ngIf="selectedFilter === 'categorie'"
-        class="filter-menu"
-        [ngStyle]="menuStyle"
-      >
-        <ul>
-          <li
-            *ngFor="let category of categories"
-            (click)="filterByCategory(category)"
-          >
-            {{ category }}
-          </li>
-        </ul>
+      <!-- No results message -->
+      <div class="no-results" *ngIf="!isLoading && RecipesList.length === 0">
+        <mat-icon>search_off</mat-icon>
+        <p>
+          No recipes found matching your criteria. Try changing your filters.
+        </p>
       </div>
 
-      <!-- Liste des recettes -->
+      <!-- Recipes Grid -->
       <div
         cdkDropList
         #mainList="cdkDropList"
         cdkDropListOrientation="mixed"
-        [cdkDropListData]="mainRecipes"
+        [cdkDropListData]="RecipesList"
         class="recipe-grid"
         (cdkDropListDropped)="drop($event)"
         cdkDropListAutoScroll
       >
         <app-simplified-card
-          *ngFor="let recipe of mainRecipes"
+          *ngFor="let recipe of RecipesList"
           [recipe]="recipe"
           displayType="main"
         >
         </app-simplified-card>
       </div>
+      <<<<<<< HEAD
       <app-bottom-bar></app-bottom-bar>
+      ======= >>>>>>> master
     </div>
   </div>
 </div>

@@ -17,11 +17,9 @@ export interface MealSimplify {
   idMeal: string;
 }
 
-export interface Recipe {
-  idMeal: string;
-  strMeal: string;
-  strCategory: string;
-  strMealThumb?: string;
+export interface IngredientsList {
+  listName: string;
+  ingredients: string[];
 }
 
 

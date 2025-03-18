@@ -2,22 +2,24 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 @Component({
-    selector: 'login-form',
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.css',
-    standalone: false
+  selector: 'login-form',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
+  standalone: false,
 })
 export class LoginComponent {
-
   private auth = inject(Auth);
-  private router = inject(Router); 
+  private router = inject(Router);
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
 
   @Input() error: string | null | undefined;
@@ -54,17 +56,16 @@ export class LoginComponent {
         this.loginError = "L'adresse e-mail est invalide.";
         break;
       case 'auth/user-disabled':
-        this.loginError = "Ce compte a été désactivé.";
+        this.loginError = 'Ce compte a été désactivé.';
         break;
       case 'auth/user-not-found':
-        this.loginError = "Aucun utilisateur trouvé avec cet e-mail.";
+        this.loginError = 'Aucun utilisateur trouvé avec cet e-mail.';
         break;
       case 'auth/wrong-password':
-        this.loginError = "Mot de passe incorrect.";
+        this.loginError = 'Mot de passe incorrect.';
         break;
       default:
-        this.loginError = "Une erreur est survenue. Veuillez réessayer.";
+        this.loginError = 'Une erreur est survenue. Veuillez réessayer.';
     }
   }
-  
 }

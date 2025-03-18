@@ -3,65 +3,188 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Recipe } from '../../models/meal.model';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { IngredientsList, Meal } from '../../models/meal.model';
+import { ApiService } from '../../service/api.service';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
   standalone: false,
 })
-export class MainComponent {
-  constructor(private router: Router) {}
+export class MainComponent implements OnInit {
+  // Listes
+  RecipesList: Meal[] = []; // Liste de recettes filtrées
+  favoriteRecipesList: Meal[] = []; // Liste des recettes favorites : à récupérer et sauvegarder avec firebase
 
-  @ViewChild('filterType', { static: false }) filterButton!: ElementRef;
+  categories: string[] = [];
+  regions: string[] = [];
+  ingredientsList: IngredientsList[] = [];
 
-  sidebarRecipes: Recipe[] = [
-    { idMeal: '1', strMeal: 'Patates, tomate', strCategory: 'Asian' },
-    { idMeal: '2', strMeal: 'Plat #1', strCategory: 'French' },
-  ];
+  // Options de filtrage
+  searchControl = new FormControl(''); // pour la recherche
+  selectedCategory = new FormControl(''); // pour les catégories
+  selectedRegion = new FormControl(''); // pour les régions
+  selectedIngredientsList = new FormControl(''); // pour les listes d'ingrédients
+  selectedLetter = new FormControl(''); // pour les lettres
 
-  mainRecipes: Recipe[] = Array(10)
-    .fill(null)
-    .map((_, i) => ({
-      idMeal: `main-${i}`,
-      strMeal: 'Patates, tomate',
-      strCategory: 'Asian',
-    }));
+  isLoading = false;
+  alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
-  filteredRecipes: Recipe[] = [...this.mainRecipes];
+  constructor(private mealService: ApiService, private router: Router) {} // pour les appels API et navigation
 
-  categories: string[] = [
-    'Catégorie 1',
-    'Catégorie 2',
-    'Catégorie 3',
-    'Catégorie 4',
-    'Catégorie 5',
-    'Catégorie 6',
-    'Catégorie 7',
-    'Catégorie 8',
-    'Catégorie 9',
-    'Catégorie 10',
-    'Catégorie 11',
-    'Catégorie 12',
-    'Catégorie 13',
-    'Catégorie 14',
-  ];
+  ngOnInit(): void {
+    this.loadInitialData(); // Charger les données initiales : catégories, régions, Liste d'ingrédients, recettes aléatoires, recettes favorites
 
-  regions: string[] = [
-    'Région 1',
-    'Région 2',
-    'Région 3',
-    'Région 4',
-    'Région 5',
-    'Région 6',
-  ];
+    // Configurer la recherche
+    this.searchControl.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((term) => {
+        if (term && term.length > 1) {
+          this.searchMeals(term);
+        } else if (!term) {
+          this.resetFilters();
+        }
+      });
 
-  selectedFilter: string = '';
-  menuStyle: any = {};
+    // Observer les changements de catégories, de régions, de lettres
+    this.observeChanges(
+      this.selectedCategory,
+      this.filterByCategory.bind(this)
+    );
+    this.observeChanges(this.selectedRegion, this.filterByRegion.bind(this));
+    this.observeChanges(
+      this.selectedLetter,
+      this.filterByFirstLetter.bind(this)
+    );
+  }
 
-  drop(event: CdkDragDrop<Recipe[]>) {
+  loadInitialData(): void {
+    this.isLoading = true;
+
+    // Charger les catégories
+    this.mealService.getAllMealCategories().subscribe((categories) => {
+      this.categories = categories.map((cat) => cat.strCategory);
+    });
+
+    // Charger les régions
+    this.mealService.getAllAreas().subscribe((areas) => {
+      this.regions = areas;
+    });
+
+    // Charger les liste d'ingrédients
+    // Temporairement : charger des ingédients aléatoire | dans l'attente d'une syncronisation avec firebase
+    this.loadIngredientsList();
+
+    // Temporairement : charger des recettes aléatoire
+    // A FAIRE : se baser sur la liste d'ingrédients selectionnée pour proposer des reco
+    this.loadRandomMeals(15);
+
+    // Simuler des recettes favorites/liste (à remplacer par votre logique)
+    this.loadSavedRecipes();
+  }
+
+  loadIngredientsList(): void {
+    this.mealService.getAllIngredients().subscribe((ingredients) => {
+      const tempIngredients: string[] = ingredients.map(
+        (ingredient) => ingredient.strIngredient
+      );
+
+      const randomIngredients = [];
+      for (let i = 0; i < 10; i++) {
+        const randomIndex = Math.floor(Math.random() * tempIngredients.length);
+        randomIngredients.push(tempIngredients[randomIndex]);
+        tempIngredients.splice(randomIndex, 1);
+      }
+
+      const tempIngredientsList: IngredientsList[] = [
+        {
+          listName: 'Random Ingredients',
+          ingredients: randomIngredients,
+        },
+      ];
+
+      this.ingredientsList = tempIngredientsList;
+    });
+  }
+
+  loadRandomMeals(count: number): void {
+    this.isLoading = true;
+    // s'assurer que les listes sont vides
+    this.RecipesList = [];
+
+    for (let i = 0; i < count; i++) {
+      this.mealService.getSingleRandomMeal().subscribe((meal) => {
+        this.RecipesList.push(meal); // ajouter les recettes à la liste filtrée | il faudrait prendre les recettes en communes, et non l'union des recettes filtrés
+        this.isLoading = false;
+      });
+    }
+  }
+
+  loadSavedRecipes(): void {
+    // Simuler le chargement des recettes sauvegardées
+    // Faire une requête à Firebase pour récupérer les recettes favorites
+    this.mealService.getMealById('52771').subscribe((meal) => {
+      this.favoriteRecipesList = [meal];
+    });
+
+    this.mealService.getMealById('52772').subscribe((meal) => {
+      this.favoriteRecipesList.push(meal);
+    });
+  }
+
+  searchMeals(term: string): void {
+    this.isLoading = true;
+    this.mealService.getMealByName(term).subscribe((meals) => {
+      if (meals) {
+        this.RecipesList = meals; // remplace la liste par la rechercher
+      } else {
+        this.RecipesList = []; // pas de recettes trouvées
+      }
+      this.isLoading = false;
+    });
+  }
+
+  filterByCategory(category: string): void {
+    this.isLoading = true;
+    this.mealService
+      .getAllMealsFilterByCategory(category)
+      .subscribe((meals) => {
+        this.RecipesList = meals;
+        this.isLoading = false;
+      });
+  }
+
+  filterByRegion(region: string): void {
+    this.isLoading = true;
+    this.mealService.getAllMealsFilterByArea(region).subscribe((meals) => {
+      this.RecipesList = meals;
+      this.isLoading = false;
+    });
+  }
+
+  filterByFirstLetter(letter: string): void {
+    this.isLoading = true;
+    this.mealService.getAllMealsByFirstLetter(letter).subscribe((meals) => {
+      this.RecipesList = meals;
+      this.isLoading = false;
+    });
+  }
+
+  resetFilters(): void {
+    this.selectedCategory.setValue('');
+    this.selectedRegion.setValue('');
+    this.selectedIngredientsList.setValue('');
+    this.selectedLetter.setValue('');
+    this.searchControl.setValue('');
+    this.loadRandomMeals(15);
+  }
+
+  drop(event: CdkDragDrop<Meal[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -78,46 +201,30 @@ export class MainComponent {
     }
   }
 
-  updateFilterPosition(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement).value;
-    this.selectedFilter = selectedValue;
-
-    // Récupérer la position du bouton filtre
-    const button = (event.target as HTMLSelectElement).getBoundingClientRect();
-    const screenWidth = window.innerWidth;
-
-    // Vérifier si le menu peut s'afficher à droite ou s'il doit passer à gauche
-    if (screenWidth - button.right > 220) {
-      this.menuStyle = {
-        left: `${button.right + 5}px`,
-        top: `${button.bottom + 5}px`,
-      };
-    } else {
-      this.menuStyle = {
-        left: `${button.left - 205}px`,
-        top: `${button.bottom + 5}px`,
-      };
+  addToFavorites(recipe: Meal): void {
+    if (!this.favoriteRecipesList.some((r) => r.idMeal === recipe.idMeal)) {
+      this.favoriteRecipesList.push(recipe);
     }
   }
 
-  filterByCategory(category: string) {
-    console.log('Filtre par catégorie:', category);
-    this.filteredRecipes = this.mainRecipes.filter((recipe) =>
-      recipe.strMeal.includes(category)
+  removeFromFavorites(recipe: Meal): void {
+    this.favoriteRecipesList = this.favoriteRecipesList.filter(
+      (r) => r.idMeal !== recipe.idMeal
     );
   }
 
-  filterByRegion(region: string) {
-    console.log('Filtre par région:', region);
-    this.filteredRecipes = this.mainRecipes.filter((recipe) =>
-      recipe.strMeal.includes(region)
-    );
+  private observeChanges(
+    control: FormControl,
+    filterFunction: (value: string) => void
+  ): void {
+    control.valueChanges.subscribe((value) => {
+      if (value) {
+        filterFunction(value);
+      }
+    });
   }
 
-  onIngredientListChange(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value;
-    if (value === 'create') {
-      this.router.navigate(['/CreateList']);
-    }
+  addRecipe(): void {
+    this.router.navigate(['/CreateList']);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../models/meal.model';
+import { Meal } from '../../models/meal.model';
 
 @Component({
   selector: 'app-simplified-card',
@@ -9,6 +9,6 @@ import { Recipe } from '../../models/meal.model';
 })
 export class SimplifiedCardComponent {
   // Rappel : @input permet de passer des données à un composant
-  @Input() recipe!: Recipe;
+  @Input() recipe!: Meal;
   @Input() displayType: 'sidebar' | 'main' = 'main';
 }
