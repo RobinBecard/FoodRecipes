@@ -1,69 +1,77 @@
 <div class="container">
-  <!-- Left Panel -->
-  <div class="left-panel">
-    <div class="logo-section">
-      <div class="title">
-        <h1>Easy</h1>
-        <h1>Meal</h1>
+    <!-- Left Panel -->
+    <div class="left-panel">
+      <div class="logo-section">
+        <div class="title">
+          <h1>Easy</h1>
+          <h1>Meal</h1>
+        </div>
+        <p>Sign up to explore delicious recipes!</p>
       </div>
-      <p>Sign up to explore delicious recipes!</p>
-    </div>
-    <div class="bottom-section">
-      <p id="signUpCase">Already having an account? Login now</p>
-      <button mat-flat-button class="sign-in-btn" [routerLink]="['']">
-        LOG IN
-      </button>
-    </div>
-  </div>
-
-  <!-- Right Panel -->
-  <mat-card class="signup-card">
-    <mat-card-title>Create Account</mat-card-title>
-
-    <div class="social-links">
-      <a class="social-btn"><mat-icon>facebook</mat-icon></a>
-      <a class="social-btn"><mat-icon>mail</mat-icon></a>
-      <a class="social-btn"><mat-icon>linked_in</mat-icon></a>
-    </div>
-
-    <p class="divider">or use your email for registration:</p>
-
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" placeholder="Email" />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input
-            type="password"
-            matInput
-            formControlName="password"
-            placeholder="Password"
-          />
-        </mat-form-field>
-
-        <p *ngIf="error" class="error">{{ error }}</p>
-
-        <button
-          mat-flat-button
-          color="primary"
-          type="submit"
-          class="signup-btn"
-        >
-          SIGN UP
+      <div class="bottom-section">
+        <p id="signUpCase">Already having an account? Login now</p>
+        <button mat-flat-button class="sign-in-btn" [routerLink]="['']">
+          LOG IN
         </button>
-      </form>
-    </mat-card-content>
-
-    <!-- Mobile bottom section -->
-    <div class="bottom-section-mobile">
-      <p>Already having an account? Login now</p>
-      <button mat-flat-button class="sign-in-btn" [routerLink]="['']">
-        LOG IN
-      </button>
+      </div>
     </div>
-  </mat-card>
-</div>
+  
+    <!-- Right Panel -->
+    <mat-card class="signup-card">
+      <mat-card-title>Create Account</mat-card-title>
+  
+      <div class="social-links">
+        <!-- Bouton Google modifié -->
+        <a class="social-btn" (click)="signUpWithGoogle()">
+          <mat-icon svgIcon="logo"></mat-icon>
+        </a>
+        <a class="social-btn">
+          <mat-icon>mail</mat-icon>
+        </a>
+        <a class="social-btn">
+          <mat-icon>linked_in</mat-icon>
+        </a>
+      </div>
+  
+      <p class="divider">or use your email for registration:</p>
+  
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Email" />
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              placeholder="Password"
+            />
+          </mat-form-field>
+  
+          <p *ngIf="error" class="error">{{ error }}</p>
+  
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            class="signup-btn"
+          >
+            SIGN UP
+          </button>
+        </form>
+      </mat-card-content>
+  
+      <!-- Mobile bottom section -->
+      <div class="bottom-section-mobile">
+        <p>Already having an account? Login now</p>
+        <button mat-flat-button class="sign-in-btn" [routerLink]="['']">
+          LOG IN
+        </button>
+      </div>
+    </mat-card>
+  </div>
+  
