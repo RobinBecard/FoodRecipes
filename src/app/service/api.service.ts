@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, map, mergeMap, Observable, switchMap, toArray } from 'rxjs';
 import { Category } from '../models/category.model';
-import { Ingredient } from '../models/ingredient.model';
 import { Meal, MealSimplify } from '../models/meal.model';
+import { Ingredient } from '../models/ingredient.model';
 
 @Injectable({
   providedIn: 'root',

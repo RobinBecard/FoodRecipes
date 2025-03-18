@@ -122,7 +122,8 @@ background-color: #a7f3d0;
 .ingredient-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 15px;
+  gap: 1rem;
+  overflow-y: auto;
   margin-bottom: 15px;
   min-height: 300px;
   border: 1px dashed #ccc;
@@ -190,4 +191,58 @@ background-color: #a7f3d0;
 .page-title {
   font-size: 24px;
   margin: 0;
+}
+
+.list-name-container {
+  margin-bottom: 20px;
+}
+
+.list-name-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.list-name-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #666;
+}
+
+.main-recipe-card {
+  position: relative;
+}
+
+.remove-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Style pour indiquer qu'un élément est en train d'être déplacé */
+.cdk-drag-preview {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
 }

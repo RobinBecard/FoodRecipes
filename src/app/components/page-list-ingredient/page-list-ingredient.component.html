@@ -1,75 +1,93 @@
 <div class="container">
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="header">
-            <h1 class="page-title">Création d'une liste</h1>
-        </div>
-        
-        <!-- Wrapper pour les colonnes -->
-        <div class="content-wrapper">
-            <!-- Left Content -->
-            <div class="left-content">
-                <h2>Ingredients Library</h2>
-                
-                <!-- Barre de recherche -->
-                <div class="search-bar">
-                    <input type="text" placeholder="Rechercher un ingrédient..." class="search-input">
-                    <button class="search-button">
-                        <i class="search-icon">🔍</i>
-                    </button>
-                </div>
-
-                <div
-                cdkDropList
-                #rightList="cdkDropList"
-                [cdkDropListData]="leftIngredient"
-                [cdkDropListConnectedTo]="[leftList]"
-                class="ingredient-grid"
-                (cdkDropListDropped)="drop($event)"
-              >
-                <div 
-                  *ngFor="let ingredient of leftIngredient" 
-                  cdkDrag 
-                  class="main-recipe-card"
-                >
-                    <div class="recipe-image-placeholder"></div>
-                    <div class="recipe-name">{{ ingredient.name }}</div>
-                </div>
-              </div>
-
-                <div class="filter">
-                    <select class="filter-select">
-                        <option>Filter by</option>
-                    </select>
-                </div>
-            </div>
-            <!-- Right Content -->
-            <div class="right-content">
-                <h2>Création de votre nouvelle liste</h2>
-
-                <div
-                cdkDropList
-                #leftList="cdkDropList"
-                [cdkDropListData]="rigthIngredient"
-                [cdkDropListConnectedTo]="[rightList]"
-                class="ingredient-grid"
-                (cdkDropListDropped)="drop($event)"
-              >
-                <div 
-                  *ngFor="let ingredient of rigthIngredient" 
-                  cdkDrag 
-                  class="main-recipe-card"
-                >
-                  <div class="recipe-image-placeholder"></div>
-                  <div class="recipe-name">{{ ingredient.name }}</div>
-                </div>
+  <!-- Main Content -->
+  <div class="main-content">
+      <div class="header">
+          <h1 class="page-title">Création d'une liste</h1>
+      </div>
+     
+      <!-- Wrapper pour les colonnes -->
+      <div class="content-wrapper">
+          <!-- Left Content -->
+          <div class="left-content">
+              <h2>Bibliothèque d'ingrédients</h2>
+             
+              <!-- Barre de recherche -->
+              <div class="search-bar">
+                  <input type="text" [(ngModel)]="searchText" 
+                         placeholder="Rechercher un ingrédient..." 
+                         class="search-input"
+                         (keyup)="filterIngredients()">
+                  <button class="search-button" (click)="filterIngredients()">
+                      <i class="search-icon">🔍</i>
+                  </button>
               </div>
               
-              <div class="button">
-                <button class="cancel-button" [routerLink]="['/main']">Cancel</button>
-                <button class="save-button">Save</button>
+              <!-- Message de chargement -->
+              <div *ngIf="isLoading" class="loading-message">
+                  Chargement des ingrédients...
               </div>
-            </div>
-        </div>
-    </div>
+              
+              <div
+                  cdkDropList
+                  #rightList="cdkDropList"
+                  [cdkDropListData]="filteredIngredients"
+                  [cdkDropListConnectedTo]="[leftList]"
+                  class="ingredient-grid"
+                  (cdkDropListDropped)="drop($event)"
+                  cdkDropListAutoScroll
+              >
+                  <div
+                    *ngFor="let ingredient of filteredIngredients"
+                    cdkDrag
+                    class="main-recipe-card"
+                  >
+                      <div class="recipe-image-placeholder"></div>
+                      <div class="recipe-name">{{ ingredient.strIngredient }}</div>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Right Content -->
+          <div class="right-content">
+              <h2>Création de votre nouvelle liste</h2>
+              
+              <!-- Champ pour le nom de la liste -->
+              <div class="list-name-container">
+                <label for="listName">Nom de la liste :</label>
+                <input 
+                  type="text" 
+                  id="listName" 
+                  [(ngModel)]="listName" 
+                  placeholder="Entrez un nom pour votre liste"
+                  required
+                >
+              </div>
+              
+              <div
+                  cdkDropList
+                  #leftList="cdkDropList"
+                  [cdkDropListData]="rigthIngredient"
+                  [cdkDropListConnectedTo]="[rightList]"
+                  class="ingredient-grid"
+                  (cdkDropListDropped)="drop($event)"
+                  cdkDropListAutoScroll
+              >
+                  <div
+                    *ngFor="let ingredient of rigthIngredient; let i = index"
+                    cdkDrag
+                    class="main-recipe-card"
+                  >
+                      <div class="recipe-image-placeholder"></div>
+                      <div class="recipe-name">{{ ingredient.strIngredient }}</div>
+                      <button class="remove-button" (click)="removeFromRight(i)">✕</button>
+                  </div>
+              </div>
+           
+              <div class="button">
+                  <button class="cancel-button" [routerLink]="['/main']">Annuler</button>
+                  <button class="save-button" (click)="saveList()">Enregistrer</button>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

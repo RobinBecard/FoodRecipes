@@ -23,3 +23,5 @@ export interface Recipe {
   strCategory: string;
   strMealThumb?: string;
 }
+
+
