@@ -38,6 +38,24 @@ export class MainComponent implements OnInit {
   selectedIngredientsList = new FormControl(''); // pour les listes d'ingrédients
   selectedLetter = new FormControl(''); // pour les lettres
 
+  // états des filtres
+  activeFilters = {
+    search: false,
+    category: false,
+    region: false,
+    letter: false,
+    ingredientsList: false,
+  };
+
+  // Valeurs actuelles des filtres
+  currentFilters = {
+    search: '',
+    category: '',
+    region: '',
+    letter: '',
+    ingredientsList: '',
+  };
+
   isLoading = false;
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   isSidebarOpen = false;
@@ -169,6 +187,50 @@ export class MainComponent implements OnInit {
     this.mealService.getMealById('52772').subscribe((meal) => {
       this.favoriteRecipesList.push(meal);
     });
+  }
+
+  applyFilters(): void {
+    this.isLoading = true;
+
+    // Déterminer la priorité des filtres
+    if (this.activeFilters.search) {
+      // si recherche active
+      // Désactiver lettre et ingredientsList
+      this.selectedLetter.setValue('', { emitEvent: false }); // on ne veut pas déclencher l'événement
+      this.activeFilters.letter = false;
+      this.selectedIngredientsList.setValue('', { emitEvent: false });
+      this.activeFilters.ingredientsList = false;
+
+      // Appliquer la recherche
+      this.searchMeals(this.currentFilters.search);
+    } else if (this.activeFilters.letter) {
+      // si lettre active
+      // Désactiver search et ingredientsList
+      this.selectedIngredientsList.setValue('', { emitEvent: false });
+      this.activeFilters.ingredientsList = false;
+
+      // Appliquer le filtre par lettre
+      this.filterByFirstLetter(this.currentFilters.letter);
+    } else if (this.activeFilters.ingredientsList) {
+      this.filterByIngredientsList(this.currentFilters.ingredientsList);
+    } else if (this.activeFilters.category || this.activeFilters.region) {
+      if (this.activeFilters.category) {
+        this.filterByCategory(this.currentFilters.category);
+      }
+      if (this.activeFilters.region) {
+        this.filterByRegion(this.currentFilters.region);
+      }
+    } else {
+      // Aucun filtre --> affichage aléatoire
+      this.loadRandomMeals(15);
+    }
+
+    if (this.activeFilters.category) {
+      this.filterByCategory(this.currentFilters.category);
+    }
+    if (this.activeFilters.region) {
+      this.filterByRegion(this.currentFilters.region);
+    }
   }
 
   searchMeals(term: string): void {
