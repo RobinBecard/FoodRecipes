@@ -23,7 +23,6 @@ import { ApiService } from '../../service/api.service';
   standalone: false,
 })
 export class MainComponent implements OnInit {
-  // Listes
   RecipesList: Meal[] = []; // Liste de recettes filtrées
   favoriteRecipesList: Meal[] = []; // Liste des recettes favorites : à récupérer et sauvegarder avec firebase
 
@@ -47,7 +46,7 @@ export class MainComponent implements OnInit {
     private mealService: ApiService,
     private router: Router,
     private breakpointObserver: BreakpointObserver
-  ) {} // pour les appels API et navigation
+  ) {}
 
   ngOnInit(): void {
     this.loadInitialData(); // Charger les données initiales : catégories, régions, Liste d'ingrédients, recettes aléatoires, recettes favorites
@@ -215,41 +214,40 @@ export class MainComponent implements OnInit {
     const selectedList = this.ingredientsList.find(
       (list) => list.listName === listName
     );
-
     if (!selectedList || selectedList.ingredients.length === 0) {
+      this.isLoading = false;
       return;
     }
-
     const ingredients = selectedList.ingredients;
-    console.log(ingredients.length);
-
     // Créer un tableau d'observables
     const requests = ingredients.map((ingredient) =>
       this.mealService.getAllMealsFilterByMainIngredient(ingredient)
     );
 
-    // Utiliser forkJoin pour attendre les requêtes
-    forkJoin(requests).subscribe((results) => {
-      let allRecipes: Meal[] = [];
-      results.forEach((meals) => {
-        if (meals) {
-          meals.forEach((meal) => {
-            // Éviter les doublons
-            if (!allRecipes.some((r) => r.idMeal === meal.idMeal)) {
-              meal.matchScore = this.calculateMatchScore(meal, ingredients);
-              allRecipes.push(meal);
-            }
-          });
-        }
-      });
-
-      allRecipes.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0)); // score decroissant
-
-      // Garder seulement les 5 premières recettes
-      this.RecipesList = allRecipes.slice(0, 50);
-
-      this.isLoading = false;
-    });
+    // Utiliser forkJoin pour attendre TOUTES les requêtes
+    forkJoin(requests).subscribe(
+      (results) => {
+        let allRecipes: Meal[] = [];
+        results.forEach((meals) => {
+          if (meals) {
+            meals.forEach((meal) => {
+              // Éviter les doublons
+              if (!allRecipes.some((r) => r.idMeal === meal.idMeal)) {
+                meal.matchScore = this.calculateMatchScore(meal, ingredients);
+                allRecipes.push(meal);
+              }
+            });
+          }
+        });
+        allRecipes.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0)); // score décroissant
+        this.RecipesList = allRecipes;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Erreur lors du filtrage par ingrédients:', error);
+        this.isLoading = false;
+      }
+    );
   }
 
   resetFilters(): void {
@@ -321,9 +319,6 @@ export class MainComponent implements OnInit {
         score++;
       }
     });
-
-    // len --> 1
-    // score -->
 
     return (score / ingredientsList.length) * 100;
   }
