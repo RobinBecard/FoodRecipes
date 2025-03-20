@@ -42,11 +42,21 @@ export class PageListIngredientComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      // Créer une copie de l'ingrédient lors du transfert pour éviter les problèmes de référence
-      const item = {...event.previousContainer.data[event.previousIndex]};
+      const item = event.previousContainer.data[event.previousIndex];
+  
+      if (event.previousContainer.id === 'rightList' && event.container.id === 'leftList') {
+        return;
+      }
+  
+      if (event.previousContainer.id === 'leftList' && event.container.id === 'rightList') {
+        this.filteredIngredients = this.filteredIngredients.filter(ing => ing.idIngredient !== item.idIngredient);
+      }
+  
       event.container.data.splice(event.currentIndex, 0, item);
+      event.previousContainer.data.splice(event.previousIndex, 1);
     }
   }
+  
   
   saveList() {
     if (!this.listName) {
@@ -85,6 +95,11 @@ export class PageListIngredientComponent implements OnInit {
   }
 
   removeFromRight(index: number) {
-    this.rigthIngredient.splice(index, 1);
+    const removedIngredient = this.rigthIngredient.splice(index, 1)[0];
+  
+    // Vérifier que l'ingrédient n'est pas déjà présent dans la liste de gauche avant de l'ajouter
+    if (!this.filteredIngredients.some(ing => ing.idIngredient === removedIngredient.idIngredient)) {
+      this.filteredIngredients.unshift(removedIngredient);
+    }
   }
 }
