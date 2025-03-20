@@ -35,7 +35,9 @@
                     class="ingredient-grid"
                     (cdkDropListDropped)="drop($event)"
                     cdkDropListAutoScroll
-                >
+                    id="leftList"
+              >
+              
                   @for (ingredient of filteredIngredients; track ingredient.strIngredient) {
                     <div
                       cdkDrag
@@ -68,22 +70,20 @@
                     cdkDropList
                     #leftList="cdkDropList"
                     [cdkDropListData]="rigthIngredient"
-                    [cdkDropListConnectedTo]="[rightList]"
                     class="ingredient-grid"
                     (cdkDropListDropped)="drop($event)"
                     cdkDropListAutoScroll
-                >
-                  @for (ingredient of rigthIngredient; track ingredient.strIngredient; let i = $index) {
-                    <div
-                      cdkDrag
-                      class="main-recipe-card"
-                    >
-                        <div class="recipe-image-placeholder"></div>
-                        <div class="recipe-name">{{ ingredient.strIngredient }}</div>
-                        <button class="remove-button" (click)="removeFromRight(i)">✕</button>
-                    </div>
-                  }
-                </div>
+                    id="rightList"
+              >
+                @for (ingredient of rigthIngredient; track ingredient.strIngredient; let i = $index) {
+                  <div cdkDrag class="main-recipe-card">
+                      <div class="recipe-image-placeholder"></div>
+                      <div class="recipe-name">{{ ingredient.strIngredient }}</div>
+                      <button class="remove-button" (click)="removeFromRight(i)">✕</button>
+                  </div>
+                }
+              </div>
+              
              
                 <div class="button">
                     <button class="cancel-button" [routerLink]="['/main']">Annuler</button>
