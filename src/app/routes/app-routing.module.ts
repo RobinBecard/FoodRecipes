@@ -7,6 +7,8 @@ import {
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
 import { MainComponent } from '../components/main/main.component';
+import { PageListIngredientComponent } from '../components/page-list-ingredient/page-list-ingredient.component';
+
 import { SignUpComponent } from '../components/signUp/signUp.component';
 import { ApiTestComponent } from '../components/test/api-test.component';
 import { DescriptionComponent } from '../components/description/description';
@@ -33,6 +35,7 @@ const routes: Routes = [
   },
   { path: 'api-test', component: ApiTestComponent },
   { path: 'description', component: DescriptionComponent },
+  { path: 'CreateList', component: PageListIngredientComponent },
 ];
 
 @NgModule({

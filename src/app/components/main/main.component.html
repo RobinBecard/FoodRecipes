@@ -1,27 +1,32 @@
+<div class="blur-background"></div>
 <div class="global-container">
+  <button class="menu-button" (click)="toggleSidebar()">☰</button>
   <div class="container">
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" [class.open]="isSidebarOpen">
+      <div class="sidebar-background"></div>
       <div class="sidebar-list">
-        <h2 class="sidebar-title"><mat-icon>list</mat-icon> My List</h2>
+        <div class="MyList-header">
+          <h2 class="sidebar-title"><mat-icon>list</mat-icon> My List</h2>
+          <button class="MyListButton" mat-icon-button color="primary" (click)="addRecipe()">
+            <mat-icon id="MyList-AddButton">add</mat-icon>
+          </button>
+        </div>
         <div class="sidebar-list-container">
-          <!-- À FAIRE : lister les listes d'ingrédients -->
+          <!-- Content for My List -->
         </div>
       </div>
       <div class="sidebar-list">
         <h2 class="sidebar-title">
           <mat-icon>favorite</mat-icon> My Favorites
         </h2>
-        <div class="sidebar-list-container">
-          <app-simplified-card
-            *ngFor="let recipe of favoriteRecipes"
-            [recipe]="recipe"
-            displayType="sidebar"
-          >
-          </app-simplified-card>
-          <div class="empty-list-message" *ngIf="favoriteRecipes.length === 0">
-            <mat-icon>info</mat-icon>
-            <p>Drag and drop recipes here to save them to your favorites</p>
+        <div class="favorites-container">
+          <div class="sidebar-card" *ngFor="let recipe of favoriteRecipesList">
+            <div class="sidebar-recipe-name">{{ recipe.strMeal }}</div>
+            <div class="sidebar-recipe-attributs">
+              <div>{{ recipe.strCategory }}</div>
+              <div>{{ recipe.strArea }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -30,7 +35,12 @@
     <!-- Main Content -->
     <div class="main-content">
       <div class="header">
-        <h1 class="page-title">Find a new recipe</h1>
+        <div class="title-part">
+          <div class="title-div">
+            <h1 class="page-title">Find a new recipe</h1>
+          </div>
+          <app-bottom-bar></app-bottom-bar>
+        </div>
         <div class="buttons-container">
           <button mat-raised-button color="primary" (click)="resetFilters()">
             <mat-icon>refresh</mat-icon> Reset Filters
@@ -69,7 +79,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" >
           <mat-label>Region</mat-label>
           <mat-select [formControl]="selectedRegion">
             <mat-option [value]="">All Regions</mat-option>
@@ -81,18 +91,18 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Ingredients</mat-label>
-          <mat-select [formControl]="selectedIngredientsList" multiple>
+          <mat-select [formControl]="selectedIngredientsList">
             <mat-option
               *ngFor="let ingredient of ingredientsList"
-              [value]="ingredient"
+              [value]="ingredient.listName"
             >
-              {{ ingredient }}
+              {{ ingredient.listName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
         <div class="alphabet-filter">
-          <span>Filter by first letter:</span>
+          <span id="text-filter">Filter by first letter:</span>
           <div class="letter-container">
             <mat-chip-option
               *ngFor="let letter of alphabet"
@@ -102,15 +112,13 @@
             >
               {{ letter }}
             </mat-chip-option>
+
           </div>
         </div>
       </div>
 
       <!-- No results message -->
-      <div
-        class="no-results"
-        *ngIf="!isLoading && filteredRecipes.length === 0"
-      >
+      <div class="no-results" *ngIf="!isLoading && RecipesList.length === 0">
         <mat-icon>search_off</mat-icon>
         <p>
           No recipes found matching your criteria. Try changing your filters.
@@ -119,23 +127,16 @@
 
       <!-- Recipes Grid -->
       <div
-        cdkDropList
-        #mainList="cdkDropList"
-        cdkDropListOrientation="mixed"
-        [cdkDropListData]="filteredRecipes"
         class="recipe-grid"
-        (cdkDropListDropped)="drop($event)"
-        cdkDropListAutoScroll
       >
-        <app-simplified-card
-          *ngFor="let recipe of filteredRecipes"
-          [recipe]="recipe"
-          displayType="main"
-        >
-        </app-simplified-card>
+        @for (recipe of RecipesList; track recipe.idMeal) {
+          <app-simplified-card
+            [recipe]="recipe"
+            displayType="main"
+          >
+          </app-simplified-card>
+        }
       </div>
     </div>
-    <app-bottom-bar></app-bottom-bar>
   </div>
 </div>
-<app-bottom-bar></app-bottom-bar>

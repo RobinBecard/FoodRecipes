@@ -9,6 +9,7 @@ export interface Meal {
   strIngredients: string[];
   strMeasures: string[];
   strSource: string; // URL
+  matchScore?: number; // score de correspondance pour la recommandation
 }
 
 export interface MealSimplify {
@@ -21,3 +22,5 @@ export interface IngredientsList {
   listName: string;
   ingredients: string[];
 }
+
+

@@ -4,7 +4,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -28,6 +28,7 @@ import { ButtonLogOutComponent } from './components/button-log-out/button-log-ou
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { PageListIngredientComponent } from './components/page-list-ingredient/page-list-ingredient.component';
 import { SignUpComponent } from './components/signUp/signUp.component';
 import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
@@ -45,6 +46,7 @@ import { DescriptionComponent } from './components/description/description';
     SignUpComponent,
     TestInfoLogComponent,
     ButtonLogOutComponent,
+    PageListIngredientComponent,
     BottomBarComponent,
     ApiTestComponent,
     SimplifiedCardComponent,
@@ -64,6 +66,7 @@ import { DescriptionComponent } from './components/description/description';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatToolbarModule,
+    MatIconModule,
     MatTooltipModule,
     ReactiveFormsModule,
     RouterLink,
