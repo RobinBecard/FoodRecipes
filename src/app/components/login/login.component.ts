@@ -4,6 +4,9 @@ import { Auth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, 
 import { Router } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from '../../service/api.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 const googleLogoURL = "https://raw.githubusercontent.com/fireflysemantics/logo/master/Google.svg";
 
@@ -14,6 +17,9 @@ const googleLogoURL = "https://raw.githubusercontent.com/fireflysemantics/logo/m
   standalone: false,
 })
 export class LoginComponent implements OnInit {
+  phoneNumber: string = '';
+  otpCode: string = '';
+  confirmationResult: any;
   private auth = inject(Auth);
   private router = inject(Router);
   private googleProvider = new GoogleAuthProvider();
@@ -33,6 +39,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
+    private authService: AuthService,
   ) {
     this.matIconRegistry.addSvgIcon(
       "logo",
@@ -51,6 +58,9 @@ export class LoginComponent implements OnInit {
       .catch((error) => {
         console.error('Erreur avec l\'authentification Google :', error.code, error.message);
       });
+    (window as any).recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      size: 'invisible'
+    });
   }
 
   submit() {

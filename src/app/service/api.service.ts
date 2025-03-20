@@ -4,6 +4,8 @@ import { from, map, mergeMap, Observable, switchMap, toArray } from 'rxjs';
 import { Category } from '../models/category.model';
 import { Meal, MealSimplify } from '../models/meal.model';
 import { Ingredient } from '../models/ingredient.model';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root',
@@ -173,5 +175,16 @@ export class ApiService {
           );
         })
       );
+  }
+}
+export class AuthService {
+  constructor(private afAuth: AngularFireAuth) {}
+
+  sendOtp(phoneNumber: string, recaptchaVerifier: any) {
+    return this.afAuth.signInWithPhoneNumber(phoneNumber, recaptchaVerifier);
+  }
+
+  verifyOtp(confirmationResult: any, otpCode: string) {
+    return confirmationResult.confirm(otpCode);
   }
 }
