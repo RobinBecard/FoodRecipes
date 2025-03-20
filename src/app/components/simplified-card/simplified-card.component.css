@@ -10,7 +10,7 @@
   background-color: #e4e3e3;
   padding: 1rem;
   border-radius: 8px;
-  cursor: move;
+  cursor:pointer;
 }
 
 .recipe-name {
