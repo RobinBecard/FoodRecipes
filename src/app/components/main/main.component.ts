@@ -10,21 +10,14 @@ import { Router } from '@angular/router';
 import {
   debounceTime,
   distinctUntilChanged,
-  forkJoin,
-  map,
   Observable,
-  of,
   Subscription,
 } from 'rxjs';
-import {Meal} from '../../models/meal.model';
+import { IngredientList } from '../../models/ingredient.model';
+import { Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
-import { Ingredient, IngredientList } from '../../models/ingredient.model';
+import { FilterService } from '../../service/filter.service';
 import { ListIngredientService } from '../../service/list-ingredient.service';
-
-interface Filter {
-  value: string;
-  active: boolean;
-}
 
 @Component({
   selector: 'app-main',
@@ -47,22 +40,6 @@ export class MainComponent implements OnInit {
   selectedIngredientsList = new FormControl(''); // pour les listes d'ingrédients
   selectedLetter = new FormControl(''); // pour les lettres
 
-  // Sauvegarder l'état du filtre et sa valeur
-  filters: {
-    [key in
-      | 'search'
-      | 'category'
-      | 'region'
-      | 'letter'
-      | 'ingredientsList']: Filter;
-  } = {
-    search: { value: '', active: false },
-    category: { value: '', active: false },
-    region: { value: '', active: false },
-    letter: { value: '', active: false },
-    ingredientsList: { value: '', active: false },
-  };
-
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   isSidebarOpen = false;
   private breakpointSubscription: Subscription = new Subscription();
@@ -71,11 +48,12 @@ export class MainComponent implements OnInit {
     private mealService: ApiService,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-    private listService : ListIngredientService
+    private listService: ListIngredientService,
+    private filterService: FilterService
   ) {}
 
   ngOnInit(): void {
-    this.loadInitialData(); // Charger les données initiales : catégories, régions, Liste d'ingrédients, recettes aléatoires, recettes favorites
+    this.loadInitialData(); // Charger les données initiales
 
     // Configurer la recherche
     this.searchControl.valueChanges
@@ -83,16 +61,17 @@ export class MainComponent implements OnInit {
       .subscribe((term) => {
         // Réinitialiser les autres filtres exclusifs
         this.selectedIngredientsList.setValue('', { emitEvent: false });
-        this.filters.ingredientsList = { value: '', active: false };
         this.selectedLetter.setValue('', { emitEvent: false });
-        this.filters.letter = { value: '', active: false };
+        this.filterService.setFilter('ingredientsList', '', false);
+        this.filterService.setFilter('letter', '', false);
+
         if (term && term.length > 1) {
-          this.filters.search = { value: term, active: true };
+          this.filterService.setFilter('search', term, true);
         } else if (!term) {
           this.searchControl.setValue('', { emitEvent: false });
-          this.filters.search = { value: '', active: false };
+          this.filterService.setFilter('search', '', false);
         }
-        this.applyFilters();
+        this.updateRecipesList();
       });
 
     // Observer les changements de catégories, de régions, de lettres et de listes d'ingrédients
@@ -142,33 +121,20 @@ export class MainComponent implements OnInit {
     this.loadSavedRecipes();
   }
 
+  // Exposer la méthode pour qu'elle puisse être appelée depuis l'HTML
+  loadRandomMeals(count: number): Observable<Meal[]> {
+    return this.filterService.loadRandomMeals(count);
+  }
+
   // Charger les listes d'ingrédients depuis Firebase
   loadIngredientsList(): void {
     this.listService.getUserLists().subscribe(
       (lists: IngredientList[]) => {
-        this.ingredientsList = lists;  // Met à jour la liste avec les données récupérées
+        this.ingredientsList = lists; // Met à jour la liste avec les données récupérées
       },
       (error) => {
         console.error('Erreur lors de la récupération des listes:', error);
       }
-    );
-  }
-
-  loadRandomMeals(count: number): Observable<Meal[]> {
-    const requests: Observable<Meal>[] = [];
-    for (let i = 0; i < count; i++) {
-      requests.push(this.mealService.getSingleRandomMeal());
-    }
-    return forkJoin(requests).pipe(
-      map((meals) => {
-        const uniqueMeals: Meal[] = [];
-        meals.forEach((meal) => {
-          if (!uniqueMeals.some((m) => m.idMeal === meal.idMeal)) {
-            uniqueMeals.push(meal);
-          }
-        });
-        return uniqueMeals;
-      })
     );
   }
 
@@ -183,61 +149,20 @@ export class MainComponent implements OnInit {
     });
   }
 
-  applyFilters(): void {
-    // Commencer avec des observables vides
-    let observables: Observable<Meal[]>[] = [];
-
-    // N'ajouter que les filtres actifs
-    if (this.filters.search.active) {
-      observables.push(this.searchMeals(this.filters.search.value));
-    }
-    if (this.filters.category.active) {
-      observables.push(this.filterByCategory(this.filters.category.value));
-    }
-    if (this.filters.region.active) {
-      observables.push(this.filterByRegion(this.filters.region.value));
-    }
-    if (this.filters.letter.active) {
-      observables.push(this.filterByFirstLetter(this.filters.letter.value));
-    }
-    if (this.filters.ingredientsList.active) {
-      observables.push(
-        this.filterByIngredientsList(this.filters.ingredientsList.value)
-      );
-    }
-
-    // Si aucun filtre n'est actif, charger des recettes aléatoires
-    if (observables.length === 0) {
-      this.loadRandomMeals(15).subscribe((meals) => {
-        this.RecipesList = meals;
-      });
-      return;
-    }
-
-    // Combiner les résultats par intersection (ET logique)
-    forkJoin(observables).subscribe(
-      (results) => {
-        if (results.length === 0) {
-          this.RecipesList = [];
-          return;
+  updateRecipesList(): void {
+    this.filterService.applyFilters().subscribe(
+      (meals) => {
+        // Si aucun filtre n'est actif, charger des recettes aléatoires
+        if (meals.length === 0 && !this.hasActiveFilters()) {
+          this.loadRandomMeals(15).subscribe((randomMeals) => {
+            this.RecipesList = randomMeals;
+          });
+        } else {
+          this.RecipesList = meals;
         }
-
-        // Commencer avec le premier résultat
-        let combined: Meal[] = results[0] || [];
-
-        // Faire l'intersection avec les autres résultats
-        for (let i = 1; i < results.length; i++) {
-          combined = combined.filter((meal) =>
-            results[i].some((m) => m.idMeal === meal.idMeal)
-          );
-        }
-
-        console.log('Filtered recipes:', combined);
-        this.RecipesList = combined;
       },
       (error) => {
         console.error('Error applying filters:', error);
-        // En cas d'erreur, peut-être charger des recettes aléatoires
         this.loadRandomMeals(5).subscribe((meals) => {
           this.RecipesList = meals;
         });
@@ -245,58 +170,9 @@ export class MainComponent implements OnInit {
     );
   }
 
-  searchMeals(term: string): Observable<Meal[]> {
-    return this.mealService
-      .getMealByName(term)
-      .pipe(map((meals) => (meals ? meals : [])));
-  }
-
-  filterByCategory(category: string): Observable<Meal[]> {
-    return this.mealService
-      .getAllMealsFilterByCategory(category)
-      .pipe(map((meals) => (meals ? meals : [])));
-  }
-
-  filterByRegion(region: string): Observable<Meal[]> {
-    return this.mealService
-      .getAllMealsFilterByArea(region)
-      .pipe(map((meals) => (meals ? meals : [])));
-  }
-
-  filterByFirstLetter(letter: string): Observable<Meal[]> {
-    return this.mealService
-      .getAllMealsByFirstLetter(letter)
-      .pipe(map((meals) => (meals ? meals : [])));
-  }
-
-  filterByIngredientsList(listName: string): Observable<Meal[]> {
-    const selectedList = this.ingredientsList.find(
-      (list) => list.name === listName
-    );
-    if (!selectedList || selectedList.ingredients.length === 0) {
-      return of([]); // renvoie un tableau vide
-    }
-    const ingredients = selectedList.ingredients;
-    const requests = ingredients.map((ingredient) =>
-      this.mealService.getAllMealsFilterByMainIngredient(ingredient.strIngredient)
-    );
-    return forkJoin(requests).pipe(
-      map((results) => {
-        let allRecipes: Meal[] = [];
-        results.forEach((meals) => {
-          if (meals) {
-            meals.forEach((meal) => {
-              if (!allRecipes.some((r) => r.idMeal === meal.idMeal)) {
-                meal.matchScore = this.calculateMatchScore(meal, ingredients);
-                allRecipes.push(meal);
-              }
-            });
-          }
-        });
-        allRecipes.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
-        return allRecipes;
-      })
-    );
+  hasActiveFilters(): boolean {
+    const filters = this.filterService.filterState;
+    return Object.values(filters).some((filter) => filter.active);
   }
 
   resetFilters(): void {
@@ -306,14 +182,8 @@ export class MainComponent implements OnInit {
     this.selectedIngredientsList.setValue('', { emitEvent: false });
     this.selectedLetter.setValue('', { emitEvent: false });
 
-    this.filters = {
-      search: { value: '', active: false },
-      category: { value: '', active: false },
-      region: { value: '', active: false },
-      letter: { value: '', active: false },
-      ingredientsList: { value: '', active: false },
-    };
-    this.applyFilters();
+    this.filterService.resetFilters();
+    this.updateRecipesList();
   }
 
   drop(event: CdkDragDrop<any[]>) {
@@ -357,10 +227,12 @@ export class MainComponent implements OnInit {
         const exclusifs = ['letter', 'ingredientsList', 'search'];
         const autresFiltres = exclusifs.filter((name) => name !== nom);
         autresFiltres.forEach((name) => {
-          this.filters[name as keyof typeof this.filters] = {
-            value: '',
-            active: false,
-          };
+          this.filterService.setFilter(
+            name as keyof typeof this.filterService.filterState,
+            '',
+            false
+          );
+
           // Utiliser { emitEvent: false } pour éviter les boucles
           if (name === 'letter') {
             this.selectedLetter.setValue('', { emitEvent: false });
@@ -373,7 +245,7 @@ export class MainComponent implements OnInit {
       }
 
       if (value && value.length > 0) {
-        this.filters[nom] = { value, active: true };
+        this.filterService.setFilter(nom, value, true);
       } else {
         if (nom == 'letter') {
           // Ne pas déclencher un nouvel événement lors de cette réinitialisation
@@ -381,36 +253,18 @@ export class MainComponent implements OnInit {
         } else if (nom == 'ingredientsList') {
           this.selectedIngredientsList.setValue('', { emitEvent: false });
         }
-        this.filters[nom] = { value: '', active: false };
+        this.filterService.setFilter(nom, '', false);
       }
-      this.applyFilters();
+
+      // Mise à jour de la liste des recettes
+      this.updateRecipesList();
     });
-  }
-
-  // Fonction pour calculer le score de correspondance
-  calculateMatchScore(meal: Meal, ingredientsList: Ingredient[]): number {
-    let score = 0;
-    const mealIngredients: string[] = meal.strIngredients;
-
-    ingredientsList.forEach((ingredient) => {
-      if (
-        mealIngredients.some(
-          (mealIng) =>
-            mealIng.toLowerCase().includes(ingredient.strIngredient.toLowerCase()) ||
-            ingredient.strIngredient.toLowerCase().includes(mealIng)
-        )
-      ) {
-        score++;
-      }
-    });
-
-    return (score / ingredientsList.length) * 100;
   }
 
   addList(): void {
     this.router.navigate(['/CreateList']);
   }
-  
+
   ngOnDestroy() {
     if (this.breakpointSubscription) {
       this.breakpointSubscription.unsubscribe();
