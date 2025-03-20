@@ -2,6 +2,8 @@ import { Component, EventEmitter, inject, Input, Output, OnInit } from '@angular
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, getRedirectResult } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const googleLogoURL = "https://raw.githubusercontent.com/fireflysemantics/logo/master/Google.svg";
 
@@ -26,8 +28,17 @@ export class LoginComponent implements OnInit {
 
   @Input() error: string | null | undefined;
   @Output() submitEM = new EventEmitter();
-
   loginError: string | null = null; // Stockage du message d'erreur
+
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      "logo",
+      this.domSanitizer.bypassSecurityTrustResourceUrl(googleLogoURL)
+    );
+  }
 
   ngOnInit() {
     getRedirectResult(this.auth)
