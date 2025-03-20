@@ -3,14 +3,18 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  forkJoin,
+  Subscription,
+} from 'rxjs';
 import { IngredientsList, Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +23,6 @@ import { Subscription } from 'rxjs';
   standalone: false,
 })
 export class MainComponent implements OnInit {
-  // Listes
   RecipesList: Meal[] = []; // Liste de recettes filtrées
   favoriteRecipesList: Meal[] = []; // Liste des recettes favorites : à récupérer et sauvegarder avec firebase
 
@@ -39,7 +42,11 @@ export class MainComponent implements OnInit {
   isSidebarOpen = false;
   private breakpointSubscription: Subscription = new Subscription();
 
-  constructor(private mealService: ApiService, private router: Router,private breakpointObserver: BreakpointObserver) {} // pour les appels API et navigation
+  constructor(
+    private mealService: ApiService,
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit(): void {
     this.loadInitialData(); // Charger les données initiales : catégories, régions, Liste d'ingrédients, recettes aléatoires, recettes favorites
@@ -65,16 +72,20 @@ export class MainComponent implements OnInit {
       this.selectedLetter,
       this.filterByFirstLetter.bind(this)
     );
+    this.observeChanges(
+      this.selectedIngredientsList,
+      this.filterByIngredientsList.bind(this)
+    );
 
     this.breakpointSubscription = this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
-      .subscribe(result => {
+      .subscribe((result) => {
         // Si l'écran correspond à Small ou HandsetPortrait, fermez la sidebar
         if (result.matches) {
           this.isSidebarOpen = false;
         }
       });
-    
+
     // Vérifiez la taille de l'écran au démarrage
     if (window.innerWidth <= 768) {
       this.isSidebarOpen = false;
@@ -129,6 +140,7 @@ export class MainComponent implements OnInit {
         },
       ];
 
+      console.log(tempIngredientsList);
       this.ingredientsList = tempIngredientsList;
     });
   }
@@ -196,6 +208,48 @@ export class MainComponent implements OnInit {
     });
   }
 
+  filterByIngredientsList(listName: string): void {
+    this.isLoading = true;
+
+    const selectedList = this.ingredientsList.find(
+      (list) => list.listName === listName
+    );
+    if (!selectedList || selectedList.ingredients.length === 0) {
+      this.isLoading = false;
+      return;
+    }
+    const ingredients = selectedList.ingredients;
+    // Créer un tableau d'observables
+    const requests = ingredients.map((ingredient) =>
+      this.mealService.getAllMealsFilterByMainIngredient(ingredient)
+    );
+
+    // Utiliser forkJoin pour attendre TOUTES les requêtes
+    forkJoin(requests).subscribe(
+      (results) => {
+        let allRecipes: Meal[] = [];
+        results.forEach((meals) => {
+          if (meals) {
+            meals.forEach((meal) => {
+              // Éviter les doublons
+              if (!allRecipes.some((r) => r.idMeal === meal.idMeal)) {
+                meal.matchScore = this.calculateMatchScore(meal, ingredients);
+                allRecipes.push(meal);
+              }
+            });
+          }
+        });
+        allRecipes.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0)); // score décroissant
+        this.RecipesList = allRecipes;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Erreur lors du filtrage par ingrédients:', error);
+        this.isLoading = false;
+      }
+    );
+  }
+
   resetFilters(): void {
     this.selectedCategory.setValue('');
     this.selectedRegion.setValue('');
@@ -244,6 +298,29 @@ export class MainComponent implements OnInit {
         filterFunction(value);
       }
     });
+  }
+
+  // Fonction pour calculer le score de correspondance
+  calculateMatchScore(meal: Meal, ingredientsList: string[]): number {
+    let score = 0;
+
+    // Récupérer tous les ingrédients du plat (non vides)
+    const mealIngredients: string[] = meal.strIngredients;
+
+    // Compter combien d'ingrédients de la liste sont présents dans la recette
+    ingredientsList.forEach((ingredient) => {
+      if (
+        mealIngredients.some(
+          (mealIng) =>
+            mealIng.toLowerCase().includes(ingredient.toLowerCase()) ||
+            ingredient.toLowerCase().includes(mealIng)
+        )
+      ) {
+        score++;
+      }
+    });
+
+    return (score / ingredientsList.length) * 100;
   }
 
   addRecipe(): void {
