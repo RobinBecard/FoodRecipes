@@ -15,6 +15,8 @@ import {
 } from 'rxjs';
 import { IngredientsList, Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
+import { DescriptionComponent } from '../description/description';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-main',
@@ -45,7 +47,8 @@ export class MainComponent implements OnInit {
   constructor(
     private mealService: ApiService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -337,4 +340,16 @@ export class MainComponent implements OnInit {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
+
+  openDescriptionDialog(recipeId: string): void {
+    const dialogWidth = window.innerWidth < 768 ? '95vw' : '95vw';
+    const dialogMaxHeight = '90vh';
+  
+    this.dialog.open(DescriptionComponent, {
+      width: dialogWidth,
+      maxHeight: dialogMaxHeight,
+      data: { id: recipeId },
+    });
+  }
+  
 }

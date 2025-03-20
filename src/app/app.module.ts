@@ -35,6 +35,9 @@ import { TestInfoLogComponent } from './components/test-info-log/test-info-log.c
 import { ApiTestComponent } from './components/test/api-test.component';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { DescriptionComponent } from './components/description/description';
+import { MatDialogModule } from '@angular/material/dialog';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { DescriptionComponent } from './components/description/description';
     ApiTestComponent,
     SimplifiedCardComponent,
     DescriptionComponent,
+    VideoplayerComponent
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -72,6 +76,8 @@ import { DescriptionComponent } from './components/description/description';
     RouterLink,
     RouterModule,
     ScrollingModule,
+    MatDialogModule ,
+    YouTubePlayerModule 
   ],
   providers: [
     provideAnimationsAsync(),

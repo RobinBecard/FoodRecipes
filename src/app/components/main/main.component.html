@@ -133,6 +133,7 @@
           <app-simplified-card
             [recipe]="recipe"
             displayType="main"
+            (click)="openDescriptionDialog(recipe.idMeal)"
           >
           </app-simplified-card>
         }

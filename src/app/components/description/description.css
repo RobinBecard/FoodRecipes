@@ -1,83 +1,163 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 800rm;
-    height: 800rm;
-    text-align: justify;
-  }
-  
-  .recipe-container {
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .recipe-header {
-    text-align: center;
-    font-weight: bold;
-    text-decoration: underline;
-  }
-  
-  #mealName {
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
-  
-  #mealThumb {
-    height: 15em;
+.recipe-container {
+display: flex;
+flex-direction: column;
+background-color: #ffffff;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
+width: 100%;
+margin: 0 auto;
+}
 
-  }
-  
-  .recipe-details {
-    margin-top: 20px;
-    margin: 30px;
-  }
-  
-  h2, h3 {
-  }
-  
-  #mealInstructions {
-    margin-top: 20px;
-    font-size: 1.1em;
-    line-height: 1.6;
-  }
-  
-  .ingredients {
-    margin: 30px;
-  }
-  
-  #ingredientsList {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  #ingredientsList li {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  
-  .links {
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  .links a {
-    display: inline-block;
-    margin: 5px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
-  .links a:hover {
-    background-color: #0056b3;
-  }
-  
+
+.mat-mdc-dialog-surface{
+  width: fit-content;
+}
+.recipe-content{
+display: flex;
+}
+
+.recipe-header {
+position: relative;
+width: 100%;
+padding: 0;
+}
+
+.recipe-left {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 20px;
+}
+
+#mealThumb {
+width: 100%;
+height: 250px;
+object-fit: cover;
+display: block;
+}
+
+#mealName {
+position: absolute;
+bottom: 10px;
+left: 50%;
+transform: translateX(-50%);
+color: white;
+font-size: 2em;
+font-weight: bold;
+background-color: rgba(0, 0, 0, 0.5);
+padding: 10px;
+border-radius: 5px;
+text-align: center;
+}
+
+.recipe-details, .ingredients, .links {
+padding: 20px;
+}
+
+.recipe-details {
+font-size: 1.1em;
+width: fit-content;
+}
+
+.ingredients {
+margin-top: 15px;
+width: fit-content;
+}
+
+#ingredientsList {
+padding: 0;
+}
+
+#ingredientsList li {
+background-color: #f9f9f9;
+padding: 8px;
+margin: 5px 0;
+border-radius: 5px;
+}
+
+.video-player {
+margin-top: 20px;
+text-align: center;
+}
+
+#mealVideo {
+max-width: 100%;
+height: auto;
+border-radius: 10px;
+}
+
+h3,h2{
+  width: fit-content;
+}
+
+p{
+  max-width: 40vw;
+  text-justify: auto;
+}
+
+.links {
+margin-top: 20px;
+text-align: center;
+}
+
+.links a {
+display: inline-block;
+margin: 5px;
+padding: 10px 20px;
+background-color: #007bff;
+color: white;
+text-decoration: none;
+border-radius: 5px;
+font-size: 1em;
+}
+
+.links a:hover {
+background-color: #0056b3;
+}
+
+/* Section droite, occupe 50% par défaut */
+.recipe-right {
+width: 50%; /* Par défaut, 50% de l'espace pour .recipe-right */
+padding: 20px;
+}
+
+/* Responsive Design : Gestion des largeurs pour petits écrans */
+@media (max-width: 768px) {
+.recipe-content {
+  flex-direction: column; /* Colonne sur petits écrans */
+}
+
+.recipe-left, .recipe-right {
+  width: 100%; /* Chaque partie occupe 100% sur petits écrans */
+  padding: 15px; /* Moins de padding */
+}
+
+.recipe-left {
+  margin-bottom: 20px; /* Espacement entre les parties */
+}
+
+#mealName {
+  font-size: 1.5em;
+}
+
+#mealThumb {
+  max-width: 300px;
+  height: auto;
+}
+
+.links a {
+  font-size: 0.9em;
+  padding: 8px 15px;
+}
+}
+
+/* Pour un affichage 75/25 en largeur sur des écrans plus larges */
+@media (min-width: 1024px) {
+.recipe-left {
+  width: 75%; /* .recipe-left occupe 75% de l'espace */
+}
+
+.recipe-right {
+  width: 25%; /* .recipe-right occupe 25% de l'espace */
+}
+}
