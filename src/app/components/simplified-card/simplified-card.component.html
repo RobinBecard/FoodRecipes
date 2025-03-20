@@ -13,7 +13,7 @@
   />
   <div class="recipe-name">{{ recipe.strMeal }}</div>
   <div class="recipe-attributs">
-    <div>{{ recipe.strCategory }}</div>
+    <div class="recipe-category">{{ recipe.strCategory }}</div>
     <div *ngIf="recipe.matchScore">{{ recipe.matchScore }}%</div>
     <div>{{ recipe.strArea }}</div>
   </div>
