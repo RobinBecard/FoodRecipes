@@ -18,3 +18,4 @@ export class SimplifiedCardComponent {
     this.isFavorited = !this.isFavorited;
   }
 }
+
