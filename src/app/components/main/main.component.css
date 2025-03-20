@@ -68,6 +68,7 @@
   padding: 5px;
   background-color: #f6f6f6;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .sidebar-title {
@@ -77,8 +78,34 @@
   font-size: 1.125rem;
   font-weight: bold;
   color: #ffffff;
+}
+
+.sidebar-title {
+  padding: 0;
+  margin: 0 !important;
+}
+
+.MyList-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
 }
+
+#MyList-AddButton {
+  color: rgb(0, 0, 0);
+  border-radius: 50%;
+  margin: 0;
+}
+
+.MyListButton{
+  color: black;
+  padding-left: 5px !important; 
+  padding-right: 5px !important;
+  margin: 0;
+}
+
 
 .sidebar-list-container {
   display: flex;
@@ -110,10 +137,13 @@
   margin-top: 0.5rem;
   gap: 0.5rem;
   overflow-wrap: break-word;
+  font-size: 0.75rem;
+  color: #666;
 }
 
 .sidebar-recipe-name {
   font-size: 0.875rem;
+
 }
 
 .empty-list-message {
@@ -190,7 +220,18 @@
   display: flex;
   justify-content: space-between;
   gap: 0.25rem;
-  overflow-x: auto;
+  overflow-x: auto !important;
+  white-space: nowrap;
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+.letter-container button span {
+  width: 10px;
+}
+
+.letter-container::-webkit-scrollbar {
+  display: none;  
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
@@ -253,24 +294,7 @@
   display: none;
 }
 
-/* Drag and Drop Styles */
-.cdk-drag-preview {
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  z-index: 1000;
-}
 
-.cdk-drag-placeholder {
-  opacity: 0.3;
-  background-color: #f5f5f5;
-  border: 1px dashed #9e9e9e;
-}
-
-.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
 
 .no-results {
   display: flex;

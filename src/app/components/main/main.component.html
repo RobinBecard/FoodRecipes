@@ -6,7 +6,17 @@
     <div class="sidebar" [class.open]="isSidebarOpen">
       <div class="sidebar-background"></div>
       <div class="sidebar-list">
-        <h2 class="sidebar-title"><mat-icon>list</mat-icon> My List</h2>
+        <div class="MyList-header">
+          <h2 class="sidebar-title"><mat-icon>list</mat-icon> My List</h2>
+          <button
+            class="MyListButton"
+            mat-icon-button
+            color="primary"
+            (click)="addRecipe()"
+          >
+            <mat-icon id="MyList-AddButton">add</mat-icon>
+          </button>
+        </div>
         <div class="sidebar-list-container">
           <!-- Content for My List -->
         </div>
@@ -35,9 +45,6 @@
             <h1 class="page-title">Find a new recipe</h1>
           </div>
           <app-bottom-bar></app-bottom-bar>
-          <button mat-raised-button color="primary" (click)="addRecipe()">
-            <mat-icon>add</mat-icon>
-          </button>
         </div>
         <div class="buttons-container">
           <button mat-raised-button color="primary" (click)="resetFilters()">
@@ -123,17 +130,9 @@
       </div>
 
       <!-- Recipes Grid -->
-      <div
-        cdkDropList
-        #mainList="cdkDropList"
-        cdkDropListOrientation="mixed"
-        [cdkDropListData]="RecipesList"
-        class="recipe-grid"
-        (cdkDropListDropped)="drop($event)"
-        cdkDropListAutoScroll
-      >
+      <div class="recipe-grid">
         @for (recipe of RecipesList; track recipe.idMeal) {
-        <app-simplified-card [recipe]="recipe" displayType="main" cdkDrag>
+        <app-simplified-card [recipe]="recipe" displayType="main">
         </app-simplified-card>
         }
       </div>
