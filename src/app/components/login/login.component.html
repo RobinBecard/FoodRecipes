@@ -22,7 +22,9 @@
     <mat-card-title>Log In</mat-card-title>
 
     <div class="social-links">
-      <a class="social-btn"><mat-icon>facebook</mat-icon></a>
+      <a class="social-btn" (click)="signInWithGoogle()">
+        <mat-icon svgIcon="logo"></mat-icon>
+      </a>
       <a class="social-btn"><mat-icon>mail</mat-icon></a>
       <a class="social-btn"><mat-icon>linked_in</mat-icon></a>
     </div>

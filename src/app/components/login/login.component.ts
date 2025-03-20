@@ -1,18 +1,22 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
+import { Component, EventEmitter, inject, Input, Output, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Auth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, getRedirectResult } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+
+const googleLogoURL = "https://raw.githubusercontent.com/fireflysemantics/logo/master/Google.svg";
 
 @Component({
   selector: 'login-form',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
   standalone: false,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private auth = inject(Auth);
   private router = inject(Router);
+  private googleProvider = new GoogleAuthProvider();
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -24,8 +28,30 @@ export class LoginComponent {
 
   @Input() error: string | null | undefined;
   @Output() submitEM = new EventEmitter();
-
   loginError: string | null = null; // Stockage du message d'erreur
+
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      "logo",
+      this.domSanitizer.bypassSecurityTrustResourceUrl(googleLogoURL)
+    );
+  }
+
+  ngOnInit() {
+    getRedirectResult(this.auth)
+      .then((result) => {
+        if (result) {
+          console.log('Connexion avec Google réussie :', result.user);
+          this.router.navigate(['main']);
+        }
+      })
+      .catch((error) => {
+        console.error('Erreur avec l\'authentification Google :', error.code, error.message);
+      });
+  }
 
   submit() {
     if (this.form.valid) {
@@ -40,7 +66,7 @@ export class LoginComponent {
       signInWithEmailAndPassword(this.auth, email, password)
         .then((userCredential) => {
           console.log('Connexion réussie :', userCredential.user);
-          this.loginError = null; // Réinitialiser l'erreur en cas de succès
+          this.loginError = null;
           this.router.navigate(['main']);
         })
         .catch((error) => {
@@ -48,6 +74,17 @@ export class LoginComponent {
           this.handleError(error.code);
         });
     }
+  }
+
+  signInWithGoogle() {
+    signInWithPopup(this.auth, this.googleProvider)
+      .then(() => {
+        console.log('Connexion avec Google réussie');
+        this.router.navigate(['main']);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la connexion avec Google :', error.code, error.message);
+      });
   }
 
   handleError(errorCode: string) {
