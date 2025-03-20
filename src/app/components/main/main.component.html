@@ -127,19 +127,12 @@
 
       <!-- Recipes Grid -->
       <div
-        cdkDropList
-        #mainList="cdkDropList"
-        cdkDropListOrientation="mixed"
-        [cdkDropListData]="RecipesList"
         class="recipe-grid"
-        (cdkDropListDropped)="drop($event)"
-        cdkDropListAutoScroll
       >
         @for (recipe of RecipesList; track recipe.idMeal) {
           <app-simplified-card
             [recipe]="recipe"
             displayType="main"
-            cdkDrag
           >
           </app-simplified-card>
         }
