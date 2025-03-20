@@ -102,5 +102,4 @@ export class PageListIngredientComponent implements OnInit {
       this.filteredIngredients.unshift(removedIngredient);
     }
   }
-  
 }

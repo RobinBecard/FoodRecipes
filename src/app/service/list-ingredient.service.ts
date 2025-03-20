@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, collectionData, doc, setDoc, addDoc, query, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Ingredient } from '../models/ingredient.model';
+import { Ingredient, IngredientList } from '../models/ingredient.model';
 import { Auth, user } from '@angular/fire/auth';
 import { switchMap } from 'rxjs/operators';
-
-export interface IngredientList {
-  id?: string;
-  name: string;
-  ingredients: Ingredient[];
-  createdAt: Date;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -67,4 +60,5 @@ export class ListIngredientService {
 
     return setDoc(listDocRef, { deleted: true }, { merge: true });
   }
+  
 }
