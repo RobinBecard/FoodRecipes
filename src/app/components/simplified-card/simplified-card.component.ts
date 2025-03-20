@@ -5,10 +5,16 @@ import { Meal } from '../../models/meal.model';
   selector: 'app-simplified-card',
   standalone: false,
   templateUrl: './simplified-card.component.html',
-  styleUrl: './simplified-card.component.css',
+  styleUrls: ['./simplified-card.component.css'], 
 })
 export class SimplifiedCardComponent {
-  // Rappel : @input permet de passer des données à un composant
   @Input() recipe!: Meal;
   @Input() displayType: 'sidebar' | 'main' = 'main';
+  
+  isFavorited: boolean = false; 
+
+  toggleFavorite(event: Event): void {
+    event.stopPropagation();
+    this.isFavorited = !this.isFavorited;
+  }
 }

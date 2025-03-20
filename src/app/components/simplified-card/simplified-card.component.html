@@ -17,4 +17,8 @@
     <div *ngIf="recipe.matchScore">{{ recipe.matchScore }}%</div>
     <div>{{ recipe.strArea }}</div>
   </div>
+  <button class="favorite-btn" (click)="toggleFavorite($event)">
+    <span [ngClass]="{'favorited': isFavorited}">❤️</span>
+  </button>
+  
 </div>
