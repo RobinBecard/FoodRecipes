@@ -11,6 +11,7 @@ import { PageListIngredientComponent } from '../components/page-list-ingredient/
 
 import { SignUpComponent } from '../components/signUp/signUp.component';
 import { ApiTestComponent } from '../components/test/api-test.component';
+import { ModifyListIngredientComponent } from '../modify-list-ingredient/modify-list-ingredient.component';
 
 const redirectLoggedInToMain = () => redirectLoggedInTo(['main']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -34,6 +35,7 @@ const routes: Routes = [
   },
   { path: 'api-test', component: ApiTestComponent },
   { path: 'CreateList', component: PageListIngredientComponent },
+  { path: 'EditList/:id', component: ModifyListIngredientComponent },
 ];
 
 @NgModule({

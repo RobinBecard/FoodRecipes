@@ -82,17 +82,22 @@ export class PageListIngredientComponent implements OnInit {
   
   filterIngredients() {
     if (!this.searchText) {
-      // Si le champ de recherche est vide, afficher les 50 premiers ingrédients
-      this.filteredIngredients = this.allIngredient.slice(0, 50);
+      // Recherche est vide, afficher les 50 premiers ingrédients filtrés
+      this.filteredIngredients = this.leftIngredient
+        .filter(ing => !this.rigthIngredient.some(selectedIng => selectedIng.idIngredient === ing.idIngredient))
+        .slice(0, 50);
     } else {
-      // Filtrer tous les ingrédients en fonction de la recherche
-      const filtered = this.allIngredient.filter((ing) =>
+      // Filtrer par le texte de recherche
+      const filtered = this.leftIngredient.filter(ing =>
         ing.strIngredient.toLowerCase().includes(this.searchText.toLowerCase())
       );
-      // Afficher uniquement les 50 premiers résultats filtrés
-      this.filteredIngredients = filtered.slice(0, 50);
+  
+      // Exclure les ingrédients déjà à droite
+      this.filteredIngredients = filtered.filter(ing =>
+        !this.rigthIngredient.some(selectedIng => selectedIng.idIngredient === ing.idIngredient)
+      ).slice(0, 50);
     }
-  }
+  }  
 
   removeFromRight(index: number) {
     const removedIngredient = this.rigthIngredient.splice(index, 1)[0];

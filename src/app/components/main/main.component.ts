@@ -17,6 +17,8 @@ import {Meal} from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
 import { Ingredient, IngredientList } from '../../models/ingredient.model';
 import { ListIngredientService } from '../../service/list-ingredient.service';
+import { query } from 'firebase/firestore';
+import { __param } from 'tslib';
 
 @Component({
   selector: 'app-main',
@@ -317,6 +319,9 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/CreateList']);
   }
   
+  editList(listID:string):void {
+    this.router.navigate(['/EditList', listID]);
+  }
   ngOnDestroy() {
     // Nettoyez l'abonnement pour éviter les fuites de mémoire
     if (this.breakpointSubscription) {

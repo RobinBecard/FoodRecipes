@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, doc, setDoc, addDoc, query, where } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, setDoc, addDoc, docData, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Ingredient, IngredientList } from '../models/ingredient.model';
 import { Auth, user } from '@angular/fire/auth';
@@ -22,7 +22,7 @@ export class ListIngredientService {
     const userListsRef = collection(this.firestore, `users/${authUser.uid}/lists`);
 
     // Création de l'objet liste
-    const newList: IngredientList = {
+    const newList:Omit<IngredientList, 'id'>  = {
       name,
       ingredients,
       createdAt: new Date()
@@ -48,17 +48,45 @@ export class ListIngredientService {
     );
   }
 
+  // Ajouter cette méthode dans votre ListIngredientService
+async updateList(listId: string, name: string, ingredients: Ingredient[]): Promise<void> {
+  const authUser = this.auth.currentUser;
+  if (!authUser) {
+    throw new Error("Utilisateur non authentifié");
+  }
+  
+  const listDocRef = doc(this.firestore, `users/${authUser.uid}/lists`, listId);
+  return setDoc(listDocRef, {
+    name,
+    ingredients,
+    updatedAt: new Date()
+  }, { merge: true });
+}
+
+  // Ajouter cette méthode dans votre ListIngredientService
+  getListById(listId: string): Observable<IngredientList> {
+    return user(this.auth).pipe(
+      switchMap(authUser => {
+        if (!authUser) {
+          throw new Error("Utilisateur non authentifié");
+        }
+        const listDocRef = doc(this.firestore, `users/${authUser.uid}/lists`, listId);
+        return docData(listDocRef) as Observable<IngredientList>;
+      })
+    );
+  }
+
   // Supprimer une liste d'ingrédients
   async deleteList(listId: string): Promise<void> {
     const authUser = this.auth.currentUser;
     if (!authUser) {
       throw new Error("Utilisateur non authentifié");
     }
-
-    // Référence du document dans `/users/{UID}/lists/{listId}`
-    const listDocRef = doc(this.firestore, `users/${authUser.uid}/lists`, listId);
-
-    return setDoc(listDocRef, { deleted: true }, { merge: true });
-  }
   
+    // Référence du document dans Firestore
+    const listDocRef = doc(this.firestore, `users/${authUser.uid}/lists`, listId);
+  
+    // Suppression complète du document
+    return deleteDoc(listDocRef);
+  }
 }

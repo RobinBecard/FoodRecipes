@@ -34,6 +34,7 @@ import { SimplifiedCardComponent } from './components/simplified-card/simplified
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { ApiTestComponent } from './components/test/api-test.component';
 import { AppRoutingModule } from './routes/app-routing.module';
+import { ModifyListIngredientComponent } from './modify-list-ingredient/modify-list-ingredient.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     BottomBarComponent,
     ApiTestComponent,
     SimplifiedCardComponent,
+    ModifyListIngredientComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
