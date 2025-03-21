@@ -1,163 +1,254 @@
 .recipe-container {
-display: flex;
-flex-direction: column;
-background-color: #ffffff;
-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-border-radius: 10px;
-width: 100%;
-margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-
-.mat-mdc-dialog-surface{
+.mat-mdc-dialog-surface {
   width: fit-content;
 }
-.recipe-content{
-display: flex;
+
+.recipe-content {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .recipe-header {
-position: relative;
-width: 100%;
-padding: 0;
+  position: relative;
+  width: 100%;
+  padding: 0;
 }
 
-.recipe-left {
+.recipe-left, .recipe-right {
   display: flex;
   flex-direction: column;
-  width: fit-content;
   padding: 20px;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+.recipe-right {
+  justify-content: center;
 }
 
 #mealThumb {
-width: 100%;
-height: 250px;
-object-fit: cover;
-display: block;
+  width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
 }
 
 #mealName {
-position: absolute;
-bottom: 10px;
-left: 50%;
-transform: translateX(-50%);
-color: white;
-font-size: 2em;
-font-weight: bold;
-background-color: rgba(0, 0, 0, 0.5);
-padding: 10px;
-border-radius: 5px;
-text-align: center;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
 }
 
-.recipe-details, .ingredients, .links {
-padding: 20px;
+.recipe-details, #mealInstructions {
+  width: 100%;
+  max-width: 100%;
 }
 
 .recipe-details {
-font-size: 1.1em;
-width: fit-content;
+  font-size: 1.1em;
+}
+
+#mealInstructions {
+  text-align: justify;
 }
 
 .ingredients {
-margin-top: 15px;
-width: fit-content;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 #ingredientsList {
-padding: 0;
+  padding: 0;
 }
 
 #ingredientsList li {
-background-color: #f9f9f9;
-padding: 8px;
-margin: 5px 0;
-border-radius: 5px;
+  background-color: #f9f9f9;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
 }
 
 .video-player {
-margin-top: 20px;
-text-align: center;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
 }
 
 #mealVideo {
-max-width: 100%;
-height: auto;
-border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
-h3,h2{
+h3, h2 {
   width: fit-content;
+  font-weight: bold;
 }
 
-p{
+p {
   max-width: 40vw;
   text-justify: auto;
 }
 
+.multi-column-list {
+  max-height: 300px;
+  overflow-y: auto; 
+  column-count: 3; 
+  column-gap: 20px; 
+  padding: 0;
+  margin: 0;
+}
+
+.mat-mdc-dialog-surface .mdc-dialog__surface {
+  width: fit-content;
+}
+
+.multi-column-list li {
+  break-inside: avoid; 
+  padding: 4px 8px;
+  margin-bottom: 6px;
+  list-style-position: inside;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
 .links {
-margin-top: 20px;
-text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  text-align: center;
 }
 
 .links a {
-display: inline-block;
-margin: 5px;
-padding: 10px 20px;
-background-color: #007bff;
-color: white;
-text-decoration: none;
-border-radius: 5px;
-font-size: 1em;
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1em;
 }
 
 .links a:hover {
-background-color: #0056b3;
+  background-color: #0056b3;
 }
 
-/* Section droite, occupe 50% par défaut */
-.recipe-right {
-width: 50%; /* Par défaut, 50% de l'espace pour .recipe-right */
-padding: 20px;
+@media (min-width: 1650px) {
+  .recipe-content {
+    flex-direction: row;
+  }
+  
+  .recipe-left {
+    width: 50%;
+    order: 1;
+  }
+  
+  .recipe-right {
+    width: 40%;
+    order: 2;
+  }
 }
 
-/* Responsive Design : Gestion des largeurs pour petits écrans */
+@media (max-width: 1649px) {
+  .recipe-content {
+    flex-direction: column;
+  }
+  
+  .recipe-left {
+    width: 100%;
+    order: 1;
+  }
+  
+  .recipe-right {
+    width: 100%;
+    order: 2;
+    margin-top: 20px;
+  }
+  
+  .video-player {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .video-player iframe, 
+  .video-player video,
+  #mealVideo,
+  app-videoplayer {
+    width: 400px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .recipe-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 768px) {
-.recipe-content {
-  flex-direction: column; /* Colonne sur petits écrans */
+  .recipe-content {
+    flex-direction: column;
+  }
+  
+  .recipe-left, .recipe-right {
+    width: 100%;
+    padding: 15px;
+  }
+  
+  .recipe-left {
+    margin-bottom: 20px;
+  }
+  
+  #mealName {
+    font-size: 1.5em;
+  }
+  
+  .links a {
+    font-size: 0.9em;
+    padding: 8px 15px;
+  }
+  
+  .video-player iframe, 
+  .video-player video,
+  #mealVideo,
+  app-videoplayer {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .multi-column-list {
+    column-count: 2;
+  }
 }
 
-.recipe-left, .recipe-right {
-  width: 100%; /* Chaque partie occupe 100% sur petits écrans */
-  padding: 15px; /* Moins de padding */
-}
-
-.recipe-left {
-  margin-bottom: 20px; /* Espacement entre les parties */
-}
-
-#mealName {
-  font-size: 1.5em;
-}
-
-#mealThumb {
-  max-width: 300px;
-  height: auto;
-}
-
-.links a {
-  font-size: 0.9em;
-  padding: 8px 15px;
-}
-}
-
-/* Pour un affichage 75/25 en largeur sur des écrans plus larges */
-@media (min-width: 1024px) {
-.recipe-left {
-  width: 75%; /* .recipe-left occupe 75% de l'espace */
-}
-
-.recipe-right {
-  width: 25%; /* .recipe-right occupe 25% de l'espace */
-}
+@media (max-width: 480px) {
+  .recipe-left, .recipe-right {
+    padding: 10px;
+  }
+  
+  .multi-column-list {
+    column-count: 1;
+  }
 }

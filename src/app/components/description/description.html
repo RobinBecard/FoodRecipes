@@ -5,21 +5,23 @@
   </div>
   <div class="recipe-content">
     <div class="recipe-left">
+      <h2>Category: <span id="mealCategory">{{recipe.strCategory}}</span></h2>
+      <h3>Origin : <span id="mealArea">{{recipe.strArea}}</span></h3>
       <div class="recipe-details">
-        <h2>Category: <span id="mealCategory">{{recipe.strCategory}}</span></h2>
-        <h3>Origin : <span id="mealArea">{{recipe.strArea}}</span></h3>
+        <div class="ingredients">
+          <h2>Ingredients</h2>
+          <ul id="ingredientsList" class="multi-column-list">
+            <li *ngFor="let ingredient of recipe.strIngredients">{{ ingredient }}</li>
+          </ul>
+        </div>
         <h3>Instructions</h3>
         <p id="mealInstructions">{{recipe.strInstructions}}</p>
       </div>
-      <div class="ingredients">
-        <h2>Ingredients</h2>
-        <h3>{{recipe.strIngredients}}</h3>
-        <ul id="ingredientsList">
-        </ul>
-      </div>
+      
     </div>
     <div class="recipe-right">
       <div class="video-player">
+        <h2>Video tutorial</h2>
         <app-videoplayer [video]="recipe.strYoutube"></app-videoplayer>
       </div>
     </div>

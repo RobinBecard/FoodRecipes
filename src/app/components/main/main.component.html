@@ -28,7 +28,8 @@
           <mat-icon>favorite</mat-icon> My Favorites
         </h2>
         <div class="favorites-container">
-          <div class="sidebar-card" *ngFor="let recipe of favoriteRecipesList">
+          <div class="sidebar-card" *ngFor="let recipe of favoriteRecipesList"
+          (click)="openDescriptionDialog(recipe.idMeal)">
             <div class="sidebar-recipe-name">{{ recipe.strMeal }}</div>
             <div class="sidebar-recipe-attributs">
               <div>{{ recipe.strCategory }}</div>
