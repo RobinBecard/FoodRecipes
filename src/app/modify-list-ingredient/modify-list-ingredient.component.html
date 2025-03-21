@@ -2,7 +2,7 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="header">
-          <h1 class="page-title">Creating a list</h1>
+          <h1 class="page-title">Edit a list</h1>
         </div>
        
         <!-- Wrapper pour les colonnes -->
@@ -84,8 +84,9 @@
                 }
               </div>
                 <div class="button">
-                    <button class="cancel-button" [routerLink]="['/main']">Annuler</button>
-                    <button class="save-button" (click)="saveList()">Enregistrer</button>
+                    <button class="cancel-button" [routerLink]="['/main']"> Cancel </button>
+                    <button class="cancel-button" (click)="deleteCurrentList()"> Delete </button>
+                    <button class="save-button" (click)="saveList()"> Save </button>
                 </div>
             </div>
         </div>

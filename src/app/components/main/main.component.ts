@@ -13,10 +13,14 @@ import {
   forkJoin,
   Subscription,
 } from 'rxjs';
-import { IngredientsList, Meal } from '../../models/meal.model';
+import {Meal} from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
 import { DescriptionComponent } from '../description/description';
 import { MatDialog } from '@angular/material/dialog';
+import { Ingredient, IngredientList } from '../../models/ingredient.model';
+import { ListIngredientService } from '../../service/list-ingredient.service';
+import { query } from 'firebase/firestore';
+import { __param } from 'tslib';
 
 @Component({
   selector: 'app-main',
@@ -30,7 +34,7 @@ export class MainComponent implements OnInit {
 
   categories: string[] = [];
   regions: string[] = [];
-  ingredientsList: IngredientsList[] = [];
+  ingredientsList: IngredientList[] = [];
 
   // Options de filtrage
   searchControl = new FormControl(''); // pour la recherche
@@ -48,7 +52,8 @@ export class MainComponent implements OnInit {
     private mealService: ApiService,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private listService : ListIngredientService
   ) {}
 
   ngOnInit(): void {
@@ -123,29 +128,16 @@ export class MainComponent implements OnInit {
     this.loadSavedRecipes();
   }
 
+  // Charger les listes d'ingrédients depuis Firebase
   loadIngredientsList(): void {
-    this.mealService.getAllIngredients().subscribe((ingredients) => {
-      const tempIngredients: string[] = ingredients.map(
-        (ingredient) => ingredient.strIngredient
-      );
-
-      const randomIngredients = [];
-      for (let i = 0; i < 10; i++) {
-        const randomIndex = Math.floor(Math.random() * tempIngredients.length);
-        randomIngredients.push(tempIngredients[randomIndex]);
-        tempIngredients.splice(randomIndex, 1);
+    this.listService.getUserLists().subscribe(
+      (lists: IngredientList[]) => {
+        this.ingredientsList = lists;  // Met à jour la liste avec les données récupérées
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des listes:', error);
       }
-
-      const tempIngredientsList: IngredientsList[] = [
-        {
-          listName: 'Random Ingredients',
-          ingredients: randomIngredients,
-        },
-      ];
-
-      console.log(tempIngredientsList);
-      this.ingredientsList = tempIngredientsList;
-    });
+    );
   }
 
   loadRandomMeals(count: number): void {
@@ -215,7 +207,7 @@ export class MainComponent implements OnInit {
     this.isLoading = true;
 
     const selectedList = this.ingredientsList.find(
-      (list) => list.listName === listName
+      (list) => list.name === listName
     );
     if (!selectedList || selectedList.ingredients.length === 0) {
       this.isLoading = false;
@@ -224,7 +216,7 @@ export class MainComponent implements OnInit {
     const ingredients = selectedList.ingredients;
     // Créer un tableau d'observables
     const requests = ingredients.map((ingredient) =>
-      this.mealService.getAllMealsFilterByMainIngredient(ingredient)
+      this.mealService.getAllMealsFilterByMainIngredient(ingredient.strIngredient)
     );
 
     // Utiliser forkJoin pour attendre TOUTES les requêtes
@@ -304,7 +296,7 @@ export class MainComponent implements OnInit {
   }
 
   // Fonction pour calculer le score de correspondance
-  calculateMatchScore(meal: Meal, ingredientsList: string[]): number {
+  calculateMatchScore(meal: Meal, ingredientsList: Ingredient[]): number {
     let score = 0;
 
     // Récupérer tous les ingrédients du plat (non vides)
@@ -315,8 +307,8 @@ export class MainComponent implements OnInit {
       if (
         mealIngredients.some(
           (mealIng) =>
-            mealIng.toLowerCase().includes(ingredient.toLowerCase()) ||
-            ingredient.toLowerCase().includes(mealIng)
+            mealIng.toLowerCase().includes(ingredient.strIngredient.toLowerCase()) ||
+            ingredient.strIngredient.toLowerCase().includes(mealIng)
         )
       ) {
         score++;
@@ -326,10 +318,13 @@ export class MainComponent implements OnInit {
     return (score / ingredientsList.length) * 100;
   }
 
-  addRecipe(): void {
+  addList(): void {
     this.router.navigate(['/CreateList']);
   }
-
+  
+  editList(listID:string):void {
+    this.router.navigate(['/EditList', listID]);
+  }
   ngOnDestroy() {
     // Nettoyez l'abonnement pour éviter les fuites de mémoire
     if (this.breakpointSubscription) {
