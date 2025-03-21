@@ -194,6 +194,6 @@ export class FilterService {
       }
     });
 
-    return (score / ingredientsList.length) * 100;
+    return (score * 100) / ingredientsList.length;
   }
 }
