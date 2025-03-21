@@ -35,6 +35,7 @@ import { TestInfoLogComponent } from './components/test-info-log/test-info-log.c
 import { ApiTestComponent } from './components/test/api-test.component';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { ModifyListIngredientComponent } from './modify-list-ingredient/modify-list-ingredient.component';
+import { DescriptionComponent } from './components/description/description';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ModifyListIngredientComponent } from './modify-list-ingredient/modify-l
     ApiTestComponent,
     SimplifiedCardComponent,
     ModifyListIngredientComponent,
+    DescriptionComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
