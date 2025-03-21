@@ -9,6 +9,7 @@ import { LoginComponent } from '../components/login/login.component';
 import { MainComponent } from '../components/main/main.component';
 import { PageListIngredientComponent } from '../components/page-list-ingredient/page-list-ingredient.component';
 
+import { DescriptionComponent } from '../components/description/description';
 import { SignUpComponent } from '../components/signUp/signUp.component';
 import { ApiTestComponent } from '../components/test/api-test.component';
 import { ModifyListIngredientComponent } from '../modify-list-ingredient/modify-list-ingredient.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   { path: 'api-test', component: ApiTestComponent },
+  { path: 'description', component: DescriptionComponent },
   { path: 'CreateList', component: PageListIngredientComponent },
   { path: 'EditList/:id', component: ModifyListIngredientComponent },
 ];
