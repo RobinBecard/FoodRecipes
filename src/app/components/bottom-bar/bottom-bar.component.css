@@ -1,31 +1,29 @@
 .drag-container {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-  }
-  
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
 .bottom-bar {
-    width: fit-content;
-    padding: 5px;
-    height: fit-content;
-    max-width: 600px;
-    border-radius: 10px;
-    background-color: #ffffff5d;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
+  width: fit-content;
+  padding: 5px;
+  height: fit-content;
+  max-width: 600px;
+  border-radius: 10px;
+  background-color: #ffffff5d;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
 .spacer {
-    flex: 1;
-  }
-  
+  flex: 1;
+}
 
 .cdk-drag-preview {
-    display: none !important;
+  display: none !important;
 }
 
 .cdk-drag-placeholder {
-    display: none !important;
+  display: none !important;
 }
