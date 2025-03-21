@@ -7,7 +7,7 @@ export interface Ingredient {
 }
 
 export interface IngredientList {
-  id?: string;
+  id:string;
   name: string;
   ingredients: Ingredient[];
   createdAt: Date;
