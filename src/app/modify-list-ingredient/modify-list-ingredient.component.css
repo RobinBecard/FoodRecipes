@@ -5,35 +5,88 @@
   .container {
     width: 100%;
     padding: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+    z-index: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  
+  .container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur(3px);   
+    z-index: -1;
+    border-color: transparent;
+  }
+  
+  .blur-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("../../assets/Images/main-bg.jpeg") no-repeat center center;
+    background-size: cover;
+    transform: scale(1.1);
+    filter: blur(6px);
+    z-index: -1;
+    will-change: transform; 
   }
   
   .main-content {
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   
   .header {
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
   
   .content-wrapper {
     display: flex;
     gap: 2rem;
+    height: calc(100vh - 150px);
   }
   
   .left-content, .right-content {
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    background-color: #ffffff5d;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   }
   
   h2 {
     margin-bottom: 15px;
+    color: #ffffff;
+    font-weight: bold;
   }
   
-   /* Search Bar Section */
+  .page-title {
+    margin: 0;
+    text-transform: capitalize;
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  /* Search Bar Section */
   .search-bar {
     display: flex;
     margin-bottom: 15px;
@@ -46,6 +99,12 @@
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
     font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+  }
+  
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
   }
   
   .search-button {
@@ -63,75 +122,65 @@
   
   /* Filters Section */
   .filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
   }
   
   .filter-title {
-  font-weight: 600;
+    font-weight: 600;
+    color: #ffffff;
   }
   
   .filter-controls {
-  display: flex;
-  gap: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
   }
   
   .filter-select {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
   }
   
   /* Button Section */
   .button {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  justify-content: flex-end;
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
   }
   
   .cancel-button {
-  background-color: #fee2e2;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+    background-color: #fee2e2;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
   }
   
   .cancel-button:hover {
-  background-color: #fecaca;
+    background-color: #fecaca;
   }
   
   .save-button {
-  background-color: #d1fae5;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+    background-color: #d1fae5;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
   }
   
   .save-button:hover {
-  background-color: #a7f3d0;
+    background-color: #a7f3d0;
   }
   
   /* Drag and Drop Section */
-  .content-wrapper {
-    display: flex;
-    gap: 2rem;
-    height: calc(100vh - 150px);
-  }
-  
-  .left-content, .right-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; 
-  }
-  
   .ingredient-grid {
     flex-grow: 1; 
     overflow-y: auto; 
@@ -139,7 +188,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 1rem;
-  
     scrollbar-width: none; 
     -ms-overflow-style: none;
   }
@@ -147,7 +195,6 @@
   .ingredient-grid::-webkit-scrollbar {
     display: none;
   }
-  
   
   .main-recipe-card {
     display: flex;
@@ -161,6 +208,12 @@
     height: 150px;
     text-align: center;
     padding: 5px;
+    transition: transform 0.2s ease;
+  }
+  
+  .main-recipe-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .recipe-image-placeholder {
@@ -197,16 +250,11 @@
   }
   
   .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
   }
   
   .ingredient-grid.cdk-drop-list-dragging .main-recipe-card:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
-  .page-title {
-    font-size: 24px;
-    margin: 0;
+    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
   }
   
   .list-name-container {
@@ -217,20 +265,27 @@
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #ffffff;
   }
   
   .list-name-container input {
-    width: 100%;
+    width: 97%;  
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+  }
+  
+  .list-name-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
   }
   
   .loading-message {
     text-align: center;
     padding: 20px;
     font-style: italic;
-    color: #666;
+    color: #ffffff;
   }
   
   .main-recipe-card {
@@ -253,7 +308,10 @@
     cursor: pointer;
   }
   
-  /* Style pour indiquer qu'un élément est en train d'être déplacé */
+  .remove-button:hover {
+    background: rgba(255, 0, 0, 0.9);
+  }
+  
   .cdk-drag-preview {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     opacity: 0.8;
