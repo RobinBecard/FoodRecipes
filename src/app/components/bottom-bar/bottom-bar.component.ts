@@ -5,7 +5,8 @@ import { ProfilePopupComponent } from '../profile-popup/profile-popup.component'
 @Component({
   selector: 'app-bottom-bar',
   templateUrl: './bottom-bar.component.html',
-  styleUrls: ['./bottom-bar.component.css'],
+  styleUrl: './bottom-bar.component.css',
+  standalone: false,
 })
 export class BottomBarComponent {
   constructor(public dialog: MatDialog) {}

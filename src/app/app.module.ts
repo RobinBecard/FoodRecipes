@@ -1,5 +1,6 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,16 +11,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-
-// Composants standalone
-import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';  // Import du composant standalone
-
 import { AppComponent } from './app.component';
 import { BodyComponent } from './components/body/body.component';
+import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
+import { DescriptionComponent } from './components/description/description';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -29,13 +27,15 @@ import { SimplifiedCardComponent } from './components/simplified-card/simplified
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { ApiTestComponent } from './components/test/api-test.component';
 import { AppRoutingModule } from './routes/app-routing.module';
-import { DescriptionComponent } from './components/description/description';
 
 // Firebase imports
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
@@ -52,6 +52,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ApiTestComponent,
     SimplifiedCardComponent,
     DescriptionComponent,
+    BottomBarComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -71,8 +72,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatToolbarModule,
     MatTooltipModule,
     RouterModule,
-    // Ajout du composant standalone ici, dans imports
-    BottomBarComponent,
   ],
   providers: [
     provideAnimationsAsync(),
