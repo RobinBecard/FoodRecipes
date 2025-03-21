@@ -12,7 +12,6 @@ import { PageListIngredientComponent } from '../components/page-list-ingredient/
 import { SignUpComponent } from '../components/signUp/signUp.component';
 import { ApiTestComponent } from '../components/test/api-test.component';
 import { ModifyListIngredientComponent } from '../modify-list-ingredient/modify-list-ingredient.component';
-import { DescriptionComponent } from '../components/description/description';
 
 const redirectLoggedInToMain = () => redirectLoggedInTo(['main']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -35,7 +34,6 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   { path: 'api-test', component: ApiTestComponent },
-  { path: 'description', component: DescriptionComponent },
   { path: 'CreateList', component: PageListIngredientComponent },
   { path: 'EditList/:id', component: ModifyListIngredientComponent },
 ];

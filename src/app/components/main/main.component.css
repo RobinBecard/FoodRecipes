@@ -68,7 +68,6 @@
   padding: 5px;
   background-color: #f6f6f6;
   border-radius: 5px;
-  cursor: pointer;
 }
 
 .sidebar-title {
@@ -335,11 +334,10 @@
 
 
 
-/*
+
 ::ng-deep .mat-icon {
-  color: #ffffff !important; 
+  color: #ffffff !important; /* Couleur des icônes dans les champs */
 }
-*/
 
 ::ng-deep .mat-mdc-text-field-wrapper {
   background-color: rgba(255, 255, 255, 0.5) !important;
