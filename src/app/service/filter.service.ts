@@ -1,21 +1,34 @@
+/**
+ * Service de filtrage pour les recettes.
+ *
+ * Ce service gère les différents filtres pour rechercher des recettes et permet de les combiner.
+ *
+ * Méthodes principales:
+ * - get filterState(): Retourne l'état actuel de tous les filtres
+ * - resetFilter(name): Réinitialise un filtre spécifique
+ * - resetFilters(): Réinitialise tous les filtres
+ * - setFilter(name, value, active): Définit un filtre avec une valeur et un état
+ * - applyFilters(): Applique tous les filtres actifs et retourne les recettes correspondantes (intersection)
+ * - loadRandomMeals(count): Charge un nombre spécifié de recettes aléatoires
+ *
+ * Méthodes de filtrage:
+ * - searchMeals(term): Recherche des recettes par nom
+ * - filterByCategory(category): Filtre les recettes par catégorie
+ * - filterByRegion(region): Filtre les recettes par région
+ * - filterByFirstLetter(letter): Filtre les recettes par première lettre
+ * - filterByIngredientsList(listName, ingredientsList): Filtre les recettes par liste d'ingrédients
+ *
+ * Méthodes utilitaires:
+ * - calculateMatchScore(meal, ingredientsList): Calcule un score de correspondance pour une recette
+ *   basé sur le nombre d'ingrédients correspondants dans la liste
+ */
+
 import { Injectable } from '@angular/core';
 import { forkJoin, map, Observable, of } from 'rxjs';
+import { FilterState } from '../models/filter.model';
 import { Ingredient, IngredientList } from '../models/ingredient.model';
 import { Meal } from '../models/meal.model';
 import { ApiService } from './api.service';
-
-export interface Filter {
-  value: string;
-  active: boolean;
-}
-
-export interface FilterState {
-  search: Filter;
-  category: Filter;
-  region: Filter;
-  letter: Filter;
-  ingredientsList: Filter;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -35,18 +48,21 @@ export class FilterService {
     return this.filters;
   }
 
-  resetFilters(): void {
-    this.filters = {
-      search: { value: '', active: false },
-      category: { value: '', active: false },
-      region: { value: '', active: false },
-      letter: { value: '', active: false },
-      ingredientsList: { value: '', active: false },
-    };
+  resetFilter(name: keyof FilterState): void {
+    if (name && this.filters[name]) {
+      this.filters[name].value = '';
+      this.filters[name].active = false;
+    }
   }
 
-  setFilter(type: keyof FilterState, value: string, active: boolean): void {
-    this.filters[type] = { value, active };
+  resetFilters(): void {
+    for (const key in this.filters) {
+      this.resetFilter(key as keyof FilterState);
+    }
+  }
+
+  setFilter(name: keyof FilterState, value: string, active: boolean): void {
+    this.filters[name] = { value, active };
   }
 
   applyFilters(): Observable<Meal[]> {

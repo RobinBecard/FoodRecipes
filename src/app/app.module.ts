@@ -4,7 +4,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { NgModule } from '@angular/core'; 
+import { NgModule } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -25,6 +25,8 @@ import { AppComponent } from './app.component';
 import { BodyComponent } from './components/body/body.component';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
+import { DescriptionComponent } from './components/description/description';
+import { FilterComponent } from './components/filter/filter.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -34,7 +36,6 @@ import { SimplifiedCardComponent } from './components/simplified-card/simplified
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { ApiTestComponent } from './components/test/api-test.component';
 import { AppRoutingModule } from './routes/app-routing.module';
-import { DescriptionComponent } from './components/description/description';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { DescriptionComponent } from './components/description/description';
     ApiTestComponent,
     SimplifiedCardComponent,
     DescriptionComponent,
+    FilterComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
