@@ -36,6 +36,9 @@ import { TestInfoLogComponent } from './components/test-info-log/test-info-log.c
 import { ApiTestComponent } from './components/test/api-test.component';
 import { ModifyListIngredientComponent } from './modify-list-ingredient/modify-list-ingredient.component';
 import { AppRoutingModule } from './routes/app-routing.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
     SimplifiedCardComponent,
     ModifyListIngredientComponent,
     DescriptionComponent,
+    VideoplayerComponent
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -74,6 +78,8 @@ import { AppRoutingModule } from './routes/app-routing.module';
     RouterLink,
     RouterModule,
     ScrollingModule,
+    MatDialogModule ,
+    YouTubePlayerModule 
   ],
   providers: [
     provideAnimationsAsync(),

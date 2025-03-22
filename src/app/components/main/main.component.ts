@@ -15,6 +15,8 @@ import {
 } from 'rxjs';
 import {Meal} from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
+import { DescriptionComponent } from '../description/description';
+import { MatDialog } from '@angular/material/dialog';
 import { Ingredient, IngredientList } from '../../models/ingredient.model';
 import { ListIngredientService } from '../../service/list-ingredient.service';
 import { query } from 'firebase/firestore';
@@ -50,6 +52,7 @@ export class MainComponent implements OnInit {
     private mealService: ApiService,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog,
     private listService : ListIngredientService
   ) {}
 
@@ -332,4 +335,16 @@ export class MainComponent implements OnInit {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
+
+  openDescriptionDialog(recipeId: string): void {
+    const dialogWidth = window.innerWidth < 768 ? '95vw' : '95vw';
+    const dialogMaxHeight = '90vh';
+  
+    this.dialog.open(DescriptionComponent, {
+      width: dialogWidth,
+      maxHeight: dialogMaxHeight,
+      data: { id: recipeId },
+    });
+  }
+  
 }
