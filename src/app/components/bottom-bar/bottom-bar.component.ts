@@ -13,7 +13,9 @@ export class BottomBarComponent {
 
   openProfilePopup(): void {
     this.dialog.open(ProfilePopupComponent, {
-      width: '300px',
+      maxWidth: 'none', 
+      height: '80vh',   
+      width: '20vw',    
     });
   }
 }

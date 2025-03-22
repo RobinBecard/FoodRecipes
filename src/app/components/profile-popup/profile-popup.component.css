@@ -1,0 +1,83 @@
+
+.mat-dialog-container {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 20vw; 
+    height: 80vh; 
+    max-width: 600px;
+    max-height: 85vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: larger;
+    text-align: center;
+    margin: 100px;
+  }
+
+  .profil{
+    font-size: 10vh;
+  }
+  
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 100%;
+    width: 100%;
+    gap: 30px; 
+    padding-top: 20px;
+  }
+  
+  button {
+    width: 80%; 
+    max-width: 300px; 
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    align-self: center; 
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Bouton Fermer (Rouge) */
+  button[color="warn"] {
+    background: #d32f2f;
+    color: white;
+  }
+  
+  button[color="warn"]:hover {
+    background: #b71c1c;
+  }
+  
+  /* Bouton Changer email (Bleu) */
+  button[color="primary"] {
+    background: #1976d2;
+    color: white;
+  }
+  
+  button[color="primary"]:hover {
+    background: #1565c0;
+  }
+  
+  /* Bouton Changer mot de passe (Violet) */
+  button[color="accent"] {
+    background: #8e24aa;
+    color: white;
+  }
+  
+  button[color="accent"]:hover {
+    background: #7b1fa2;
+  }
+  
