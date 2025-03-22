@@ -178,13 +178,13 @@ export class ApiService {
   }
 }
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth) {}
-
-  sendOtp(phoneNumber: string, recaptchaVerifier: any) {
-    return this.afAuth.signInWithPhoneNumber(phoneNumber, recaptchaVerifier);
+    constructor(private afAuth: AngularFireAuth) {}
+  
+    sendOtp(phoneNumber: string, recaptchaVerifier: any) {
+      return this.afAuth.signInWithPhoneNumber(phoneNumber, recaptchaVerifier);
+    }
+  
+    verifyOtp(confirmationResult: any, otpCode: string) {
+      return confirmationResult.confirm(otpCode);
+    }
   }
-
-  verifyOtp(confirmationResult: any, otpCode: string) {
-    return confirmationResult.confirm(otpCode);
-  }
-}

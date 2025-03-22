@@ -35,6 +35,9 @@ import { TestInfoLogComponent } from './components/test-info-log/test-info-log.c
 import { ApiTestComponent } from './components/test/api-test.component';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { DescriptionComponent } from './components/description/description';
+import { Routes } from '@angular/router';
+import { PhoneLoginComponent } from './phone-login/phone-login.component';
+import firebase from 'firebase/app';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { DescriptionComponent } from './components/description/description';
     ApiTestComponent,
     SimplifiedCardComponent,
     DescriptionComponent,
+    PhoneLoginComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -72,7 +76,10 @@ import { DescriptionComponent } from './components/description/description';
     RouterLink,
     RouterModule,
     ScrollingModule,
+    RouterModule,
+    FormsModule,
   ],
+  exports: [RouterModule],
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),

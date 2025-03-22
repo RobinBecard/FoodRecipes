@@ -35,11 +35,11 @@ export class LoginComponent implements OnInit {
   @Input() error: string | null | undefined;
   @Output() submitEM = new EventEmitter();
   loginError: string | null = null; // Stockage du message d'erreur
+  authService: any;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private authService: AuthService,
   ) {
     this.matIconRegistry.addSvgIcon(
       "logo",

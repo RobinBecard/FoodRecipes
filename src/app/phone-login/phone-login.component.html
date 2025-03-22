@@ -1,0 +1,12 @@
+<div>
+    <h2>Connexion par téléphone</h2>
+  
+    <input [(ngModel)]="phoneNumber" placeholder="Numéro de téléphone" />
+    <button (click)="sendOtp()">Envoyer OTP</button>
+  
+    <div id="recaptcha-container"></div>
+  
+    <input [(ngModel)]="otpCode" placeholder="Code OTP" />
+    <button (click)="verifyOtp()">Vérifier OTP</button>
+  </div>
+  
