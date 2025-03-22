@@ -21,6 +21,7 @@ import { Ingredient, IngredientList } from '../../models/ingredient.model';
 import { ListIngredientService } from '../../service/list-ingredient.service';
 import { query } from 'firebase/firestore';
 import { __param } from 'tslib';
+import { FavoriteRecipesService } from '../../service/favorite-recipes.service';
 
 @Component({
   selector: 'app-main',
@@ -53,7 +54,8 @@ export class MainComponent implements OnInit {
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     private dialog: MatDialog,
-    private listService : ListIngredientService
+    private listService : ListIngredientService,
+    private favoriteService: FavoriteRecipesService
   ) {}
 
   ngOnInit(): void {
@@ -154,15 +156,15 @@ export class MainComponent implements OnInit {
   }
 
   loadSavedRecipes(): void {
-    // Simuler le chargement des recettes sauvegardées
-    // Faire une requête à Firebase pour récupérer les recettes favorites
-    this.mealService.getMealById('52771').subscribe((meal) => {
-      this.favoriteRecipesList = [meal];
-    });
-
-    this.mealService.getMealById('52772').subscribe((meal) => {
-      this.favoriteRecipesList.push(meal);
-    });
+    // Get favorites from Firebase
+    this.favoriteService.getFavoriteRecipes().subscribe(
+      (favorites: Meal[]) => {
+        this.favoriteRecipesList = favorites;
+      },
+      (error) => {
+        console.error('Error fetching favorite recipes:', error);
+      }
+    );
   }
 
   searchMeals(term: string): void {
@@ -271,7 +273,7 @@ export class MainComponent implements OnInit {
     }
     this.RecipesList = [...this.RecipesList];
   }
-
+/*
   addToFavorites(recipe: Meal): void {
     if (!this.favoriteRecipesList.some((r) => r.idMeal === recipe.idMeal)) {
       this.favoriteRecipesList.push(recipe);
@@ -283,7 +285,7 @@ export class MainComponent implements OnInit {
       (r) => r.idMeal !== recipe.idMeal
     );
   }
-
+*/
   private observeChanges(
     control: FormControl,
     filterFunction: (value: string) => void
