@@ -212,6 +212,11 @@
   align-items: center;
 }
 
+.mat-green-button{
+  background-color: #00ae68 !important;
+  color: #ffffff !important;
+}
+
 .buttons-container button {
   width: 100%;
   min-width: fit-content;
