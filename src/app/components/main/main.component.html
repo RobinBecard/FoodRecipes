@@ -7,13 +7,25 @@
       <div class="sidebar-background"></div>
       <div class="sidebar-list">
         <div class="MyList-header">
-          <h2 class="sidebar-title"><mat-icon>list</mat-icon> My List</h2>
-          <button class="MyListButton" mat-icon-button color="primary" (click)="addRecipe()">
+          <h2 class="sidebar-title"><mat-icon>list</mat-icon> My Lists</h2>
+          <button
+            class="MyListButton"
+            mat-icon-button
+            color="primary"
+            (click)="addList()"
+          >
             <mat-icon id="MyList-AddButton">add</mat-icon>
           </button>
         </div>
         <div class="sidebar-list-container">
           <!-- Content for My List -->
+          <div class="sidebar-card" *ngFor="let list of ingredientsList">
+            <div class="sidebar-recipe-name">{{ list.name }}</div>
+            <div class="sidebar-recipe-attributs">
+              <div>{{ list.ingredients.length }} ingredients</div>
+            </div>
+            <div><button (click)="editList(list.id)">modifier</button></div>
+          </div>
         </div>
       </div>
       <div class="sidebar-list">
@@ -21,7 +33,11 @@
           <mat-icon>favorite</mat-icon> My Favorites
         </h2>
         <div class="favorites-container">
-          <div class="sidebar-card" *ngFor="let recipe of favoriteRecipesList">
+          <div
+            class="sidebar-card"
+            *ngFor="let recipe of favoriteRecipesList"
+            (click)="openDescriptionDialog(recipe.idMeal)"
+          >
             <div class="sidebar-recipe-name">{{ recipe.strMeal }}</div>
             <div class="sidebar-recipe-attributs">
               <div>{{ recipe.strCategory }}</div>
@@ -42,12 +58,12 @@
           <app-bottom-bar></app-bottom-bar>
         </div>
         <div class="buttons-container">
-          <button mat-raised-button color="primary" (click)="resetFilters()">
+          <button mat-raised-button class="green-button" (click)="onReset()">
             <mat-icon>refresh</mat-icon> Reset Filters
           </button>
           <button
             mat-raised-button
-            color="accent"
+            color="warn"
             (click)="loadRandomMeals(15)"
             class="random-button"
           >
@@ -57,68 +73,16 @@
       </div>
 
       <!-- Filtres -->
-      <div class="filters-container">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Search by recipe name</mat-label>
-          <input
-            matInput
-            type="text"
-            [formControl]="searchControl"
-            placeholder="Enter recipe name..."
-          />
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Category</mat-label>
-          <mat-select [formControl]="selectedCategory">
-            <mat-option [value]="">All Categories</mat-option>
-            <mat-option *ngFor="let category of categories" [value]="category">
-              {{ category }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" >
-          <mat-label>Region</mat-label>
-          <mat-select [formControl]="selectedRegion">
-            <mat-option [value]="">All Regions</mat-option>
-            <mat-option *ngFor="let region of regions" [value]="region">
-              {{ region }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Ingredients</mat-label>
-          <mat-select [formControl]="selectedIngredientsList">
-            <mat-option
-              *ngFor="let ingredient of ingredientsList"
-              [value]="ingredient.listName"
-            >
-              {{ ingredient.listName }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <div class="alphabet-filter">
-          <span id="text-filter">Filter by first letter:</span>
-          <div class="letter-container">
-            <mat-chip-option
-              *ngFor="let letter of alphabet"
-              [value]="letter"
-              (click)="selectedLetter.setValue(letter)"
-              [selected]="selectedLetter.value === letter"
-            >
-              {{ letter }}
-            </mat-chip-option>
-
-          </div>
-        </div>
-      </div>
+      <app-filter
+        [listOfIngredientsList]="ingredientsList"
+        [recipesList]="RecipesList"
+        (recipesListChange)="RecipesList = $event"
+      >
+        >
+      </app-filter>
 
       <!-- No results message -->
-      <div class="no-results" *ngIf="!isLoading && RecipesList.length === 0">
+      <div class="no-results" *ngIf="RecipesList.length === 0">
         <mat-icon>search_off</mat-icon>
         <p>
           No recipes found matching your criteria. Try changing your filters.
@@ -126,15 +90,14 @@
       </div>
 
       <!-- Recipes Grid -->
-      <div
-        class="recipe-grid"
-      >
+      <div class="recipe-grid">
         @for (recipe of RecipesList; track recipe.idMeal) {
-          <app-simplified-card
-            [recipe]="recipe"
-            displayType="main"
-          >
-          </app-simplified-card>
+        <app-simplified-card
+          [recipe]="recipe"
+          displayType="main"
+          (click)="openDescriptionDialog(recipe.idMeal)"
+        >
+        </app-simplified-card>
         }
       </div>
     </div>
