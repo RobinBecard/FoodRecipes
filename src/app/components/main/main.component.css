@@ -173,15 +173,25 @@
 
 .filters-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
   margin-bottom: 1.5rem;
   align-items: flex-start;
+  justify-content: space-between;
 }
 
-.filters-container > * {
-  flex: 1 1 auto;
-  height: 60px;
+.filters_blocks {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.filters_blocks > * {
+  margin-right: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .buttons-container {
@@ -204,10 +214,9 @@
   align-items: center;
   width: 100%;
 }
-
 .alphabet-filter {
-  flex: 1 1 100%;
-  margin-top: 0.5rem;
+  width: 100%;
+  flex: none; 
 }
 
 .alphabet-filter span {
@@ -218,12 +227,12 @@
 
 .letter-container {
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
   gap: 0.25rem;
   overflow-x: auto !important;
   white-space: nowrap;
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+  width: 100%;
 }
 
 .letter-container button span {
@@ -231,7 +240,11 @@
 }
 
 .letter-container::-webkit-scrollbar {
-  display: none;  
+  display: none;
+}
+
+::ng-deep .letter-container .mat-mdc-chip {
+  flex: 0 0 auto;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
@@ -249,8 +262,10 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto; 
 }
+
 
 .header {
   display: flex;
@@ -288,6 +303,7 @@
   flex: 1;
   scrollbar-width: none; 
   -ms-overflow-style: none;
+  min-height: 220px;
 }
 
 .recipe-grid::-webkit-scrollbar {
@@ -362,6 +378,15 @@
     font-size: 1.5rem;
     padding-left: 20px;
   }
+
+  .filters_blocks {
+    flex-wrap: wrap;
+  }
+  
+  .filters_blocks > * {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 150px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -410,13 +435,29 @@
 
   .recipe-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    min-height: 1fr;
   }
+  .filters_blocks {
+    flex-direction: column;
+  }
+  
+  .filters_blocks > * {
+    flex: 1 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    min-height: 160px;
+  }
+  
 }
 
 @media (max-width: 480px) {
-  .recipe-grid {
+  recipe-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 0.75rem;
+    min-height: 130px;
   }
 
   .filters-container > * {
@@ -437,4 +478,9 @@
   }
 }
 
-
+@media ((max-height: 768px) and (max-height: 480px)) {
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    min-height: 240px;
+  }
+}
