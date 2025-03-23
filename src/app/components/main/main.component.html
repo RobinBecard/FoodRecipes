@@ -19,11 +19,12 @@
         </div>
         <div class="sidebar-list-container">
           <!-- Content for My List -->
-          <div class="sidebar-card" *ngFor="let recipe of ingredientsList">
-            <div class="sidebar-recipe-name">{{ recipe.name }}</div>
+          <div class="sidebar-card" *ngFor="let list of ingredientsList">
+            <div class="sidebar-recipe-name">{{ list.name }}</div>
             <div class="sidebar-recipe-attributs">
-              <div>{{ recipe.ingredients.length }} ingredients</div>
+              <div>{{ list.ingredients.length }} ingredients</div>
             </div>
+            <div><button (click)="editList(list.id)">modifier</button></div>
           </div>
         </div>
       </div>
@@ -32,7 +33,11 @@
           <mat-icon>favorite</mat-icon> My Favorites
         </h2>
         <div class="favorites-container">
-          <div class="sidebar-card" *ngFor="let recipe of favoriteRecipesList">
+          <div
+            class="sidebar-card"
+            *ngFor="let recipe of favoriteRecipesList"
+            (click)="openDescriptionDialog(recipe.idMeal)"
+          >
             <div class="sidebar-recipe-name">{{ recipe.strMeal }}</div>
             <div class="sidebar-recipe-attributs">
               <div>{{ recipe.strCategory }}</div>
@@ -86,7 +91,11 @@
       <!-- Recipes Grid -->
       <div class="recipe-grid">
         @for (recipe of RecipesList; track recipe.idMeal) {
-        <app-simplified-card [recipe]="recipe" displayType="main">
+        <app-simplified-card
+          [recipe]="recipe"
+          displayType="main"
+          (click)="openDescriptionDialog(recipe.idMeal)"
+        >
         </app-simplified-card>
         }
       </div>

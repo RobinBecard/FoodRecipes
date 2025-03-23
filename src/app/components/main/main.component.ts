@@ -1,12 +1,15 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IngredientList } from '../../models/ingredient.model';
 import { Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
+import { FavoriteRecipesService } from '../../service/favorite-recipes.service';
 import { FilterService } from '../../service/filter.service';
 import { ListIngredientService } from '../../service/list-ingredient.service';
+import { DescriptionComponent } from '../description/description';
 import { FilterComponent } from '../filter/filter.component';
 
 @Component({
@@ -30,8 +33,10 @@ export class MainComponent implements OnInit {
     private mealService: ApiService,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
+    private filterService: FilterService,
+    private dialog: MatDialog,
     private listService: ListIngredientService,
-    private filterService: FilterService
+    private favoriteService: FavoriteRecipesService
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +80,10 @@ export class MainComponent implements OnInit {
 
   addList(): void {
     this.router.navigate(['/CreateList']);
+  }
+
+  editList(listID: string): void {
+    this.router.navigate(['/EditList', listID]);
   }
 
   // Charger les listes d'ingrédients depuis Firebase
@@ -133,5 +142,16 @@ export class MainComponent implements OnInit {
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  openDescriptionDialog(recipeId: string): void {
+    const dialogWidth = window.innerWidth < 768 ? '95vw' : '95vw';
+    const dialogMaxHeight = '90vh';
+
+    this.dialog.open(DescriptionComponent, {
+      width: dialogWidth,
+      maxHeight: dialogMaxHeight,
+      data: { id: recipeId },
+    });
   }
 }
