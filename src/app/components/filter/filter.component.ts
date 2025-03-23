@@ -21,7 +21,7 @@ import { FilterService } from '../../service/filter.service';
   styleUrl: './filter.component.css',
 })
 export class FilterComponent implements OnInit, OnDestroy {
-  @Input() ingredientsList: IngredientList[] = []; // Liste des listes ingrédients
+  @Input() listOfIngredientsList: IngredientList[] = []; // Liste des listes ingrédients
   @Input() recipesList: Meal[] = []; // Liste de recettes filtrées
   @Output() recipesListChange = new EventEmitter<Meal[]>();
 

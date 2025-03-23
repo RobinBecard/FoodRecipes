@@ -82,6 +82,7 @@ export class MainComponent implements OnInit {
     this.listService.getUserLists().subscribe(
       (lists: IngredientList[]) => {
         this.ingredientsList = lists; // Met à jour la liste avec les données récupérées
+        this.filterService.setIngredientsList(lists); // Met à jour le service de filtre
       },
       (error) => {
         console.error('Erreur lors de la récupération des listes:', error);

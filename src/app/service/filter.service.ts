@@ -34,6 +34,7 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class FilterService {
+  private listOfIngredientsList: IngredientList[] = [];
   private filters: FilterState = {
     search: { value: '', active: false },
     category: { value: '', active: false },
@@ -43,6 +44,10 @@ export class FilterService {
   };
 
   constructor(private mealService: ApiService) {}
+
+  setIngredientsList(list: IngredientList[]): void {
+    this.listOfIngredientsList = list;
+  }
 
   get filterState(): FilterState {
     return this.filters;
@@ -83,6 +88,7 @@ export class FilterService {
       observables.push(this.filterByFirstLetter(this.filters.letter.value));
     }
     if (this.filters.ingredientsList.active) {
+      // la valeur de la liste d'ingrédients est l'id de la liste
       observables.push(
         this.filterByIngredientsList(this.filters.ingredientsList.value)
       );
@@ -158,11 +164,10 @@ export class FilterService {
       .pipe(map((meals) => (meals ? meals : [])));
   }
 
-  filterByIngredientsList(
-    listName: string,
-    ingredientsList: IngredientList[] = []
-  ): Observable<Meal[]> {
-    const selectedList = ingredientsList.find((list) => list.name === listName);
+  filterByIngredientsList(ingredientsListID: string): Observable<Meal[]> {
+    const selectedList = this.listOfIngredientsList.find(
+      (list) => list.id === ingredientsListID
+    );
     if (!selectedList || selectedList.ingredients.length === 0) {
       return of([]); // renvoie un tableau vide
     }
