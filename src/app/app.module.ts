@@ -40,6 +40,7 @@ import { ApiTestComponent } from './components/test/api-test.component';
 import { ModifyListIngredientComponent } from './modify-list-ingredient/modify-list-ingredient.component';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
+import { ListDescriptionComponent } from './components/list-description/list-description.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { VideoplayerComponent } from './videoplayer/videoplayer.component';
     DescriptionComponent,
     FilterComponent,
     VideoplayerComponent,
+    ListDescriptionComponent
   ],
   bootstrap: [AppComponent],
   imports: [

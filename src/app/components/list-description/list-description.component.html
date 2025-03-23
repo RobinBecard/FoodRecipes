@@ -1,0 +1,21 @@
+<div class="ingredient-list-container">
+    <div class="ingredient-list-header">
+      <h2>{{ingredientList.name}}</h2>
+      <p class="date">{{ingredientList.createdAt | date:'short'}}</p>
+    </div>
+    
+    <div class="ingredient-list-content">
+      <div class="ingredient-list-details">
+        <h3>Ingredients:</h3>
+        <ul id="ingredientsList" class="multi-column-list">
+          <li *ngFor="let ingredient of ingredientList.ingredients">{{ ingredient.strIngredient }}</li>
+        </ul>
+      </div>
+      
+      <!-- Bouton de modification -->
+      <div class="modify-button-container">
+        <button (click)="editList(ingredientList.id)">modifier</button>
+      </div>
+    </div>
+  </div>
+  

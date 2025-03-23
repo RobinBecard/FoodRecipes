@@ -22,6 +22,7 @@ import { ListIngredientService } from '../../service/list-ingredient.service';
 import { query } from 'firebase/firestore';
 import { __param } from 'tslib';
 import { FavoriteRecipesService } from '../../service/favorite-recipes.service';
+import { ListDescriptionComponent } from '../list-description/list-description.component';
 
 @Component({
   selector: 'app-main',
@@ -273,6 +274,7 @@ export class MainComponent implements OnInit {
     }
     this.RecipesList = [...this.RecipesList];
   }
+  //Méthode plus necéssaire vu que gérer dans le service : favorite_service
 /*
   addToFavorites(recipe: Meal): void {
     if (!this.favoriteRecipesList.some((r) => r.idMeal === recipe.idMeal)) {
@@ -348,5 +350,17 @@ export class MainComponent implements OnInit {
       data: { id: recipeId },
     });
   }
+
+  openDescriptionListDialog(ingredientList: IngredientList): void {
+    const dialogWidth = window.innerWidth < 768 ? '95vw' : '95vw';
+    const dialogMaxHeight = '90vh';
+  
+    this.dialog.open(ListDescriptionComponent, {
+      width: dialogWidth,
+      maxHeight: dialogMaxHeight,
+      data: ingredientList,
+    });
+  }
+  
   
 }

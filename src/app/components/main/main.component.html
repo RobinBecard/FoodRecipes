@@ -14,12 +14,12 @@
         </div>
         <div class="sidebar-list-container">
           <!-- Content for My List -->
-          <div class="sidebar-card" *ngFor="let list of ingredientsList">
+          <div class="sidebar-card" *ngFor="let list of ingredientsList"
+          (click)="openDescriptionListDialog(list)" >
             <div class="sidebar-recipe-name">{{ list.name }}</div>
             <div class="sidebar-recipe-attributs">
-              <div>{{ list.ingredients.length }} ingredients</div>
+              <div>{{ list.ingredients.length }} ingredient{{ list.ingredients.length !== 1 ? 's' : '' }}</div>
             </div>
-            <div><button (click)="editList(list.id)">modifier</button></div>
           </div>
         </div>
       </div>

@@ -83,12 +83,12 @@ export class PageListIngredientComponent implements OnInit {
   filterIngredients() {
     if (!this.searchText) {
       // Recherche est vide, afficher les 50 premiers ingrédients filtrés
-      this.filteredIngredients = this.leftIngredient
+      this.filteredIngredients = this.allIngredient
         .filter(ing => !this.rigthIngredient.some(selectedIng => selectedIng.idIngredient === ing.idIngredient))
         .slice(0, 50);
     } else {
       // Filtrer par le texte de recherche
-      const filtered = this.leftIngredient.filter(ing =>
+      const filtered = this.allIngredient.filter(ing =>
         ing.strIngredient.toLowerCase().includes(this.searchText.toLowerCase())
       );
   
