@@ -88,10 +88,9 @@ export class FilterService {
       );
     }
 
-    // Si aucun filtre n'est actif, retourner un observable vide
-    // pour que le composant puisse charger des recettes aléatoires
+    // Si aucun filtre n'est actif --> aléatoire
     if (observables.length === 0) {
-      return of([]);
+      return this.loadRandomMeals(15);
     }
 
     // Combiner les résultats par intersection (ET logique)

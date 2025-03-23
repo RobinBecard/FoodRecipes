@@ -128,36 +128,25 @@ export class FilterComponent implements OnInit, OnDestroy {
           this.selectedLetter.setValue('', { emitEvent: false });
         } else if (nom == 'ingredientsList') {
           this.selectedIngredientsList.setValue('', { emitEvent: false });
+        } else if ((nom = 'category')) {
+          this.selectedCategory.setValue('', { emitEvent: false });
+        } else if ((nom = 'region')) {
+          this.selectedRegion.setValue('', { emitEvent: false });
         }
         this.filterService.setFilter(nom, '', false);
       }
-
       // Mise à jour de la liste des recettes
       this.updateRecipesList();
     });
-
-    // Ajouter cet abonnement à la liste des subscriptions
     this.subscriptions.push(subscription);
   }
 
   updateRecipesList(): void {
     const subscription = this.filterService
-      .applyFilters()
+      .applyFilters() // récupérer les recettes filtrées
       .subscribe((meals) => {
-        // Si aucun filtre n'est actif, charger des recettes aléatoires
-        if (meals.length === 0 && !this.hasActiveFilters()) {
-          const randomSubscription = this.filterService
-            .loadRandomMeals(15)
-            .subscribe((randomMeals) => {
-              this.resetFormControls();
-              this.recipesList = randomMeals;
-              this.recipesListChange.emit(this.recipesList); // Notifier le parent
-            });
-          this.subscriptions.push(randomSubscription);
-        } else {
-          this.recipesList = meals;
-          this.recipesListChange.emit(this.recipesList); // Notifier le parent
-        }
+        this.recipesList = meals;
+        this.recipesListChange.emit(this.recipesList); // Notifier le parent
       });
     this.subscriptions.push(subscription);
   }
@@ -169,11 +158,6 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.selectedRegion.setValue('', { emitEvent: false });
     this.selectedIngredientsList.setValue('', { emitEvent: false });
     this.selectedLetter.setValue('', { emitEvent: false });
-  }
-
-  hasActiveFilters(): boolean {
-    const filters = this.filterService.filterState;
-    return Object.values(filters).some((filter) => filter.active);
   }
 
   ngOnDestroy(): void {
