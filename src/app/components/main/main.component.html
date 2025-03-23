@@ -8,12 +8,7 @@
       <div class="sidebar-list">
         <div class="MyList-header">
           <h2 class="sidebar-title"><mat-icon>list</mat-icon> My Lists</h2>
-          <button
-            class="MyListButton"
-            mat-icon-button
-            color="primary"
-            (click)="addList()"
-          >
+          <button class="MyListButton" mat-icon-button color="primary" (click)="addList()">
             <mat-icon id="MyList-AddButton">add</mat-icon>
           </button>
         </div>
@@ -33,11 +28,8 @@
           <mat-icon>favorite</mat-icon> My Favorites
         </h2>
         <div class="favorites-container">
-          <div
-            class="sidebar-card"
-            *ngFor="let recipe of favoriteRecipesList"
-            (click)="openDescriptionDialog(recipe.idMeal)"
-          >
+          <div class="sidebar-card" *ngFor="let recipe of favoriteRecipesList"
+          (click)="openDescriptionDialog(recipe.idMeal)">
             <div class="sidebar-recipe-name">{{ recipe.strMeal }}</div>
             <div class="sidebar-recipe-attributs">
               <div>{{ recipe.strCategory }}</div>
@@ -58,7 +50,7 @@
           <app-bottom-bar></app-bottom-bar>
         </div>
         <div class="buttons-container">
-          <button mat-raised-button color="green-button" (click)="onReset()">
+          <button mat-raised-button class="green-button" (click)="resetFilters()">
             <mat-icon>refresh</mat-icon> Reset Filters
           </button>
           <button
@@ -72,16 +64,11 @@
         </div>
       </div>
 
-      <app-filter
-        [listOfIngredientsList]="ingredientsList"
-        [recipesList]="RecipesList"
-        (recipesListChange)="RecipesList = $event"
-      >
-        >
-      </app-filter>
+      <!-- Filtres -->
+      <app-filter></app-filter>
 
       <!-- No results message -->
-      <div class="no-results" *ngIf="RecipesList.length === 0">
+      <div class="no-results" *ngIf="!isLoading && RecipesList.length === 0">
         <mat-icon>search_off</mat-icon>
         <p>
           No recipes found matching your criteria. Try changing your filters.
@@ -89,14 +76,16 @@
       </div>
 
       <!-- Recipes Grid -->
-      <div class="recipe-grid">
+      <div
+        class="recipe-grid"
+      >
         @for (recipe of RecipesList; track recipe.idMeal) {
-        <app-simplified-card
-          [recipe]="recipe"
-          displayType="main"
-          (click)="openDescriptionDialog(recipe.idMeal)"
-        >
-        </app-simplified-card>
+          <app-simplified-card
+            [recipe]="recipe"
+            displayType="main"
+            (click)="openDescriptionDialog(recipe.idMeal)"
+          >
+          </app-simplified-card>
         }
       </div>
     </div>
