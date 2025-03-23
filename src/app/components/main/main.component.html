@@ -58,12 +58,12 @@
           <app-bottom-bar></app-bottom-bar>
         </div>
         <div class="buttons-container">
-          <button mat-raised-button color="primary" (click)="onReset()">
+          <button mat-raised-button class="green-button" (click)="onReset()">
             <mat-icon>refresh</mat-icon> Reset Filters
           </button>
           <button
             mat-raised-button
-            color="accent"
+            color="warn"
             (click)="loadRandomMeals(15)"
             class="random-button"
           >
@@ -72,6 +72,7 @@
         </div>
       </div>
 
+      <!-- Filtres -->
       <app-filter
         [listOfIngredientsList]="ingredientsList"
         [recipesList]="RecipesList"

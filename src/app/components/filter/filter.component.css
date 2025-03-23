@@ -1,19 +1,29 @@
 /* Filters Styles */
-#text-filter {
+#text-filter{
   color: #ffffff;
 }
 
 .filters-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
   margin-bottom: 1.5rem;
   align-items: flex-start;
+  justify-content: space-between;
 }
 
-.filters-container > * {
-  flex: 1 1 auto;
-  height: 60px;
+.filters_blocks {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.filters_blocks > * {
+  margin-right: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .buttons-container {
@@ -30,16 +40,15 @@
   min-width: fit-content;
 }
 
-.title-part {
+.title-part{
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
-
 .alphabet-filter {
-  flex: 1 1 100%;
-  margin-top: 0.5rem;
+  width: 100%;
+  flex: none; 
 }
 
 .alphabet-filter span {
@@ -50,12 +59,12 @@
 
 .letter-container {
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
   gap: 0.25rem;
   overflow-x: auto !important;
   white-space: nowrap;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  width: 100%;
 }
 
 .letter-container button span {
@@ -66,6 +75,10 @@
   display: none;
 }
 
+::ng-deep .letter-container .mat-mdc-chip {
+  flex: 0 0 auto;
+}
+
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
   background-color: #fff;
 }
@@ -74,4 +87,69 @@
   border-radius: 4px;
   padding: 0.75em 0.75em 0 0.75em;
   border: 1px solid #f94747;
+}
+
+::ng-deep .mat-icon {
+  color: #ffffff !important; 
+}
+
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  border-radius: 4px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper span {
+  color: #ffffff !important;
+}
+
+::ng-deep mat-label,
+input,
+.mat-mdc-input-element span {
+  color: #ffffff !important;
+}
+
+@media (max-width: 992px) {
+  .filters_blocks {
+    flex-wrap: wrap;
+  }
+  
+  .filters_blocks > * {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    min-height: 1fr;
+  }
+  .filters_blocks {
+    flex-direction: column;
+  }
+  
+  .filters_blocks > * {
+    flex: 1 1;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters-container > * {
+    height: auto;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .buttons-container button {
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+    padding-left: 40px;
+  }
 }
