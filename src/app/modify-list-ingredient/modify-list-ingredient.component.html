@@ -10,12 +10,12 @@
         <div class="content-wrapper">
             <!-- Left Content -->
             <div class="left-content">
-                <h2>Bibliothèque d'ingrédients</h2>
+                <h2>Ingredients library</h2>
                
                 <!-- Barre de recherche -->
                 <div class="search-bar">
                     <input type="text" [(ngModel)]="searchText" 
-                           placeholder="Rechercher un ingrédient..." 
+                           placeholder="Search for an ingredient..." 
                            class="search-input"
                            (keyup)="filterIngredients()">
                     <button class="search-button" (click)="filterIngredients()">
@@ -25,7 +25,7 @@
                 
                 <!-- Message de chargement -->
                 <div *ngIf="isLoading" class="loading-message">
-                    Chargement des ingrédients...
+                  Loading ingredients...
                 </div>
                 
                 <div
@@ -53,16 +53,16 @@
             
             <!-- Right Content -->
             <div class="right-content">
-                <h2>Création de votre nouvelle liste</h2>
+                <h2>Modifying your list</h2>
                 
                 <!-- Champ pour le nom de la liste -->
                 <div class="list-name-container">
-                  <label for="listName">Nom de la liste :</label>
+                  <!--<label for="listName">Nom de la liste :</label>-->
                   <input 
                     type="text" 
                     id="listName" 
                     [(ngModel)]="listName" 
-                    placeholder="Entrez un nom pour votre liste"
+                    placeholder="Enter a name for your list"
                     required
                   >
                 </div>
@@ -86,8 +86,8 @@
               </div>
                 <div class="button">
                     <button class="cancel-button" [routerLink]="['/main']"> Cancel </button>
-                    <button class="cancel-button" (click)="deleteCurrentList()"> Delete </button>
-                    <button class="save-button" (click)="saveList()"> Save </button>
+                    <button class="cancel-button" (click)="deleteCurrentList()"> Delete list</button>
+                    <button class="save-button" (click)="saveList()"> Save list </button>
                 </div>
             </div>
         </div>

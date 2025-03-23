@@ -26,4 +26,18 @@ export class DescriptionComponent implements OnInit {
       });
     }
   }
+  //Méthode fonctionnel mais pas opti pour éviter le saut 
+  ngAfterViewInit(): void {
+  // Forcer le focus sur le titre de la recette
+  setTimeout(() => {
+    const title = document.getElementById('mealName');
+    if (title) {
+      // Ajouter tabindex si nécessaire pour permettre le focus
+      title.setAttribute('tabindex', '-1');
+      title.focus();
+      // Retirer le tabindex après avoir forcé le focus
+      title.removeAttribute('tabindex');
+    }
+  }, 100);
+}
 }
