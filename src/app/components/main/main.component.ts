@@ -103,14 +103,15 @@ export class MainComponent implements OnInit {
 
   // #### Favoris ####
   loadFavoriteRecipes(): void {
-    // Simuler le chargement des recettes sauvegardées
-    this.mealService.getMealById('52771').subscribe((meal) => {
-      this.favoriteRecipesList = [meal];
-    });
-
-    this.mealService.getMealById('52772').subscribe((meal) => {
-      this.favoriteRecipesList.push(meal);
-    });
+    // Get favorites from Firebase
+    this.favoriteService.getFavoriteRecipes().subscribe(
+      (favorites: Meal[]) => {
+        this.favoriteRecipesList = favorites;
+      },
+      (error) => {
+        console.error('Error fetching favorite recipes:', error);
+      }
+    );
   }
 
   addToFavorites(recipe: Meal): void {
