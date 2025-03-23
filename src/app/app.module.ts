@@ -38,6 +38,7 @@ import { DescriptionComponent } from './components/description/description';
 import { Routes } from '@angular/router';
 import { PhoneLoginComponent } from './phone-login/phone-login.component';
 import firebase from 'firebase/app';
+import { environment } from './environments/environment';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,9 @@ import firebase from 'firebase/app';
     ScrollingModule,
     RouterModule,
     FormsModule,
+    BrowserModule,
+    FormsModule,
+
   ],
   exports: [RouterModule],
   providers: [
