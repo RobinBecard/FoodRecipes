@@ -79,7 +79,7 @@ export class FilterComponent implements OnInit, OnDestroy {
           this.filterService.setFilter('ingredientsList', '', false);
           this.filterService.setFilter('letter', '', false);
 
-          if (term && term.length > 1) {
+          if (term && term.length > 0) {
             this.filterService.setFilter('search', term, true);
           } else {
             this.searchControl.setValue('', { emitEvent: false });
