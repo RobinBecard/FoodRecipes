@@ -4,7 +4,7 @@
   }"
   >
   <div class="imagebt">
-    <button class="favorite-btn" (click)="toggleFavorite($event)">
+    <button class="favorite-btn" (click)="toggleFavorite($event)" *ngIf="displayType === 'main'">
       <mat-icon *ngIf="!isFavorited">favorite_border</mat-icon>
       <mat-icon *ngIf="isFavorited" class="red-icon">favorite</mat-icon>
     </button>

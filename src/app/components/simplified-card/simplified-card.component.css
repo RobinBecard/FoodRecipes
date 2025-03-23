@@ -1,9 +1,23 @@
 .recipe-card {
   background-color: white;
-  padding: 0.75rem;
-  border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  cursor: move;
+  margin-top: 10px;
+  padding: 0.75rem;
+  border-radius: 5px;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #ffcc4d;
+  border-color: #ffcc4d;
+  color: white;
+  
+}
+
+.main-recipe-card:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #ffcc4d;
+  color: white;
 }
 
 .main-recipe-card {

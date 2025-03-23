@@ -14,7 +14,6 @@
 
 .recipe-content {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .recipe-header {
@@ -56,13 +55,9 @@
   text-align: center;
 }
 
-.recipe-details, #mealInstructions {
-  width: 100%;
-  max-width: 100%;
-}
-
 .recipe-details {
   font-size: 1.1em;
+  width: fit-content;
 }
 
 #mealInstructions {
@@ -72,7 +67,7 @@
 .ingredients {
   margin-top: 15px;
   margin-bottom: 20px;
-  width: 100%;
+  width: 50%;
 }
 
 #ingredientsList {
@@ -154,7 +149,19 @@ p {
 
 @media (min-width: 1650px) {
   .recipe-content {
+    display: flex;
     flex-direction: row;
+  }
+
+  .recipe-container {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .recipe-header {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
   }
   
   .recipe-left {
@@ -171,6 +178,11 @@ p {
 @media (max-width: 1649px) {
   .recipe-content {
     flex-direction: column;
+  }
+
+  #mealName {
+    font-size: 2em;
+    margin-bottom: 10px;
   }
   
   .recipe-left {
@@ -215,6 +227,17 @@ p {
   .recipe-left, .recipe-right {
     width: 100%;
     padding: 15px;
+  }
+  #mealInstructions {
+ 
+
+    margin-top: 20px;
+ 
+
+    font-size: 1.1em;
+ 
+
+    line-height: 1.6;
   }
   
   .recipe-left {

@@ -38,11 +38,12 @@
             *ngFor="let recipe of favoriteRecipesList"
             (click)="openDescriptionDialog(recipe.idMeal)"
           >
-            <div class="sidebar-recipe-name">{{ recipe.strMeal }}</div>
-            <div class="sidebar-recipe-attributs">
-              <div>{{ recipe.strCategory }}</div>
-              <div>{{ recipe.strArea }}</div>
-            </div>
+              <app-simplified-card
+              [recipe]="recipe"
+              displayType="sidebar"
+              (click)="openDescriptionDialog(recipe.idMeal)"
+            >
+          </app-simplified-card>
           </div>
         </div>
       </div>
