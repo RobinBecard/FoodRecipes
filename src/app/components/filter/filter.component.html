@@ -1,7 +1,6 @@
 <!-- Filtres -->
 <div class="filters-container">
   <div class="filters_blocks">
-
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Search by recipe name</mat-label>
       <input
@@ -23,7 +22,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" >
+    <mat-form-field appearance="outline">
       <mat-label>Region</mat-label>
       <mat-select [formControl]="selectedRegion">
         <mat-option [value]="">All Regions</mat-option>
@@ -38,29 +37,26 @@
       <mat-select [formControl]="selectedIngredientsList">
         <mat-option [value]="">No List</mat-option>
         <mat-option
-          *ngFor="let ingredient of listOfIngredientsList"
-          [value]="ingredient.name"
+          *ngFor="let list of listOfIngredientsList"
+          [value]="list.id"
         >
-          {{ ingredient.name }}
+          {{ list.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-
-  </div>
-
-  
-  <div class="alphabet-filter">
-    <span id="text-filter">Filter by first letter:</span>
-    <div class="letter-container">
-      <mat-chip-option
-        *ngFor="let letter of alphabet"
-        [value]="letter"
-        (click)="selectedLetter.setValue(letter)"
-        [selected]="selectedLetter.value === letter"
-      >
-        {{ letter }}
-      </mat-chip-option>
+    <div class="alphabet-filter">
+      <span id="text-filter">Filter by first letter:</span>
+      <div class="letter-container">
+        <mat-chip-option
+          *ngFor="let letter of alphabet"
+          [value]="letter"
+          (click)="selectedLetter.setValue(letter)"
+          [selected]="selectedLetter.value === letter"
+        >
+          {{ letter }}
+        </mat-chip-option>
+      </div>
     </div>
   </div>
 </div>
