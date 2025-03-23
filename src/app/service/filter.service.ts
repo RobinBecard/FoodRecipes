@@ -34,6 +34,7 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class FilterService {
+  randomRecipesNumber: number = 50;
   private listOfIngredientsList: IngredientList[] = [];
   private filters: FilterState = {
     search: { value: '', active: false },
