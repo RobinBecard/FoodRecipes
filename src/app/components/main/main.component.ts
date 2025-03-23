@@ -21,6 +21,7 @@ import { FilterComponent } from '../filter/filter.component';
 export class MainComponent implements OnInit {
   @ViewChild(FilterComponent) filterComponent!: FilterComponent;
 
+  randomRecipesNumber: number = 50;
   RecipesList: Meal[] = []; // Liste de recettes filtrées
   favoriteRecipesList: Meal[] = []; // Liste des recettes favorites : à récupérer et sauvegarder avec firebase
 
