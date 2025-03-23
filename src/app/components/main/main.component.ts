@@ -11,6 +11,7 @@ import { FilterService } from '../../service/filter.service';
 import { ListIngredientService } from '../../service/list-ingredient.service';
 import { DescriptionComponent } from '../description/description';
 import { FilterComponent } from '../filter/filter.component';
+import { ListDescriptionComponent } from '../list-description/list-description.component';
 
 @Component({
   selector: 'app-main',
@@ -154,6 +155,17 @@ export class MainComponent implements OnInit {
       width: dialogWidth,
       maxHeight: dialogMaxHeight,
       data: { id: recipeId },
+    });
+  }
+
+  openDescriptionListDialog(ingredientList: IngredientList): void {
+    const dialogWidth = window.innerWidth < 768 ? '95vw' : '95vw';
+    const dialogMaxHeight = '90vh';
+
+    this.dialog.open(ListDescriptionComponent, {
+      width: dialogWidth,
+      maxHeight: dialogMaxHeight,
+      data: ingredientList,
     });
   }
 }

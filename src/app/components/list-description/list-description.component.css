@@ -1,0 +1,175 @@
+.ingredient-list-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .mat-mdc-dialog-surface {
+    width: fit-content;
+  }
+  
+  .ingredient-list-header {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .ingredient-list-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .ingredient-list-details {
+    font-size: 1.1em;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .date {
+    font-size: 0.9em;
+    color: #888;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .ingredients {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
+  #ingredientsList {
+    padding: 0;
+    list-style: none;
+  }
+  
+  #ingredientsList li {
+    background-color: #f4f4f4;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 1.1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  #ingredientsList li:hover {
+    background-color: #e0f7fa;
+    transform: translateY(-5px);
+  }
+  
+  h2, h3 {
+    font-size: 1.3em;
+    color: #444;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    max-width: 40vw;
+    text-justify: auto;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .multi-column-list {
+    max-height: 300px;
+    overflow-y: auto; 
+    column-count: 3; 
+    column-gap: 20px; 
+    padding: 0;
+    margin: 0;
+  }
+  
+  .multi-column-list li {
+    break-inside: avoid; 
+    padding: 8px;
+    margin-bottom: 8px;
+    list-style-position: inside;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .multi-column-list li:hover {
+    background-color: #e0f7fa;
+    transform: translateY(-5px);
+  }
+  
+  /* Style pour le bouton de modification */
+  .modify-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .modify-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .modify-button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (min-width: 1650px) {
+    .ingredient-list-content {
+      display: flex;
+      flex-direction: row;
+    }
+  
+    .ingredient-list-container {
+      background-color: #ffffff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+  
+    .ingredient-list-header {
+      font-size: 2.2em;
+      font-weight: bold;
+    }
+  }
+  
+  @media (max-width: 1649px) {
+    .ingredient-list-content {
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .ingredient-list-content {
+      flex-direction: column;
+    }
+  
+    .ingredient-list-details {
+      padding: 10px;
+    }
+  
+    .multi-column-list {
+      column-count: 2;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .ingredient-list-details {
+      padding: 10px;
+    }
+  
+    .multi-column-list {
+      column-count: 1;
+    }
+  }
+  

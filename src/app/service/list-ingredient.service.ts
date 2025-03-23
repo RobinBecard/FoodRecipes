@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, doc, setDoc, addDoc, docData, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, setDoc, addDoc, docData, deleteDoc, getDocs } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Ingredient, IngredientList } from '../models/ingredient.model';
 import { Auth, user } from '@angular/fire/auth';
@@ -89,4 +89,20 @@ async updateList(listId: string, name: string, ingredients: Ingredient[]): Promi
     // Suppression complète du document
     return deleteDoc(listDocRef);
   }
+
+  async deleteAllList(): Promise<void> {
+    const authUser = this.auth.currentUser;
+    if (!authUser) {
+      throw new Error('Utilisateur non authentifié');
+    }
+  
+    const collectionRef = collection(this.firestore, `users/${authUser.uid}/lists`);
+    const allDocQuery = await getDocs(collectionRef);
+  
+    for (const docSnap of allDocQuery.docs) {
+      const docRef = doc(this.firestore, `users/${authUser.uid}/lists`, docSnap.id);
+      await deleteDoc(docRef); 
+    }
+  }
+  
 }
