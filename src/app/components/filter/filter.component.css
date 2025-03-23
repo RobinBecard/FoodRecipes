@@ -88,3 +88,68 @@
   padding: 0.75em 0.75em 0 0.75em;
   border: 1px solid #f94747;
 }
+
+::ng-deep .mat-icon {
+  color: #ffffff !important; 
+}
+
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  border-radius: 4px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper span {
+  color: #ffffff !important;
+}
+
+::ng-deep mat-label,
+input,
+.mat-mdc-input-element span {
+  color: #ffffff !important;
+}
+
+@media (max-width: 992px) {
+  .filters_blocks {
+    flex-wrap: wrap;
+  }
+  
+  .filters_blocks > * {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    min-height: 1fr;
+  }
+  .filters_blocks {
+    flex-direction: column;
+  }
+  
+  .filters_blocks > * {
+    flex: 1 1;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters-container > * {
+    height: auto;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .buttons-container button {
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+    padding-left: 40px;
+  }
+}

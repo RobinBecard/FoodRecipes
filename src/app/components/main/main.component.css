@@ -304,15 +304,6 @@ input,
     font-size: 1.5rem;
     padding-left: 20px;
   }
-
-  .filters_blocks {
-    flex-wrap: wrap;
-  }
-  
-  .filters_blocks > * {
-    flex: 1 1 calc(50% - 0.5rem);
-    min-width: 150px;
-  }
 }
 
 @media (max-width: 768px) {
