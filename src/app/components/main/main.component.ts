@@ -129,6 +129,7 @@ export class MainComponent implements OnInit {
     if (this.filterComponent) {
       this.filterService.resetFilters();
       this.filterComponent.resetFormControls();
+      this.loadRandomMeals(15);
     }
   }
 
