@@ -44,19 +44,18 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-    <div class="alphabet-filter">
-      <span id="text-filter">Filter by first letter:</span>
-      <div class="letter-container">
-        <mat-chip-option
-          *ngFor="let letter of alphabet"
-          [value]="letter"
-          (click)="selectedLetter.setValue(letter)"
-          [selected]="selectedLetter.value === letter"
-        >
-          {{ letter }}
-        </mat-chip-option>
-      </div>
+  </div>
+  <div class="alphabet-filter">
+    <span id="text-filter">Filter by first letter:</span>
+    <div class="letter-container">
+      <mat-chip-option
+        *ngFor="let letter of alphabet"
+        [value]="letter"
+        (click)="selectedLetter.setValue(letter)"
+        [selected]="selectedLetter.value === letter"
+      >
+        {{ letter }}
+      </mat-chip-option>
     </div>
   </div>
 </div>
