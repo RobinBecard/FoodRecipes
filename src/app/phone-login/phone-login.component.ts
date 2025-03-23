@@ -18,7 +18,7 @@ export class PhoneLoginComponent {
 
   ngOnInit() {
     this.recaptchaVerifier = new RecaptchaVerifier(this.auth, 'recaptcha-container', {
-      size: 'invisible'
+      size: 'invisible' 
     });
   }
 
