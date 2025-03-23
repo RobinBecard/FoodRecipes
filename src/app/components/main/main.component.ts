@@ -7,11 +7,11 @@ import { IngredientList } from '../../models/ingredient.model';
 import { Meal } from '../../models/meal.model';
 import { ApiService } from '../../service/api.service';
 import { FavoriteRecipesService } from '../../service/favorite-recipes.service';
-import { ListDescriptionComponent } from '../list-description/list-description.component';
 import { FilterService } from '../../service/filter.service';
 import { ListIngredientService } from '../../service/list-ingredient.service';
 import { DescriptionComponent } from '../description/description';
 import { FilterComponent } from '../filter/filter.component';
+import { ListDescriptionComponent } from '../list-description/list-description.component';
 
 @Component({
   selector: 'app-main',
@@ -113,76 +113,6 @@ export class MainComponent implements OnInit {
     });
   }
 
-  filterByIngredientsList(listName: string): void {
-    this.isLoading = true;
-
-    const selectedList = this.ingredientsList.find(
-      (list) => list.name === listName
-    );
-    if (!selectedList || selectedList.ingredients.length === 0) {
-      this.isLoading = false;
-      return;
-    }
-    const ingredients = selectedList.ingredients;
-    // Créer un tableau d'observables
-    const requests = ingredients.map((ingredient) =>
-      this.mealService.getAllMealsFilterByMainIngredient(ingredient.strIngredient)
-    );
-
-    // Utiliser forkJoin pour attendre TOUTES les requêtes
-    forkJoin(requests).subscribe(
-      (results) => {
-        let allRecipes: Meal[] = [];
-        results.forEach((meals) => {
-          if (meals) {
-            meals.forEach((meal) => {
-              // Éviter les doublons
-              if (!allRecipes.some((r) => r.idMeal === meal.idMeal)) {
-                meal.matchScore = this.calculateMatchScore(meal, ingredients);
-                allRecipes.push(meal);
-              }
-            });
-          }
-        });
-        allRecipes.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0)); // score décroissant
-        this.RecipesList = allRecipes;
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error('Erreur lors du filtrage par ingrédients:', error);
-        this.isLoading = false;
-      }
-    );
-  }
-
-  resetFilters(): void {
-    this.selectedCategory.setValue('');
-    this.selectedRegion.setValue('');
-    this.selectedIngredientsList.setValue('');
-    this.selectedLetter.setValue('');
-    this.searchControl.setValue('');
-    this.loadRandomMeals(15);
-  }
-
-  drop(event: CdkDragDrop<any[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-    this.RecipesList = [...this.RecipesList];
-  }
-  //Méthode plus necéssaire vu que gérer dans le service : favorite_service
-/*
   addToFavorites(recipe: Meal): void {
     if (!this.favoriteRecipesList.some((r) => r.idMeal === recipe.idMeal)) {
       this.favoriteRecipesList.push(recipe);
@@ -227,11 +157,11 @@ export class MainComponent implements OnInit {
       data: { id: recipeId },
     });
   }
-  
+
   openDescriptionListDialog(ingredientList: IngredientList): void {
     const dialogWidth = window.innerWidth < 768 ? '95vw' : '95vw';
     const dialogMaxHeight = '90vh';
-  
+
     this.dialog.open(ListDescriptionComponent, {
       width: dialogWidth,
       maxHeight: dialogMaxHeight,
