@@ -1,0 +1,77 @@
+/* Filters Styles */
+#text-filter {
+  color: #ffffff;
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.filters-container > * {
+  flex: 1 1 auto;
+  height: 60px;
+}
+
+.buttons-container {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.buttons-container button {
+  width: 100%;
+  min-width: fit-content;
+}
+
+.title-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.alphabet-filter {
+  flex: 1 1 100%;
+  margin-top: 0.5rem;
+}
+
+.alphabet-filter span {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.letter-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+  overflow-x: auto !important;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.letter-container button span {
+  width: 10px;
+}
+
+.letter-container::-webkit-scrollbar {
+  display: none;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+  background-color: #fff;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+  border-radius: 4px;
+  padding: 0.75em 0.75em 0 0.75em;
+  border: 1px solid #f94747;
+}

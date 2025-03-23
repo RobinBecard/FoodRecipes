@@ -8,7 +8,7 @@
   padding: 1rem;
   position: relative;
   z-index: 0;
-  background-color: rgba(255, 255, 255, 0); 
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .container::before {
@@ -18,12 +18,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  filter: blur(3px);   
+  filter: blur(3px);
   z-index: -1;
   border-color: transparent;
 }
 
-.blur-background{
+.blur-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -63,7 +63,7 @@
   overflow: hidden; /* Cache tout débordement */
 }
 
-.sidebar-card{
+.sidebar-card {
   margin-top: 10px;
   padding: 5px;
   background-color: #f6f6f6;
@@ -85,7 +85,7 @@
   margin: 0 !important;
 }
 
-.MyList-header{
+.MyList-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -99,13 +99,12 @@
   margin: 0;
 }
 
-.MyListButton{
+.MyListButton {
   color: black;
-  padding-left: 5px !important; 
+  padding-left: 5px !important;
   padding-right: 5px !important;
   margin: 0;
 }
-
 
 .sidebar-list-container {
   display: flex;
@@ -166,96 +165,7 @@
   margin-bottom: 0.5rem;
 }
 
-/* Filters Styles */
-#text-filter{
-  color: #ffffff;
-}
 
-.filters-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.filters_blocks {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  justify-content: space-between;
-}
-
-.filters_blocks > * {
-  margin-right: 0;
-  flex: 1;
-  min-width: 0;
-}
-
-.buttons-container {
-  width: 100%;
-  display: flex;
-  gap: 0.5rem;
-  justify-content: space-between;
-  flex-direction: row;
-  align-items: center;
-}
-
-.buttons-container button {
-  width: 100%;
-  min-width: fit-content;
-}
-
-.title-part{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-.alphabet-filter {
-  width: 100%;
-  flex: none; 
-}
-
-.alphabet-filter span {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.letter-container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  gap: 0.25rem;
-  overflow-x: auto !important;
-  white-space: nowrap;
-  width: 100%;
-}
-
-.letter-container button span {
-  width: 10px;
-}
-
-.letter-container::-webkit-scrollbar {
-  display: none;
-}
-
-::ng-deep .letter-container .mat-mdc-chip {
-  flex: 0 0 auto;
-}
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-  background-color: #fff;
-}
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-  border-radius: 4px;
-  padding: 0.75em 0.75em 0 0.75em;
-  border: 1px solid #f94747;
-}
 
 /* Main Content Styles */
 .main-content {
@@ -293,6 +203,27 @@
   align-items: center;
 }
 
+.buttons-container {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.buttons-container button {
+  width: 100%;
+  min-width: fit-content;
+}
+
+.title-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 /* Recipe Grid */
 .recipe-grid {
   display: grid;
@@ -301,7 +232,7 @@
   overflow-y: auto;
   padding: 0.5rem;
   flex: 1;
-  scrollbar-width: none; 
+  scrollbar-width: none;
   -ms-overflow-style: none;
   min-height: 220px;
 }
@@ -309,8 +240,6 @@
 .recipe-grid::-webkit-scrollbar {
   display: none;
 }
-
-
 
 .no-results {
   display: flex;
@@ -349,8 +278,6 @@
   z-index: 1100;
 }
 
-
-
 /*
 ::ng-deep .mat-icon {
   color: #ffffff !important; 
@@ -362,18 +289,18 @@
   border-radius: 4px !important;
 }
 
-
-::ng-deep mat-label, input, .mat-mdc-input-element span{
+::ng-deep mat-label,
+input,
+.mat-mdc-input-element span {
   color: #ffffff !important;
 }
-
 
 /* Media Queries */
 @media (max-width: 992px) {
   .container {
     grid-template-columns: 250px 1fr;
   }
-  
+
   .page-title {
     font-size: 1.5rem;
     padding-left: 20px;
@@ -414,7 +341,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: url("../../../assets/Images/main-sidebar.jpg") no-repeat center center;
+    background: url("../../../assets/Images/main-sidebar.jpg") no-repeat center
+      center;
     background-size: cover;
     transform: scale(1.1);
     filter: blur(2px);
@@ -483,4 +411,8 @@
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     min-height: 240px;
   }
+}
+/* Filters Styles */
+#text-filter {
+  color: #ffffff;
 }
