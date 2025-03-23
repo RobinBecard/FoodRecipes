@@ -117,6 +117,7 @@ export class FilterService {
   }
 
   loadRandomMeals(count: number): Observable<Meal[]> {
+    this.resetFilters();
     const requests: Observable<Meal>[] = [];
     for (let i = 0; i < count; i++) {
       requests.push(this.mealService.getSingleRandomMeal());

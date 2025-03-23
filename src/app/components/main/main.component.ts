@@ -118,6 +118,7 @@ export class MainComponent implements OnInit {
     // Vérifier si le composant enfant est bien chargé
     if (this.filterComponent) {
       this.filterService.resetFilters();
+      this.filterComponent.resetFormControls();
     }
   }
 

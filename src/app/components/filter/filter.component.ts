@@ -64,6 +64,7 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.filterService.loadRandomMeals(15).subscribe((meals) => {
         this.recipesList = meals;
+        this.recipesListChange.emit(this.recipesList); // Ajoutez cette ligne
       })
     );
 
@@ -102,11 +103,13 @@ export class FilterComponent implements OnInit, OnDestroy {
   ): void {
     const subscription = control.valueChanges.subscribe((value) => {
       if (exclusions) {
-        // Réinitialiser les autres filtres exclusifs sans déclencher d'événements
+        // Seulement réinitialiser les autres filtres exclusifs, pas tous les filtres
         const exclusifs = ['letter', 'ingredientsList', 'search'];
         const autresFiltres = exclusifs.filter((name) => name !== nom);
+
         autresFiltres.forEach((name) => {
           this.filterService.setFilter(name as keyof FilterState, '', false);
+          // Réinitialiser les contrôles sans émettre d'événements
           if (name === 'letter') {
             this.selectedLetter.setValue('', { emitEvent: false });
           } else if (name === 'ingredientsList') {
@@ -146,6 +149,7 @@ export class FilterComponent implements OnInit, OnDestroy {
           const randomSubscription = this.filterService
             .loadRandomMeals(15)
             .subscribe((randomMeals) => {
+              this.resetFormControls();
               this.recipesList = randomMeals;
               this.recipesListChange.emit(this.recipesList); // Notifier le parent
             });
@@ -156,6 +160,15 @@ export class FilterComponent implements OnInit, OnDestroy {
         }
       });
     this.subscriptions.push(subscription);
+  }
+
+  // Dans FilterComponent, ajoutez une méthode
+  resetFormControls(): void {
+    this.searchControl.setValue('', { emitEvent: false });
+    this.selectedCategory.setValue('', { emitEvent: false });
+    this.selectedRegion.setValue('', { emitEvent: false });
+    this.selectedIngredientsList.setValue('', { emitEvent: false });
+    this.selectedLetter.setValue('', { emitEvent: false });
   }
 
   hasActiveFilters(): boolean {
