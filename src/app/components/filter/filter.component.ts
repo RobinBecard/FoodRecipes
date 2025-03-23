@@ -25,6 +25,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   @Input() recipesList: Meal[] = []; // Liste de recettes filtrées
   @Output() recipesListChange = new EventEmitter<Meal[]>();
 
+  randomRecipesNumber: number = 50;
   categories: string[] = [];
   regions: string[] = [];
 
@@ -62,10 +63,12 @@ export class FilterComponent implements OnInit, OnDestroy {
 
     // Charger des recettes aléatoires
     this.subscriptions.push(
-      this.filterService.loadRandomMeals(15).subscribe((meals) => {
-        this.recipesList = meals;
-        this.recipesListChange.emit(this.recipesList); // Ajoutez cette ligne
-      })
+      this.filterService
+        .loadRandomMeals(this.randomRecipesNumber)
+        .subscribe((meals) => {
+          this.recipesList = meals;
+          this.recipesListChange.emit(this.recipesList); // Ajoutez cette ligne
+        })
     );
 
     // Observer les changements de la recherche
