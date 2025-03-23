@@ -65,11 +65,18 @@
 
 .sidebar-card {
   margin-top: 10px;
-  padding: 5px;
+  padding: 0.75rem;
   background-color: #f6f6f6;
   border-radius: 5px;
   cursor: pointer;
 }
+
+.sidebar-card:hover{
+  background-color: #cab079;
+  border-color: #cab079;
+  color: white;
+}
+
 
 .sidebar-title {
   display: flex;
@@ -109,14 +116,14 @@
 .sidebar-list-container {
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - 40px); /* Hauteur moins l'espace pour le titre */
+  max-height: calc(100% - 40px);
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE et Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .sidebar-list-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari et Opera */
+  display: none;
 }
 
 .favorites-container {
@@ -212,7 +219,7 @@
   align-items: center;
 }
 
-.mat-green-button{
+.green-button{
   background-color: #00ae68 !important;
   color: #ffffff !important;
 }
@@ -371,40 +378,20 @@ input,
 
   .recipe-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    min-height: 160px;
+    min-height: 270px;
   }
   
 }
-
-@media (max-width: 480px) {
-  recipe-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 0.75rem;
-    min-height: 130px;
-  }
-
-  .filters-container > * {
-    height: auto;
-  }
-
-  .buttons-container {
-    flex-direction: column;
-  }
-
-  .buttons-container button {
-    margin-bottom: 0.5rem;
-  }
-
-  .page-title {
-    font-size: 1.25rem;
-    padding-left: 40px;
+@media (max-width: 768px) {
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }
 
-@media ((max-height: 768px) and (max-height: 480px)) {
+@media (max-width: 480px) {
   .recipe-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    min-height: 240px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.75rem;
   }
 }
 /* Filters Styles */

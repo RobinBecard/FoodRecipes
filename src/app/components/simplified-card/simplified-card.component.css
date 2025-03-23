@@ -8,15 +8,14 @@
 
 .recipe-card:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  background-color: #ffcc4d;
-  border-color: #ffcc4d;
+  background-color: #cab079;
+  border-color: #cab079;
   color: white;
-  
 }
 
 .main-recipe-card:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  background-color: #ffcc4d;
+  background-color: #cab079;
   color: white;
 }
 
