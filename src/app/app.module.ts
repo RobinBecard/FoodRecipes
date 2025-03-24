@@ -37,10 +37,10 @@ import { SignUpComponent } from './components/signUp/signUp.component';
 import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { ApiTestComponent } from './components/test/api-test.component';
-import { ModifyListIngredientComponent } from './modify-list-ingredient/modify-list-ingredient.component';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 import { ListDescriptionComponent } from './components/list-description/list-description.component';
+import { ModifyListIngredientComponent } from './components/modify-list-ingredient/modify-list-ingredient.component';
 
 @NgModule({
   declarations: [
