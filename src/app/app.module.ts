@@ -41,6 +41,7 @@ import { ModifyListIngredientComponent } from './modify-list-ingredient/modify-l
 import { AppRoutingModule } from './routes/app-routing.module';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 import { ListDescriptionComponent } from './components/list-description/list-description.component';
+import { IngredientCardComponent } from './components/ingredient-card/ingredient-card.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ListDescriptionComponent } from './components/list-description/list-des
     DescriptionComponent,
     FilterComponent,
     VideoplayerComponent,
-    ListDescriptionComponent
+    ListDescriptionComponent,
+    IngredientCardComponent
   ],
   bootstrap: [AppComponent],
   imports: [
