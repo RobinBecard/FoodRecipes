@@ -47,7 +47,6 @@
         </div>
       </div>
     </div>
-
     <!-- Main Content -->
     <div class="main-content">
       <div class="header">
@@ -71,7 +70,6 @@
           </button>
         </div>
       </div>
-
       <!-- Filtres -->
       <app-filter
         [listOfIngredientsList]="ingredientsList"
@@ -80,7 +78,6 @@
       >
         >
       </app-filter>
-
       <!-- No results message -->
       <div class="no-results" *ngIf="RecipesList.length === 0">
         <mat-icon>search_off</mat-icon>
@@ -88,7 +85,6 @@
           No recipes found matching your criteria. Try changing your filters.
         </p>
       </div>
-
       <!-- Recipes Grid -->
       <div class="recipe-grid">
         @for (recipe of RecipesList; track recipe.idMeal) {

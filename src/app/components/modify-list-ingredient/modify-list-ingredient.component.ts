@@ -1,10 +1,9 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../service/api.service';
-import { ListIngredientService } from '../service/list-ingredient.service';
-import { Ingredient, IngredientList } from '../models/ingredient.model';
-
+import { Ingredient, IngredientList } from '../../models/ingredient.model';
+import { ApiService } from '../../service/api.service';
+import { ListIngredientService } from '../../service/list-ingredient.service';
 
 @Component({
   selector: 'app-modify-list-ingredient',
