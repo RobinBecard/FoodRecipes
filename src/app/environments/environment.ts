@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyBXRoQ90QvaAFnjLublOnTZ_0fYZjxEuS0',
+    apiKey: 'AIzaSyA9gcG436HXnGSzICgferuINJeaAsa5bfg',
     authDomain: 'foodrecipes-2aa22.firebaseapp.com',
     projectId: 'foodrecipes-2aa22',
     storageBucket: 'foodrecipes-2aa22.firebasestorage.app',
