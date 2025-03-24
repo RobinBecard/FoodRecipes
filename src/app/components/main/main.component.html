@@ -6,7 +6,7 @@
     <div class="sidebar" [class.open]="isSidebarOpen">
       <div class="sidebar-background"></div>
       <div class="sidebar-list" id="myList">
-        <div class="MyList-header" >
+        <div class="MyList-header">
           <h2 class="sidebar-title"><mat-icon>list</mat-icon> My Lists</h2>
           <button
             class="MyListButton"
@@ -19,11 +19,18 @@
         </div>
         <div class="sidebar-list-container">
           <!-- Content for My List -->
-          <div class="sidebar-card" *ngFor="let list of ingredientsList"
-          (click)="openDescriptionListDialog(list)" >
+          <div
+            class="sidebar-card"
+            *ngFor="let list of ingredientsList"
+            (click)="openDescriptionListDialog(list)"
+          >
             <div class="sidebar-recipe-name">{{ list.name }}</div>
             <div class="sidebar-recipe-attributs">
-              <div>{{ list.ingredients.length }} ingredient{{ list.ingredients.length !== 1 ? 's' : '' }}</div>
+              <div>
+                {{ list.ingredients.length }} ingredient{{
+                  list.ingredients.length !== 1 ? "s" : ""
+                }}
+              </div>
             </div>
           </div>
         </div>
