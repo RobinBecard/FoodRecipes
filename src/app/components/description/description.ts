@@ -54,7 +54,6 @@ export class DescriptionComponent implements OnInit {
       });
     }
   }
-  //Méthode fonctionnel mais pas opti pour éviter le saut 
   ngAfterViewInit(): void {
   // Forcer le focus sur le titre de la recette
   setTimeout(() => {
