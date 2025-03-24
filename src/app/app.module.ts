@@ -29,6 +29,7 @@ import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
 import { DescriptionComponent } from './components/description/description';
 import { FilterComponent } from './components/filter/filter.component';
+import { IngredientCardComponent } from './components/ingredient-card/ingredient-card.component';
 import { ListDescriptionComponent } from './components/list-description/list-description.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
@@ -39,7 +40,7 @@ import { SignUpComponent } from './components/signUp/signUp.component';
 import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { ApiTestComponent } from './components/test/api-test.component';
-import { environment } from './environments/environmment';
+import { environment } from './environments/environment';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 
@@ -62,6 +63,7 @@ import { VideoplayerComponent } from './videoplayer/videoplayer.component';
     FilterComponent,
     VideoplayerComponent,
     ListDescriptionComponent,
+    IngredientCardComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
