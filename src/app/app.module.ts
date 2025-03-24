@@ -29,6 +29,7 @@ import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component
 import { ButtonLogOutComponent } from './components/button-log-out/button-log-out.component';
 import { DescriptionComponent } from './components/description/description';
 import { FilterComponent } from './components/filter/filter.component';
+import { IngredientCardComponent } from './components/ingredient-card/ingredient-card.component';
 import { ListDescriptionComponent } from './components/list-description/list-description.component';
 import { ListSidenavComponent } from './components/list-sidenav/list-sidenav.component';
 import { LoginComponent } from './components/login/login.component';
@@ -63,6 +64,7 @@ import { environment } from './environments/environment';
     FilterComponent,
     VideoplayerComponent,
     ListDescriptionComponent,
+    IngredientCardComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
