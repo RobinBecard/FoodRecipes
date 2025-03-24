@@ -6,7 +6,7 @@
     
     <div class="ingredient-list-content">
       <div class="ingredient-list-details">
-        <h3>Ingredients:</h3>
+        <h3>Ingredients</h3>
         <ul id="ingredientsList" class="multi-column-list">
           <li *ngFor="let ingredient of ingredientList.ingredients">{{ ingredient.strIngredient }}</li>
         </ul>
@@ -14,7 +14,7 @@
       
       <!-- Bouton de modification -->
       <div class="modify-button-container">
-        <button (click)="editList(ingredientList.id)">modifier</button>
+        <button class="modify-button" (click)="editList(ingredientList.id)">modifier</button>
       </div>
     </div>
   </div>

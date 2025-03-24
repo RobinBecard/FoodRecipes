@@ -8,11 +8,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
 import { MainComponent } from '../components/main/main.component';
 import { PageListIngredientComponent } from '../components/page-list-ingredient/page-list-ingredient.component';
-
 import { DescriptionComponent } from '../components/description/description';
 import { SignUpComponent } from '../components/signUp/signUp.component';
 import { ApiTestComponent } from '../components/test/api-test.component';
-import { ModifyListIngredientComponent } from '../modify-list-ingredient/modify-list-ingredient.component';
+import { ModifyListIngredientComponent } from '../components/modify-list-ingredient/modify-list-ingredient.component';
 
 const redirectLoggedInToMain = () => redirectLoggedInTo(['main']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
