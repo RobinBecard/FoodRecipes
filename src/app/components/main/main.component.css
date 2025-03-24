@@ -46,10 +46,6 @@
   transition: ease-out 0.3s ease;
 }
 
-.sidebar > :first-child {
-  margin-bottom: 1rem;
-}
-
 .sidebar-list {
   box-sizing: border-box;
   height: calc((100% - 1rem) / 2 - 20px);
@@ -124,6 +120,10 @@
 
 .sidebar-list-container::-webkit-scrollbar {
   display: none;
+}
+
+#myList{
+  margin: 0;
 }
 
 .favorites-container {
@@ -339,8 +339,7 @@ input,
 
   .sidebar-background {
     position: absolute;
-    top: 0;
-    left: 0;
+    margin-bottom: 0px;
     width: 100%;
     height: 100%;
     background: url("../../../assets/Images/main-sidebar.jpg") no-repeat center
