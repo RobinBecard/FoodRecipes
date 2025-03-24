@@ -39,9 +39,9 @@ import { SignUpComponent } from './components/signUp/signUp.component';
 import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
 import { ApiTestComponent } from './components/test/api-test.component';
-import { environment } from './environments/environmment';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
+import { environment } from './environnements/environnement';
 
 @NgModule({
   declarations: [
