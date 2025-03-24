@@ -93,7 +93,7 @@ import { ModifyListIngredientComponent } from './components/modify-list-ingredie
         projectId: 'foodrecipes-2aa22',
         appId: '1:884813621746:web:33a2d8b48d913f4dc3636b',
         storageBucket: 'foodrecipes-2aa22.firebasestorage.app',
-        apiKey: 'AIzaSyCX8mcEGxhnFox8kfUBQsE3tTzJKdExp6c',
+        apiKey: ' AIzaSyA9gcG436HXnGSzICgferuINJeaAsa5bfg',
         authDomain: 'foodrecipes-2aa22.firebaseapp.com',
         messagingSenderId: '884813621746',
       })
