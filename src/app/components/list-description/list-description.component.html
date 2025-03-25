@@ -10,7 +10,7 @@
       <ul id="ingredientsList" class="multi-column-list">
         @for (ingredient of ingredientList.ingredients; track
         ingredient.strIngredient) {
-        <app-ingredient-card [ingredient]="ingredient"></app-ingredient-card>
+        <app-ingredient-card [enableDrag]="false" [ingredient]="ingredient"></app-ingredient-card>
         }
       </ul>
     </div>

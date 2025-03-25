@@ -1,4 +1,4 @@
-<div cdkDrag class="main-recipe-card">
+<div cdkDrag [cdkDragDisabled]="!enableDrag" class="main-recipe-card">
   <img
     [src]="
       'https://www.themealdb.com/images/ingredients/' +

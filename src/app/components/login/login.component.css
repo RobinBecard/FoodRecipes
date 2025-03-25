@@ -6,7 +6,6 @@
   background: url("../../../assets/Images/background.jpg") no-repeat center
     center fixed;
   background-size: cover;
-  font-family: Helvetica, sans-serif;
 }
 
 .container {
@@ -28,8 +27,6 @@
   overflow: hidden;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  font-family: Helvetica, sans-serif;
-  opacity: 0.95;
 }
 
 .logo-section {
@@ -38,53 +35,46 @@
   text-align: center;
   margin-top: 100px;
   width: 100%;
-  font-family: Helvetica, sans-serif;
 }
 
 .title {
   margin-bottom: 20px;
-  font-family: Helvetica, sans-serif;
 }
 
 .title h1 {
   font-size: 3em;
   margin: 0;
   line-height: 1.2;
-  font-family: Helvetica, sans-serif;
 }
 
 .title h1::first-letter,
 .title h2::first-letter {
   color: #ffa500;
-  font-family: Helvetica, sans-serif;
 }
 
 .left-panel p {
   font-size: 1.2em;
   margin: 20px 0;
-  font-family: Helvetica, sans-serif;
 }
 
 #logInCase,
 #signUpCase {
   font-size: 0.8rem;
-  font-family: Helvetica, sans-serif;
 }
 
 .bottom-section {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre horizontalement */
-  justify-content: center; /* Centre verticalement si nécessaire */
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  width: 100%; /* Évite les décalages */
-  font-family: Helvetica, sans-serif;
+  width: 100%; 
 }
 
 .left-panel a {
   color: white;
   text-decoration: none;
-  display: inline-block; /* Change block en inline-block pour éviter les pleines lignes */
+  display: inline-block;
   margin-bottom: 20px;
 }
 
@@ -97,7 +87,6 @@
   font-weight: 500;
   letter-spacing: 1px;
   text-align: center;
-  font-family: Helvetica, sans-serif;
 }
 
 .error-message {
@@ -105,7 +94,6 @@
   font-size: 14px;
   margin-top: 8px;
   text-align: center;
-  font-family: Helvetica, sans-serif;
 }
 
 @media (max-width: 1024px) {
@@ -124,7 +112,6 @@
   padding: 40px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
   border-radius: 10px !important;
-  font-family: Helvetica, sans-serif;
 }
 
 mat-card-title {
@@ -132,7 +119,6 @@ mat-card-title {
   font-size: 24px;
   margin-bottom: 30px !important;
   color: #333;
-  font-family: Helvetica, sans-serif;
 }
 
 .social-links {
@@ -228,6 +214,9 @@ mat-form-field {
   .bottom-section-mobile {
     display: block;
   }
+  .sign-in-btn{
+    background-color: #ffa500 !important;
+  }   
 }
 
 @media (max-width: 600px) {
@@ -236,10 +225,8 @@ mat-form-field {
   }
   .title h1 {
     font-size: 2em;
-    font-family: Helvetica, sans-serif;
   }
   .signup-btn {
     padding: 8px;
-    font-family: Helvetica, sans-serif;
   }
 }
