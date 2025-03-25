@@ -43,7 +43,7 @@
         >
           @for (ingredient of filteredIngredients; track
           ingredient.strIngredient) {
-          <app-ingredient-card [ingredient]="ingredient"></app-ingredient-card>
+          <app-ingredient-card [enableDrag]="true" [ingredient]="ingredient"></app-ingredient-card>
           }
         </div>
       </div>
@@ -76,6 +76,7 @@
           @for (ingredient of rigthIngredient; track ingredient.strIngredient;
           let i = $index) {<app-ingredient-card
             [ingredient]="ingredient"
+            [enableDrag]="true"
             [index]="i"
             (delete)="removeFromRight($event)"
           ></app-ingredient-card>

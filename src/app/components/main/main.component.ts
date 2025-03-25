@@ -160,7 +160,7 @@ export class MainComponent implements OnInit {
   }
 
   openDescriptionListDialog(ingredientList: IngredientList): void {
-    const dialogWidth = window.innerWidth < 768 ? '95vw' : '95vw';
+    const dialogWidth = window.innerWidth < 768 ? '60vw' : '60vw';
     const dialogMaxHeight = '90vh';
 
     this.dialog.open(ListDescriptionComponent, {

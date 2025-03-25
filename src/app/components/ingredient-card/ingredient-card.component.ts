@@ -3,9 +3,9 @@ import { Ingredient } from '../../models/ingredient.model';
 
 @Component({
   selector: 'app-ingredient-card',
-  standalone: false,
   templateUrl: './ingredient-card.component.html',
   styleUrl: './ingredient-card.component.css',
+  standalone: false
 })
 export class IngredientCardComponent {
   @Input() ingredient: Ingredient = {
@@ -15,6 +15,7 @@ export class IngredientCardComponent {
     strType: '',
   };
   @Input() index: number = -1;
+  @Input() enableDrag: boolean = true;
   @Output() delete = new EventEmitter<number>();
 
   onRemove() {
