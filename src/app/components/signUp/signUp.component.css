@@ -72,16 +72,16 @@
 .bottom-section {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre horizontalement */
-  justify-content: center; /* Centre verticalement si nécessaire */
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  width: 100%; /* Évite les décalages */
+  width: 100%;
 }
 
 .left-panel a {
   color: white;
   text-decoration: none;
-  display: inline-block; /* Change block en inline-block pour éviter les pleines lignes */
+  display: inline-block;
   margin-bottom: 20px;
 }
 
@@ -93,6 +93,13 @@
   border-radius: 25px !important;
   font-weight: 500;
   letter-spacing: 1px;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 8px;
   text-align: center;
 }
 
@@ -216,6 +223,9 @@ mat-form-field {
   .bottom-section-mobile {
     display: block;
   }
+  .sign-in-btn{
+    background-color: #ffa500 !important;
+  }   
 }
 
 @media (max-width: 600px) {

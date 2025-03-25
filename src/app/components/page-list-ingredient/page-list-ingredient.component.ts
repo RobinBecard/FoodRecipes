@@ -42,11 +42,21 @@ export class PageListIngredientComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      // Créer une copie de l'ingrédient lors du transfert pour éviter les problèmes de référence
-      const item = {...event.previousContainer.data[event.previousIndex]};
+      const item = event.previousContainer.data[event.previousIndex];
+  
+      if (event.previousContainer.id === 'rightList' && event.container.id === 'leftList') {
+        return;
+      }
+  
+      if (event.previousContainer.id === 'leftList' && event.container.id === 'rightList') {
+        this.filteredIngredients = this.filteredIngredients.filter(ing => ing.idIngredient !== item.idIngredient);
+      }
+  
       event.container.data.splice(event.currentIndex, 0, item);
+      event.previousContainer.data.splice(event.previousIndex, 1);
     }
   }
+  
   
   saveList() {
     if (!this.listName) {
@@ -72,19 +82,29 @@ export class PageListIngredientComponent implements OnInit {
   
   filterIngredients() {
     if (!this.searchText) {
-      // Si le champ de recherche est vide, afficher les 50 premiers ingrédients
-      this.filteredIngredients = this.allIngredient.slice(0, 50);
+      // Recherche est vide, afficher les 50 premiers ingrédients filtrés
+      this.filteredIngredients = this.allIngredient
+        .filter(ing => !this.rigthIngredient.some(selectedIng => selectedIng.idIngredient === ing.idIngredient))
+        .slice(0, 50);
     } else {
-      // Filtrer tous les ingrédients en fonction de la recherche
-      const filtered = this.allIngredient.filter((ing) =>
+      // Filtrer par le texte de recherche
+      const filtered = this.allIngredient.filter(ing =>
         ing.strIngredient.toLowerCase().includes(this.searchText.toLowerCase())
       );
-      // Afficher uniquement les 50 premiers résultats filtrés
-      this.filteredIngredients = filtered.slice(0, 50);
+  
+      // Exclure les ingrédients déjà à droite
+      this.filteredIngredients = filtered.filter(ing =>
+        !this.rigthIngredient.some(selectedIng => selectedIng.idIngredient === ing.idIngredient)
+      ).slice(0, 50);
     }
-  }
+  }  
 
   removeFromRight(index: number) {
-    this.rigthIngredient.splice(index, 1);
+    const removedIngredient = this.rigthIngredient.splice(index, 1)[0];
+  
+    // Vérifier que l'ingrédient n'est pas déjà présent dans la liste de gauche avant de l'ajouter
+    if (!this.filteredIngredients.some(ing => ing.idIngredient === removedIngredient.idIngredient)) {
+      this.filteredIngredients.unshift(removedIngredient);
+    }
   }
 }

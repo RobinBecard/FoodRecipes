@@ -3,7 +3,7 @@
   <!-- Main Content -->
   <div class="main-content">
     <div class="header">
-      <h1 class="page-title">Creating a list</h1>
+      <h1 class="page-title">Edit a list</h1>
     </div>
 
     <!-- Wrapper pour les colonnes -->
@@ -50,11 +50,11 @@
 
       <!-- Right Content -->
       <div class="right-content">
-        <h2>Creating your new list</h2>
+        <h2>Modifying your list</h2>
 
         <!-- Champ pour le nom de la liste -->
         <div class="list-name-container">
-          <!-- <label for="listName">Nom de la liste :</label>-->
+          <!--<label for="listName">Nom de la liste :</label>-->
           <input
             type="text"
             id="listName"
@@ -74,7 +74,8 @@
           id="rightList"
         >
           @for (ingredient of rigthIngredient; track ingredient.strIngredient;
-          let i = $index) {<app-ingredient-card
+          let i = $index) {
+          <app-ingredient-card
             [ingredient]="ingredient"
             [enableDrag]="true"
             [index]="i"
@@ -84,6 +85,9 @@
         </div>
         <div class="button">
           <button class="cancel-button" [routerLink]="['/main']">Cancel</button>
+          <button class="cancel-button" (click)="deleteCurrentList()">
+            Delete list
+          </button>
           <button class="save-button" (click)="saveList()">Save list</button>
         </div>
       </div>

@@ -1,0 +1,9 @@
+<div *ngIf="video">
+    <youtube-player 
+      [videoId]="getYouTubeVideoId(video)"
+      (ready)="onPlayerReady($event)">
+    </youtube-player>
+  </div>
+  
+  <p *ngIf="!video">No video provided</p>
+  

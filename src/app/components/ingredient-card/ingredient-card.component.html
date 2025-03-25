@@ -1,0 +1,15 @@
+<div cdkDrag [cdkDragDisabled]="!enableDrag" class="main-recipe-card">
+  <img
+    [src]="
+      'https://www.themealdb.com/images/ingredients/' +
+      ingredient.strIngredient +
+      '.png'
+    "
+    alt="{{ ingredient.strIngredient }}"
+    class="recipe-image"
+  />
+  <div class="recipe-name">{{ ingredient.strIngredient }}</div>
+  <button *ngIf="index != -1" class="remove-button" (click)="onRemove()">
+    ✕
+  </button>
+</div>
