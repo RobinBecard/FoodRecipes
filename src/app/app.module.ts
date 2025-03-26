@@ -92,7 +92,7 @@ import { VideoplayerComponent } from './videoplayer/videoplayer.component';
         projectId: 'foodrecipes-2aa22',
         appId: '1:884813621746:web:33a2d8b48d913f4dc3636b',
         storageBucket: 'foodrecipes-2aa22.firebasestorage.app',
-        apiKey: 'AIzaSyA9gcG436HXnGSzICgferuINJeaAsa5bfg',
+        apiKey: 'AIzaSyCX8mcEGxhnFox8kfUBQsE3tTzJKdExp6c',
         authDomain: 'foodrecipes-2aa22.firebaseapp.com',
         messagingSenderId: '884813621746',
       })
