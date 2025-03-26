@@ -1,6 +1,12 @@
 <div class="recipe-container">
   <div class="recipe-header">
-    <img id="mealThumb" src="{{recipe.strMealThumb}}" alt="recipe image">
+    <div>
+      <button class="favorite-btn" (click)="toggleFavorite($event)" *ngIf="displayType === 'main'">
+        <mat-icon *ngIf="!isFavorited">favorite_border</mat-icon>
+        <mat-icon *ngIf="isFavorited" class="red-icon">favorite</mat-icon>
+      </button>
+      <img id="mealThumb" src="{{recipe.strMealThumb}}" alt="recipe image">
+    </div>
     <h1 id="mealName">{{recipe.strMeal}}</h1>
   </div>
   <div class="recipe-content">
