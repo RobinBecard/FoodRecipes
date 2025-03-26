@@ -2,10 +2,11 @@
 <p>Email : {{ userEmail }}</p>
 
 
-<button mat-button color="primary" (click)="toggleChangeEmail()">Changer l'adresse email</button>
+<!-- <button mat-button color="primary" (click)="toggleChangeEmail()">Changer l'adresse email</button>-->
 <button mat-button color="accent" (click)="toggleChangePassword()">Changer le mot de passe</button>
 <button mat-button color="warn" (click)="closeDialog()">Fermer</button>
 
+<!--
 <div *ngIf="showChangeEmail">
   <h2>Changer d'adresse e-mail</h2>
   <label for="newEmail">Nouvel e-mail :</label>
@@ -14,7 +15,7 @@
   <button (click)="changeEmail()" [disabled]="newEmailControl.invalid">Valider</button>
   <button (click)="toggleChangeEmail()">Annuler</button>
   <p *ngIf="emailError" class="error">{{ emailError }}</p>
-</div>
+</div> -->
 
 <!-- Section pour réinitialiser le mot de passe -->
 <div *ngIf="showChangePassword">

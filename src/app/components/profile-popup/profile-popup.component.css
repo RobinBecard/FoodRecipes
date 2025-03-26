@@ -5,7 +5,7 @@
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     width: 20vw; 
-    height: 80vh; 
+    height: 40vh; 
     max-width: 600px;
     max-height: 85vh;
     overflow: hidden;
@@ -14,7 +14,6 @@
     align-items: center;
     font-size: larger;
     text-align: center;
-    
   }
 
   .profil{
