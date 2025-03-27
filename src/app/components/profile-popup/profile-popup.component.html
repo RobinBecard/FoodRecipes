@@ -1,28 +1,62 @@
-<h1 class="Profil">Mon Profil</h1>
-<p>Email : {{ userEmail }}</p>
-
-
-<button mat-button color="primary" (click)="toggleChangeEmail()">Changer l'adresse email</button>
-<button mat-button color="accent" (click)="toggleChangePassword()">Changer le mot de passe</button>
-<button mat-button color="warn" (click)="closeDialog()">Fermer</button>
-
-<div *ngIf="showChangeEmail">
-  <h2>Changer d'adresse e-mail</h2>
-  <label for="newEmail">Nouvel e-mail :</label>
-  <input id="newEmail" type="email" [formControl]="newEmailControl" aria-label="Nouvelle adresse e-mail" placeholder="Entrez votre nouvel e-mail" />
-  <p *ngIf="newEmailControl.invalid && newEmailControl.touched" class="error">Veuillez entrer une adresse e-mail valide.</p>
-  <button (click)="changeEmail()" [disabled]="newEmailControl.invalid">Valider</button>
-  <button (click)="toggleChangeEmail()">Annuler</button>
-  <p *ngIf="emailError" class="error">{{ emailError }}</p>
-</div>
-
-<!-- Section pour réinitialiser le mot de passe -->
-<div *ngIf="showChangePassword">
-  <h2>Réinitialiser le mot de passe</h2>
-  <label for="email">E-mail :</label>
-  <input id="email" type="email" [formControl]="emailControl" aria-label="Adresse e-mail" placeholder="Entrez votre e-mail" />
-  <p *ngIf="emailControl.invalid && emailControl.touched" class="error">Veuillez entrer une adresse e-mail valide.</p>
-  <button (click)="changePassword()" [disabled]="emailControl.invalid">Envoyer l'e-mail de réinitialisation</button>
-  <button (click)="toggleChangePassword()">Annuler</button>
-  <p *ngIf="loginError" class="error">{{ loginError }}</p>
+<div class="bg">
+  <div class="container">
+    <h1 class="Profil">My Profile</h1>
+    <div class="email-container">
+      <p id="Email">Email:</p> 
+      <p>{{ userEmail }}</p>
+    </div>
+    
+    <div class="buttons-container">
+      <button 
+        class="Button"
+        mat-button 
+        color="primary" 
+        (click)="toggleChangeEmail()" 
+        [class.active]="isButtonActive('email')"
+      >
+        Change Email Address
+      </button>
+      <button
+        class="Button" 
+        mat-button 
+        color="accent" 
+        (click)="toggleChangePassword()" 
+        [class.active]="isButtonActive('password')"
+      >
+        Change Password
+      </button>
+    </div>
+    
+    <div class="ShowPart" *ngIf="showChangeEmail">
+      <h2>Change Email Address</h2>
+      <label for="newEmail">New Email:</label>
+      <input id="newEmail" type="email" [formControl]="newEmailControl" aria-label="New email address" placeholder="Enter your new email" />
+      <p *ngIf="newEmailControl.invalid && newEmailControl.touched" class="error">Please enter a valid email address.</p>
+      <button class="Button InButton" (click)="changeEmail()" [disabled]="newEmailControl.invalid">Validate</button>
+      <button class="Button InButton" (click)="toggleChangeEmail()">Cancel</button>
+      <p *ngIf="emailError" class="error">{{ emailError }}</p>
+    </div>
+    
+    <div class="ShowPart" *ngIf="showChangePassword">
+      <h2>Reset Password</h2>
+      <label for="email">Email:</label>
+      <input id="email" type="email" [formControl]="emailControl" aria-label="Email address" placeholder="Enter your email" />
+      <p *ngIf="emailControl.invalid && emailControl.touched" class="error">Please enter a valid email address.</p>
+      <button class="Button InButton" (click)="changePassword()" [disabled]="emailControl.invalid">Send Reset Email</button>
+      <button class="Button InButton" (click)="toggleChangePassword()">Cancel</button>
+      <p *ngIf="loginError" class="error">{{ loginError }}</p>
+    </div>
+    <button 
+      class="Button"
+      id="closeButton"
+      mat-button 
+      color="warn" 
+      (click)="closeDialog()"
+    >
+      Close
+    </button>
+  </div>
+  
+  
+  
 </div>

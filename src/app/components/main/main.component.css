@@ -38,6 +38,9 @@
 
 /* Sidebar Styles */
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
@@ -93,7 +96,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
 }
 
 #MyList-AddButton {
@@ -118,12 +120,17 @@
   -ms-overflow-style: none;
 }
 
+.sidebar-title{
+  min-height: 48px !important;
+}
+
 .sidebar-list-container::-webkit-scrollbar {
   display: none;
 }
 
 #myList{
   margin: 0;
+  margin-bottom: 10px;
 }
 
 .favorites-container {
