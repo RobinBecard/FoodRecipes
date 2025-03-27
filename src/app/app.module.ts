@@ -21,7 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { AppComponent } from './app.component';
 import { BodyComponent } from './components/body/body.component';
@@ -36,6 +36,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { ModifyListIngredientComponent } from './components/modify-list-ingredient/modify-list-ingredient.component';
 import { PageListIngredientComponent } from './components/page-list-ingredient/page-list-ingredient.component';
+import { ProfilePopupComponent } from './components/profile-popup/profile-popup.component';
 import { SignUpComponent } from './components/signUp/signUp.component';
 import { SimplifiedCardComponent } from './components/simplified-card/simplified-card.component';
 import { TestInfoLogComponent } from './components/test-info-log/test-info-log.component';
@@ -56,11 +57,12 @@ import { environment } from './environments/environment';
     TestInfoLogComponent,
     ButtonLogOutComponent,
     PageListIngredientComponent,
-    BottomBarComponent,
     ApiTestComponent,
     SimplifiedCardComponent,
     ModifyListIngredientComponent,
     DescriptionComponent,
+    BottomBarComponent,
+    ProfilePopupComponent,
     FilterComponent,
     VideoplayerComponent,
     ListDescriptionComponent,
@@ -70,8 +72,10 @@ import { environment } from './environments/environment';
   imports: [
     AppRoutingModule,
     BrowserModule,
-    DragDropModule,
     FormsModule,
+    ReactiveFormsModule,
+    DragDropModule,
+    ScrollingModule,
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
@@ -80,10 +84,7 @@ import { environment } from './environments/environment';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatToolbarModule,
-    MatIconModule,
     MatTooltipModule,
-    ReactiveFormsModule,
-    RouterLink,
     RouterModule,
     ScrollingModule,
     MatDialogModule,

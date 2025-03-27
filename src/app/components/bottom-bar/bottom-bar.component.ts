@@ -1,10 +1,21 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ProfilePopupComponent } from '../profile-popup/profile-popup.component';
 
 @Component({
   selector: 'app-bottom-bar',
-  standalone: false,
   templateUrl: './bottom-bar.component.html',
-  styleUrl: './bottom-bar.component.css'
+  styleUrl: './bottom-bar.component.css',
+  standalone: false,
 })
 export class BottomBarComponent {
+  constructor(public dialog: MatDialog) {}
+
+  openProfilePopup(): void {
+    this.dialog.open(ProfilePopupComponent, {
+      maxWidth: 'none', 
+      height: '80vh',   
+      width: '20vw',    
+    });
+  }
 }
