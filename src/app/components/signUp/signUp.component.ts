@@ -71,6 +71,7 @@ export class SignUpComponent implements OnInit {
       createUserWithEmailAndPassword(this.auth, email, password)
         .then((userCredential) => {
           console.log('Inscription réussie :', userCredential.user);
+          this.router.navigate(['main']);
         })
         .catch((error) => {
           const errorCode = error.code;

@@ -20,6 +20,7 @@ export class ProfilePopupComponent {
   emailError: string | null = null;
   showChangePassword = false;
   showChangeEmail = false;
+  activeButton: 'email' | 'password' | null = null;
 
   constructor(
     private dialogRef: MatDialogRef<ProfilePopupComponent>,
@@ -31,29 +32,26 @@ export class ProfilePopupComponent {
   toggleChangePassword() {
     this.showChangePassword = !this.showChangePassword;
     this.showChangeEmail = false;
+    this.activeButton = this.activeButton === 'password' ? null : 'password';
   }
 
   toggleChangeEmail() {
     this.showChangeEmail = !this.showChangeEmail;
     this.showChangePassword = false;
+    this.activeButton = this.activeButton === 'email' ? null : 'email';
+  }
+
+  isButtonActive(type: 'email' | 'password'): boolean {
+    return this.activeButton === type;
   }
 
   changePassword() {
     const email = this.emailControl.value;
-
+  
     if (!email) {
-      this.loginError = 'Veuillez entrer votre adresse e-mail.';
+      this.loginError = 'Please enter your email address.';
       return;
     }
-
-    sendPasswordResetEmail(this.auth, email)
-      .then(() => {
-        alert('Un e-mail de réinitialisation a été envoyé à ' + email);
-      })
-      .catch((error) => {
-        console.error('Erreur :', error.code, error.message);
-        this.handleError(error.code);
-      });
   }
 
   changeEmail() {
@@ -61,22 +59,22 @@ export class ProfilePopupComponent {
     const user = this.auth.currentUser;
 
     if (!newEmail) {
-      this.emailError = 'Veuillez entrer un nouvel e-mail valide.';
+      this.emailError = 'Please enter a valid email address.';
       return;
     }
 
     if (!user) {
-      this.emailError = 'Aucun utilisateur connecté.';
+      this.emailError = 'No user is currently logged in.';
       return;
     }
 
     updateEmail(user, newEmail)
       .then(() => {
         this.userEmail = newEmail;
-        alert('Adresse e-mail mise à jour avec succès !');
+        alert('Email address updated successfully!');
       })
       .catch((error) => {
-        console.error('Erreur :', error.code, error.message);
+        console.error('Error:', error.code, error.message);
         this.handleEmailError(error.code);
       });
   }
@@ -84,18 +82,19 @@ export class ProfilePopupComponent {
   handleError(errorCode: string) {
     this.loginError =
       errorCode === 'auth/user-not-found'
-        ? 'Aucun utilisateur trouvé avec cet e-mail.'
-        : 'Une erreur est survenue.';
+        ? 'No user found with this email.'
+        : 'An error occurred.';
   }
 
   handleEmailError(errorCode: string) {
     this.emailError =
       errorCode === 'auth/requires-recent-login'
-        ? 'Veuillez vous reconnecter avant de changer votre e-mail.'
-        : 'Impossible de modifier l’e-mail.';
+        ? 'Please log in again before changing your email.'
+        : 'Unable to modify email.';
   }
 
   closeDialog() {
     this.dialogRef.close();
+    this.activeButton = null;
   }
 }
