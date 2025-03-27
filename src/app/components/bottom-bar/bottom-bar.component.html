@@ -1,7 +1,9 @@
 <mat-toolbar color="primary" class="bottom-bar">
-  <button mat-icon-button [routerLink]="['/profile']">
+  <button mat-icon-button (click)="openProfilePopup()">
     <mat-icon>account_circle</mat-icon>
   </button>
+
   <span class="spacer"></span>
+
   <button-log-out></button-log-out>
 </mat-toolbar>
