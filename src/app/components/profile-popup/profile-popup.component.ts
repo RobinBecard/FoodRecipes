@@ -52,7 +52,19 @@ export class ProfilePopupComponent {
       this.loginError = 'Please enter your email address.';
       return;
     }
-  }
+  
+
+  sendPasswordResetEmail(this.auth, email)
+      .then(() => {
+        alert('Un e-mail de réinitialisation a été envoyé à ' + email);
+      })
+      .catch((error) => {
+        console.error('Erreur :', error.code, error.message);
+        this.handleError(error.code);
+      });
+
+    }
+
 
   changeEmail() {
     const newEmail = this.newEmailControl.value;
