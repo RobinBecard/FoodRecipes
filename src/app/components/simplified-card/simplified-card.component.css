@@ -101,25 +101,9 @@
 }
 
 .match-score-indicator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
+  display: inline-block;
+  padding: 10px 10px;
   border-radius: 50%;
   font-weight: bold;
   color: white;
-}
-
-.match-score-low {
-  background-color: #ff4444;
-}
-
-.match-score-medium {
-  background-color: #ffc107;
-  color: black;
-}
-
-.match-score-high {
-  background-color: #4caf50;
 }
