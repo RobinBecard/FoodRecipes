@@ -100,3 +100,25 @@
   transform: scale(1.2);
   text-shadow: 0px 0px 15px rgb(255, 0, 0);
 }
+
+
+.match-score-indicator {
+  display: inline-block;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.match-score-low {
+  background-color: #FF4444;
+}
+
+.match-score-medium {
+  background-color: #FFC107;
+  color: black;
+}
+
+.match-score-high {
+  background-color: #4CAF50;
+}
