@@ -47,4 +47,16 @@ export class SimplifiedCardComponent implements OnInit {
         }
       });
   }
+
+  getMatchScoreColor(): string {
+    if (!this.recipe.matchScore) return '';
+
+    if (this.recipe.matchScore < 40) {
+      return 'match-score-low';
+    } else if (this.recipe.matchScore < 70) {
+      return 'match-score-medium';
+    } else {
+      return 'match-score-high';
+    }
+  }
 }
