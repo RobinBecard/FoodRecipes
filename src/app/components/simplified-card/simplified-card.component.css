@@ -23,12 +23,12 @@
   background-color: #e4e3e3;
   padding: 1rem;
   border-radius: 8px;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .recipe-name {
   font-size: 0.875rem;
-  text-wrap:nowrap;
+  text-wrap: nowrap;
   max-height: 20px;
   white-space: nowrap;
   overflow: hidden;
@@ -54,9 +54,8 @@
 .recipe-category {
   font-size: 0.75rem;
   color: #666;
-  
 }
-.imagebt{
+.imagebt {
   position: relative;
 }
 
@@ -101,24 +100,10 @@
   text-shadow: 0px 0px 15px rgb(255, 0, 0);
 }
 
-
 .match-score-indicator {
   display: inline-block;
   padding: 10px 10px;
-  border-radius: 12px;
+  border-radius: 50%;
   font-weight: bold;
   color: white;
-}
-
-.match-score-low {
-  background-color: #FF4444;
-}
-
-.match-score-medium {
-  background-color: #FFC107;
-  color: black;
-}
-
-.match-score-high {
-  background-color: #4CAF50;
 }

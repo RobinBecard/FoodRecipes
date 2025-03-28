@@ -1,10 +1,15 @@
-<div [ngClass]="{
+<div
+  [ngClass]="{
     'recipe-card': displayType === 'sidebar',
     'main-recipe-card': displayType === 'main'
   }"
-  >
+>
   <div class="imagebt">
-    <button class="favorite-btn" (click)="toggleFavorite($event)" *ngIf="displayType === 'main'">
+    <button
+      class="favorite-btn"
+      (click)="toggleFavorite($event)"
+      *ngIf="displayType === 'main'"
+    >
       <mat-icon *ngIf="!isFavorited">favorite_border</mat-icon>
       <mat-icon *ngIf="isFavorited" class="red-icon">favorite</mat-icon>
     </button>
@@ -14,13 +19,17 @@
       [src]="recipe.strMealThumb + '/medium'"
       alt="{{ recipe.strMeal }}"
       class="recipe-image"
-    />    
+    />
   </div>
 
   <div class="recipe-name">{{ recipe.strMeal }}</div>
-    <div class="recipe-attributs">
-      <div class="recipe-category">{{ recipe.strCategory }}</div>
-      <div>{{ recipe.strArea }}</div>
-      <div *ngIf="recipe.matchScore"  class="match-score-indicator {{ getMatchScoreColor() }}"></div>
-    </div>
+  <div class="recipe-attributs">
+    <div class="recipe-category">{{ recipe.strCategory }}</div>
+    <div>{{ recipe.strArea }}</div>
+    <div
+      *ngIf="recipe.matchScore"
+      [style.background-color]="getMatchScoreColor(recipe.matchScore)"
+      class="match-score-indicator"
+    ></div>
+  </div>
 </div>
