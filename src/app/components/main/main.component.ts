@@ -66,8 +66,6 @@ export class MainComponent implements OnInit {
   loadInitialData(): void {
     // Charger la liste des liste d'ingrédients
     this.loadIngredientsList();
-
-    // Simuler le chargement des recettes favorites
     this.loadFavoriteRecipes();
   }
 
